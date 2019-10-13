@@ -6,7 +6,10 @@ from django.views import View
 
 from .utils import IsNotAuthenticatedMixin
 #from Post.models import Post
-from .forms import LoginForm
+from .forms import LoginForm, OrgForm
+
+
+from django.contrib.auth.models import User
 
 
 # Function Views
@@ -66,6 +69,22 @@ class RegistrarO(View):
         #all_posts = Post.objects.all()
         #self.context['posts'] = all_posts
         return render(request, self.template, self.context)
+
+    def post(self, request):
+        """
+            Validates and do the login
+        """
+        form = OrgForm(request.POST)
+        if form.is_valid():
+
+
+            user = User.objects.create_user(username=form.cleaned_data['usuario'],email=form.cleaned_data['correo'],password=form.cleaned_data['password'], first_name = form.cleaned_data['nombre'], last_name = form.cleaned_data['apellido'])            
+            print(",oaoeu")
+        
+        self.context['form'] = form
+        return redirect("Home:homeA")
+        #return render(request, self.template, self.context)
+
 
 class EliminarO(View):
     """

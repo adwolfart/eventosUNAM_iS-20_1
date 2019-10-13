@@ -6,17 +6,19 @@
 
 {% block body_content %}
 
-<form action="">
+<form method="post">
+    {% csrf_token %}
     <label for="nombre">Nombre: </label>
-    <input type="text" required> <br>
+    <input type="text" name="nombre" required> <br>
     <label for="apellido">Apellido: </label>
-    <input type="text"><br>
+    <input type="text" name="apellido" required><br>
     <label for="correo">Correo: </label>
-    <input type="email"><br>
+    <input type="email" name="correo" required><br>
     <label for="usuario">Usuario: </label>
-    <input type="text"><br>
+    <input type="text" name="usuario" required><br>
     <label for="contraseña">Contraseña: </label>
-    <input type="password">
+    <input type="password" name="password" required><br>
+    <input id="button-loggin" type="submit" value="RegistrarO">
 
 </form>
 {% endblock %}
