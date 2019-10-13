@@ -1,0 +1,29 @@
+{% extends "Home/not_home.html" %}
+
+
+{% block css_content %}
+
+{% load static %}
+<link rel="stylesheet" href={% static "Home/css/login.css" %}>
+
+{% endblock %}
+
+{% block authentication %}
+{% endblock %}
+
+{% block body_content %}
+
+<div id="logina" class="center">
+    <form method="post" id="login-form">
+        {% csrf_token %}
+        <!-- {{ form.as_ul }} -->
+        <label>Username</label>
+        <input type="text" name="username" required> <br>
+        <label>Password</label>
+        <input type="password" name="password" required> <br>
+        <input id="button-loggin" type="submit" value="Login">
+    </form>
+
+</div>
+
+{% endblock %}

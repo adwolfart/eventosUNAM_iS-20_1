@@ -1,0 +1,21 @@
+{% extends "Home/base.html" %}
+
+
+{% block body_header %}
+<nav>
+
+    <ul id="lista">
+        {% if user.is_authenticated %}
+        <li><a href="">Home</a></li>
+        {% else %}
+        <li><a href="{% url 'Home:index' %}">Home</a></li>    
+        {% endif %}
+
+
+
+    </ul>
+
+
+
+</nav>
+{% endblock %}

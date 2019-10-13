@@ -5,10 +5,20 @@ from django.shortcuts import render, redirect
 from django.views import View
 
 from .utils import IsNotAuthenticatedMixin
-from Post.models import Post
+#from Post.models import Post
 from .forms import LoginForm
 
-from django.shortcuts import render
+
+# Function Views
+def index(request):
+    """
+        Index in my Web Page.
+    """
+    print(request.method)
+    template = 'Home/index.html'
+    context = {}
+    return render(request, template, context)
+
 
 # Class-based Views
 class Index(View):
@@ -22,8 +32,8 @@ class Index(View):
         """
             Get in my Index.
         """
-        all_posts = Post.objects.all()
-        self.context['posts'] = all_posts
+        #all_posts = Post.objects.all()
+        #self.context['posts'] = all_posts
         return render(request, self.template, self.context)
 
 
