@@ -20,12 +20,58 @@ def index(request):
     return render(request, template, context)
 
 
+
 # Class-based Views
 class Index(View):
     """
         Index in my Web Page but with Clased based views.
     """
     template = 'Home/index.html'
+    context = {'title': 'Index'}
+
+    def get(self, request):
+        """
+            Get in my Index.
+        """
+        #all_posts = Post.objects.all()
+        #self.context['posts'] = all_posts
+        return render(request, self.template, self.context)
+
+class HomeA(View):
+    """
+        Index in my Web Page but with Clased based views.
+    """
+    template = 'Home/homeA.html'
+    context = {'title': 'Index'}
+
+    def get(self, request):
+        """
+            Get in my Index.
+        """
+        #all_posts = Post.objects.all()
+        #self.context['posts'] = all_posts
+        return render(request, self.template, self.context)
+
+class RegistrarO(View):
+    """
+        Index in my Web Page but with Clased based views.
+    """
+    template = 'Home/registrarO.html'
+    context = {'title': 'Index'}
+
+    def get(self, request):
+        """
+            Get in my Index.
+        """
+        #all_posts = Post.objects.all()
+        #self.context['posts'] = all_posts
+        return render(request, self.template, self.context)
+
+class EliminarO(View):
+    """
+        Index in my Web Page but with Clased based views.
+    """
+    template = 'Home/eliminarO.html'
     context = {'title': 'Index'}
 
     def get(self, request):
@@ -75,10 +121,12 @@ class Login(IsNotAuthenticatedMixin, View):
         if form.is_valid():
             user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user is not None:
+                print(user)
                 login(request, user)
                 if request.GET.get("next", None) is not None:
                     return redirect(request.GET.get("next"))
-                return redirect('Home:index')
+                
+                return redirect("Home:homeA")
 
         self.context['form'] = form
         return render(request, self.template, self.context)

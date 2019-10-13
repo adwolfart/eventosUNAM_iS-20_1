@@ -1,7 +1,6 @@
-#login-form {
+h1{
     position: fixed;
     left: 50%;
     top: 50%;
-    color: blue;
     transform: translate(-50%,-50%)
 }

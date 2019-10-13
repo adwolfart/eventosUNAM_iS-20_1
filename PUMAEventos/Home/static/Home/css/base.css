@@ -36,3 +36,7 @@ ul {
  #login-button {
     background-color: rgb(21, 99, 172);
   }
+
+ #logout-button{
+   background-color: rgb(156, 18, 18);
+ }

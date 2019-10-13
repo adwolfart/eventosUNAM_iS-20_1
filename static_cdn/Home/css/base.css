@@ -1,3 +1,42 @@
 html {
-    background-color: white;
+    width: 100%;
+    margin: 0;
+    background-color: grey;
 }
+
+nav{
+    width: 100%;
+    margin: 0;
+    width: 100%;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover:not(.active) {
+    background-color: #111;
+  }
+  
+ #login-button {
+    background-color: rgb(21, 99, 172);
+  }
+
+ #logout-button{
+   background-color: rgb(156, 18, 18);
+ }
