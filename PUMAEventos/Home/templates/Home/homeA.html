@@ -1,19 +1,24 @@
 {% extends "Home/base.html" %}
 
+{% block css_content %}
 
+{% load static %}
+<link rel="stylesheet" href={% static "Home/css/homeA.css" %}>
 
-
+{% endblock %}
 
 {% block body_content %}
 
 
 
 
-{% if user.is_authenticated %}
-<h1><a href="{% url 'Home:registrarO' %}">Registrar</a></h1>
-<h1><a href="{% url 'Home:eliminarO' %}">Eliminar</a></h1>
-{% else %}
-
-{% endif %}
+<div>
+        {% if user.is_authenticated %}
+        <h1 id="aveces"><a href="{% url 'Home:registrarO' %}">Registrar</a></h1>
+        <h1><a href="{% url 'Home:eliminarO' %}">Eliminar</a></h1>
+        {% else %}
+        
+        {% endif %}
+</div>
 
 {% endblock %}

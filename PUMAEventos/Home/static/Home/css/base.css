@@ -1,7 +1,7 @@
 html {
     width: 100%;
     margin: 0;
-    background-color: grey;
+    background-color: white;
 }
 
 nav{
@@ -14,7 +14,7 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background: transparent;
   }
   
   li {
@@ -23,7 +23,7 @@ ul {
   
   li a {
     display: block;
-    color: white;
+    color: black;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -31,12 +31,21 @@ ul {
   
   li a:hover:not(.active) {
     background-color: #111;
+    color: white;
+    border-radius: 5px;
   }
   
  #login-button {
-    background-color: rgb(21, 99, 172);
+    border: 2px solid black;
+    border-radius: 5px;
   }
 
  #logout-button{
-   background-color: rgb(156, 18, 18);
+  border: 2px solid red;
+  border-radius: 5px;
+  color: red;
+ }
+ #logout-button:hover:not(.active){
+  background-color: red;
+  color: white;
  }
