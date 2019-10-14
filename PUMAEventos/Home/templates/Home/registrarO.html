@@ -2,23 +2,29 @@
 
 
 
+{% block css_content %}
 
+{% load static %}
+<link rel="stylesheet" href={% static "Home/css/registrarO.css" %}>
+
+
+{% endblock %}
 
 {% block body_content %}
 
-<form method="post">
-    {% csrf_token %}
-    <label for="nombre">Nombre: </label>
-    <input type="text" name="nombre" required> <br>
-    <label for="apellido">Apellido: </label>
-    <input type="text" name="apellido" required><br>
-    <label for="correo">Correo: </label>
-    <input type="email" name="correo" required><br>
-    <label for="usuario">Usuario: </label>
-    <input type="text" name="usuario" required><br>
-    <label for="contraseña">Contraseña: </label>
-    <input type="password" name="password" required><br>
-    <input id="button-loggin" type="submit" value="RegistrarO">
-
-</form>
+<div id="formas">
+        <h3>Registrar</h3>
+        <hr>
+        <form method="post">
+                {% csrf_token %}
+                <input type="text" name="nombre" required placeholder="Nombre"> <br>
+                <input type="text" name="apellido" required placeholder="Apellido"><br>
+                <input type="email" name="correo" required placeholder="Correo"><br>
+                <input type="text" name="usuario" required placeholder="Usuario"><br>
+                <input type="password" name="password" required placeholder="Contraseña"><br>
+                <hr>
+                <input id="button-loggin" type="submit" value="Registrar">
+            
+            </form>
+</div>
 {% endblock %}

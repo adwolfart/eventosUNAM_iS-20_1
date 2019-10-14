@@ -5,17 +5,19 @@
 {% load static %}
 <link rel="stylesheet" href={% static "Home/css/homeA.css" %}>
 
+
 {% endblock %}
 
 {% block body_content %}
 
-
-
-
-<div>
+<div id="aveces">
         {% if user.is_authenticated %}
-        <h1 id="aveces"><a href="{% url 'Home:registrarO' %}">Registrar</a></h1>
-        <h1><a href="{% url 'Home:eliminarO' %}">Eliminar</a></h1>
+        
+                <div>
+                        <h1 id="aveces"><a href="{% url 'Home:registrarO' %}">Registrar </a></h1>
+                        <h1><a href="{% url 'Home:eliminarO' %}">Eliminar</a></h1>
+                </div>
+        
         {% else %}
         
         {% endif %}

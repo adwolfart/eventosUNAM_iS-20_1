@@ -1,15 +1,26 @@
 {% extends "Home/base.html" %}
 
 
+{% block css_content %}
+
+{% load static %}
+<link rel="stylesheet" href={% static "Home/css/eliminarO.css" %}>
 
 
+{% endblock %}
 
 {% block body_content %}
 
-<form action="">
-    <label for="usuario">Usuario: </label>
-    <input type="text" required> <br>
-    <button value="EliminarO">Eliminar</button>
 
-</form>
+
+<div id="formas">
+        <h3>Eliminar</h3>
+        <hr>
+        <form method="post">
+                <input type="text" required placeholder="Usuario"> <br>
+                <hr>
+                <input id="button-loggin" type="submit" value="Eliminar">
+            
+            </form>
+</div>
 {% endblock %}
