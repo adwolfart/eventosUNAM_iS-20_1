@@ -7,39 +7,42 @@
 
     {% load static %}
     <link rel="stylesheet" href={% static "Home/css/base.css" %}>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     {% block css_content %}
     {% endblock %}
 </head>
 
 <body >
     {% block authentication %}
-   <div>
-        {% if user.is_authenticated %}
+    <nav id="navbar" class="nav">
 
-        {% else %}
-
-
-
-        {% endif %}
-    </div>
-    <nav>
-
-        <ul id="lista">
+        <ul id="lista" class="nav-list">
             {% if user.is_authenticated %}
-            <li><a href="">Home</a></li>
+            <li><a href=""><i class="fa fa-home"></i> Home</a></li>
             {% else %}
             <li><a href="{% url 'Home:login' %}">Home</a></li>    
             {% endif %}
 
             {% if user.is_authenticated %}
-            <li><a href="">Eventos</a></li>
+            <li><a href=""><i class="fas fa-calendar-alt"></i> Eventos</a></li>
             {% else %}
-            <li><a href="{% url 'Home:login' %}">Eventos</a></li>  
             {% endif %}
+
             {% if user.is_authenticated %}
-            <li style="float:right"><a id="logout-button" href="{% url 'Home:logout' %}">Logout</a></li>
+            <div class="search-container">
+                <form action="/action_page.php">
+                  <input type="text" placeholder="Search.." name="search">
+                  <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+              </div>
+              
             {% else %}
-            <li style="float:right"><a id="login-button" href="{% url 'Home:login' %}">Login</a></li>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            <li style="float:right"><a id="logout-button" href="{% url 'Home:logout' %}">Salir <i class="fas fa-sign-out-alt"></i> </a></li>
+            {% else %}
+            <li style="float:right" class="active"><a id="login-button" href="{% url 'Home:login' %}">Iniciar sesión</a></li>
             {% endif %}
 
         </ul>

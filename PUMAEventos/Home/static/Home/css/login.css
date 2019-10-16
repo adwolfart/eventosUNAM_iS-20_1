@@ -11,6 +11,14 @@
 #button-loggin{
     position: relative;
     left: 50%;
-    top: 10px;
+    top: 15px;
+    transform: translate(-50%,-50%)
+}
+#registrarse{
+    position: absolute;
+    text-decoration: none;
+    left: 50%;
+    margin-top: 10px;
+    font-size: 12px;
     transform: translate(-50%,-50%)
 }

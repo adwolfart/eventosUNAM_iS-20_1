@@ -39,6 +39,23 @@ class Index(View):
         #all_posts = Post.objects.all()
         #self.context['posts'] = all_posts
         return render(request, self.template, self.context)
+        
+
+class RegistrarU(View):
+    """
+        Index in my Web Page but with Clased based views.
+    """
+    template = 'Home/registrarU.html'
+    context = {'title': 'Index'}
+
+    def get(self, request):
+        """
+            Get in my Index.
+        """
+        #all_posts = Post.objects.all()
+        #self.context['posts'] = all_posts
+        return render(request, self.template, self.context)
+
 
 class HomeA(View):
     """

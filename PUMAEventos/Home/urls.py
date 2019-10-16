@@ -14,5 +14,6 @@ urlpatterns = [
     path('homeA/', views.HomeA.as_view(), name='homeA'),
     path('registrarO/', views.RegistrarO.as_view(), name='registrarO'),
     path('eliminarO/', views.EliminarO.as_view(), name='eliminarO'),
+    path('registrarU/', views.RegistrarU.as_view(), name='registrarU'),
 
 ] 
