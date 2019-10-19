@@ -17,7 +17,8 @@
         <h3>Eliminar</h3>
         <hr>
         <form method="post">
-                <input type="text" required placeholder="Usuario"> <br>
+                {% csrf_token %}
+                <input type="text" name="correo" required placeholder="Correo"> <br>
                 <hr>
                 <input id="button-loggin" type="submit" value="Eliminar">
             

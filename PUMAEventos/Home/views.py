@@ -6,10 +6,11 @@ from django.views import View
 
 from .utils import IsNotAuthenticatedMixin
 #from Post.models import Post
-from .forms import LoginForm, OrgForm
+from .forms import LoginForm, OrgForm, DelForm
 
 
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 
 
 # Function Views
@@ -93,15 +94,29 @@ class RegistrarO(View):
         """
         form = OrgForm(request.POST)
         if form.is_valid():
+            print("h")
 
 
-            user = User.objects.create_user(username=form.cleaned_data['usuario'],email=form.cleaned_data['correo'],password=form.cleaned_data['password'], first_name = form.cleaned_data['nombre'], last_name = form.cleaned_data['apellido'])            
-            print(",oaoeu")
+            user = User.objects.create_user(username=form.cleaned_data['correo'],email=form.cleaned_data['correo'],password='default')            
         
         self.context['form'] = form
+        send_mail(
+        'Subject here',
+        'Here is the message.',
+        'pumaeventosunam@gmail.com',
+        ['ori@ciencias.unam.mx'],
+        fail_silently=False,
+        )
         return redirect("Home:homeA")
         #return render(request, self.template, self.context)
-
+def del_user(request, username):    
+    try:
+        u = User.objects.get(username = username)
+        u.delete()
+        print( "The user is deleted")
+    except:
+        print(request, "The user not found")    
+    return redirect("Home:homeA")
 
 class EliminarO(View):
     """
@@ -117,6 +132,27 @@ class EliminarO(View):
         #all_posts = Post.objects.all()
         #self.context['posts'] = all_posts
         return render(request, self.template, self.context)
+
+
+
+    def post(self, request):
+        """
+            Validates and do the login
+        """
+        form = DelForm(request.POST)
+        if form.is_valid():
+                del_user(request, username=form.cleaned_data['correo'])
+
+        self.context['form'] = form
+        send_mail(
+        'Subject here',
+        'Here is the message.',
+        'pumaeventosunam@gmail.com',
+        ['ori@ciencias.unam.mx'],
+        fail_silently=False,
+        )
+        return redirect("Home:homeA")
+        #return render(request, self.template, self.context)
 
 
 class About(View):
