@@ -19,7 +19,7 @@
     <form method="post" id="login-form">
         {% csrf_token %}
         <!-- {{ form.as_ul }} -->
-        <input type="text" name="username" required placeholder="Usuario"> <br>
+        <input type="text" name="username" required placeholder="Correo"> <br>
         <input type="password" name="password" required placeholder="Contraseña"> <br>
         <hr>
         <a href="{% url 'Home:registrarU' %}" id="registrarse">Registrarse</a><br>

@@ -6,11 +6,12 @@ from django.views import View
 
 from .utils import IsNotAuthenticatedMixin
 #from Post.models import Post
-from .forms import LoginForm, OrgForm, DelForm
+from .forms import LoginForm, OrgForm, DelForm, UserProfileForm
 
 
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
+from Home.models import UserProfile
 
 
 # Function Views
@@ -58,6 +59,36 @@ class RegistrarU(View):
         return render(request, self.template, self.context)
 
 
+    def post(self, request):
+        """
+            Validates and do the login
+        """
+        form = UserProfileForm(request.POST)
+        print(form)
+        if form.is_valid():
+            print("h")
+            nombre = request.POST.get('nombre', '')
+            correo = request.POST.get('correo', '')
+            password = request.POST.get('password', '')
+            entidad = request.POST.get('entidad', '')
+            avatar = request.POST.get('avatar', '')
+
+
+            UserProfile.objects.create(username = correo, nombre = nombre, correo = correo, password = password, entidad = entidad, avatar = avatar)  
+                    
+        
+        self.context['form'] = form
+        send_mail(
+        'Subject here',
+        'Here is the message.',
+        'pumaeventosunam@gmail.com',
+        ['ori@ciencias.unam.mx'],
+        fail_silently=False,
+        )
+        return redirect("Home:homeA")
+        #return render(request, self.template, self.context)
+
+
 class HomeA(View):
     """
         Index in my Web Page but with Clased based views.
@@ -72,6 +103,9 @@ class HomeA(View):
         #all_posts = Post.objects.all()
         #self.context['posts'] = all_posts
         return render(request, self.template, self.context)
+
+
+
 
 class RegistrarO(View):
     """
@@ -97,7 +131,7 @@ class RegistrarO(View):
             print("h")
 
 
-            user = User.objects.create_user(username=form.cleaned_data['correo'],email=form.cleaned_data['correo'],password='default')            
+            user = User.objects.create_user(username=form.cleaned_data['correo'],email=form.cleaned_data['correo'],password='default', last_name = form.cleaned_data['nombre'])            
         
         self.context['form'] = form
         send_mail(
@@ -109,6 +143,7 @@ class RegistrarO(View):
         )
         return redirect("Home:homeA")
         #return render(request, self.template, self.context)
+
 def del_user(request, username):    
     try:
         u = User.objects.get(username = username)
@@ -190,8 +225,10 @@ class Login(IsNotAuthenticatedMixin, View):
             Validates and do the login
         """
         form = LoginForm(request.POST)
+        print(form)
         if form.is_valid():
             user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            print(user)
             if user is not None:
                 print(user)
                 login(request, user)

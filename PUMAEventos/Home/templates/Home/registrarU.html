@@ -17,11 +17,11 @@
         <hr>
         <form method="post">
                 {% csrf_token %}
-                <input type="text" name="nombre" required placeholder="Nombre"> <br>
-                <input type="text" name="apellido" required placeholder="Apellido"><br>
+                <input type="text" name="nombre" required placeholder="Nombre Completo"> <br>
+                <input type="text" name="entidad" required placeholder="Entidad"><br>
                 <input type="email" name="correo" required placeholder="Correo"><br>
-                <input type="text" name="usuario" required placeholder="Usuario"><br>
                 <input type="password" name="password" required placeholder="Contraseña"><br>
+                <input type="file" name="avatar" accept="image/*">
                 <hr>
                 <input id="button-loggin" type="submit" value="Registrar">
             
