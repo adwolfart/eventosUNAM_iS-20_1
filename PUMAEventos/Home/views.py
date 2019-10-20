@@ -73,7 +73,7 @@ class RegistrarU(View):
             entidad = request.POST.get('entidad', '')
             avatar = request.POST.get('avatar', '')
 
-            user = User.objects.create_user(username = correo, password = password, email = correo)
+            user = User.objects.create_user(username = correo, password = password, email = correo, first_name = 'Estudiante', last_name = nombre)
             UserProfile.objects.create( user = user, nombre = nombre,  entidad = entidad, avatar = avatar)  
                     
         
@@ -131,7 +131,7 @@ class RegistrarO(View):
             print("h")
 
 
-            user = User.objects.create_user(username=form.cleaned_data['correo'],email=form.cleaned_data['correo'],password='default', last_name = form.cleaned_data['nombre'])            
+            user = User.objects.create_user(username=form.cleaned_data['correo'],email=form.cleaned_data['correo'],password='default', last_name = form.cleaned_data['nombre'], first_name = 'Organizador')            
         
         self.context['form'] = form
         send_mail(
