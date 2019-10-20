@@ -17,11 +17,15 @@ class DelForm(forms.Form):
     correo = forms.EmailField(max_length=100)
 
 
+class Userform(forms.Form):
+    username = forms.CharField(label = 'nombre', max_length = 100)
+    password = forms.CharField(label = 'password')
+
 class UserProfileForm(forms.ModelForm):
     password = forms.CharField(widget = forms.PasswordInput)
     class Meta:
         model = UserProfile
-        fields = ('nombre', 'correo', 'entidad', 'password', 'avatar')
+        fields = ('nombre', 'entidad', 'avatar')
 
     def clean_avatar(self):
         avatar = self.cleaned_data['avatar']

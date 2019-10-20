@@ -73,8 +73,8 @@ class RegistrarU(View):
             entidad = request.POST.get('entidad', '')
             avatar = request.POST.get('avatar', '')
 
-
-            UserProfile.objects.create(username = correo, nombre = nombre, correo = correo, password = password, entidad = entidad, avatar = avatar)  
+            user = User.objects.create_user(username = correo, password = password, email = correo)
+            UserProfile.objects.create( user = user, nombre = nombre,  entidad = entidad, avatar = avatar)  
                     
         
         self.context['form'] = form
@@ -85,7 +85,7 @@ class RegistrarU(View):
         ['ori@ciencias.unam.mx'],
         fail_silently=False,
         )
-        return redirect("Home:homeA")
+        return redirect("Home:login")
         #return render(request, self.template, self.context)
 
 
