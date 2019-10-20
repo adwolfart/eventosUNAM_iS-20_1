@@ -1,0 +1,9 @@
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <h3>¿Desea eliminar el registro de {{ object.titulo }} ?</h3>
+
+        <button class="btn btn-danger" type= "submit">Sí, eliminar </button>
+        <a class= "btn btn-default" href="{% url 'eventos:evento_lista' %}">Cancelar</a>
+    </form>
+{% endblock %}

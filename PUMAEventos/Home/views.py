@@ -93,11 +93,11 @@ class RegistrarU(View):
         #return render(request, self.template, self.context)
 
 
-class HomeA(View):
+class Home(View):
     """
         Index in my Web Page but with Clased based views.
     """
-    template = 'Home/homeA.html'
+    template = 'Home/home.html'
     context = {'title': 'Index'}
 
     def get(self, request):
@@ -147,7 +147,7 @@ class RegistrarO(View):
 
         self.context['form'] = form
 
-        return redirect("Home:homeA")
+        return redirect("Home:home")
         #return render(request, self.template, self.context)
 
 def del_user(request, username):    
@@ -157,7 +157,7 @@ def del_user(request, username):
         print( "The user is deleted")
     except:
         print(request, "The user not found")    
-    return redirect("Home:homeA")
+    return redirect("Home:home")
 
 class EliminarO(View):
     """
@@ -192,7 +192,7 @@ class EliminarO(View):
         ['ori@ciencias.unam.mx'],
         fail_silently=False,
         )
-        return redirect("Home:homeA")
+        return redirect("Home:home")
         #return render(request, self.template, self.context)
 
 
@@ -241,7 +241,7 @@ class Login(IsNotAuthenticatedMixin, View):
                 if request.GET.get("next", None) is not None:
                     return redirect(request.GET.get("next"))
                 
-                return redirect("Home:homeA")
+                return redirect("Home:home")
 
         self.context['form'] = form
         return render(request, self.template, self.context)
