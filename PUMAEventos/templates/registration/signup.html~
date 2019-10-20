@@ -1,8 +1,0 @@
-{% extends 'base.html' %}
-
-{% block content %}
-  <h2>Registrate</h2>
-  <p class="lead">Selecciona el tipo de cuenta que deseas registrar</p>
-  <a href="{% url 'student_signup' %}" class="btn btn-student btn-lg" role="button">Soy un estudiante</a>
-  <a href="{% url 'teacher_signup' %}" class="btn btn-teacher btn-lg" role="button">Soy un organizador</a>
-{% endblock %}

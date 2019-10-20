@@ -8,8 +8,10 @@ from Usuario.models import (Player, Subject, User)
 
 class PlayerSignUpForm(UserCreationForm):
     nUsuario = forms.IntegerField()
-    nombre = forms.CharField(label='nombre', max_length=200)
-    usuarioTipo = forms.CharField()
+    nombre = forms.CharField(label='nombre', max_length=20)
+    apellidosP=forms.CharField(label='apellidoP', max_length=200)
+    apellidosM=forms.CharField(label='apellidoM', max_length=200)
+    #usuarioTipo = forms.CharField()
     email = forms.EmailField(label='email', max_length=70)
     fechaNacimiento = forms.DateTimeField()
     password = forms.CharField(max_length=200)
