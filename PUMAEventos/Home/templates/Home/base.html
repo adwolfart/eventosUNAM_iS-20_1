@@ -20,7 +20,7 @@
             {% if user.is_authenticated %}
             <li><a href=""><i class="fa fa-home"></i> Home</a></li>
             {% else %}
-            <li><a href="{% url 'Home:login' %}">Home</a></li>    
+            <li><a href="{% url 'Home:login' %}"><i class="fa fa-home"></i> Home</a></li>    
             {% endif %}
 
             {% if user.is_authenticated %}
@@ -43,6 +43,7 @@
             <li style="float:right"><a id="logout-button" href="{% url 'Home:logout' %}">Salir <i class="fas fa-sign-out-alt"></i> </a></li>
             {% else %}
             <li style="float:right" class="active"><a id="login-button" href="{% url 'Home:login' %}">Iniciar sesión</a></li>
+            <li style="float:right" class="active"><a id="reg-button" href="{% url 'Home:registrarU' %}">Registrarse</a></li>
             {% endif %}
 
         </ul>
