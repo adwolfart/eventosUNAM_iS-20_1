@@ -14,6 +14,9 @@ from django.core.mail import send_mail
 from Home.models import UserProfile
 
 
+from django.contrib.auth.forms import PasswordResetForm
+
+
 # Function Views
 def index(request):
     """
@@ -72,19 +75,20 @@ class RegistrarU(View):
             password = request.POST.get('password', '')
             entidad = request.POST.get('entidad', '')
             avatar = request.POST.get('avatar', '')
-
+            print("i")
             user = User.objects.create_user(username = correo, password = password, email = correo, first_name = 'Estudiante', last_name = nombre)
             UserProfile.objects.create( user = user, nombre = nombre,  entidad = entidad, avatar = avatar)  
-                    
-        
+            send_mail(
+            'Confirmacion de cuenta',
+            'Da click para confirmar tu registro',
+            'pumaeventosunam@gmail.com',
+            [correo],
+            fail_silently=False,
+            )                    
+
+
         self.context['form'] = form
-        send_mail(
-        'Subject here',
-        'Here is the message.',
-        'pumaeventosunam@gmail.com',
-        ['ori@ciencias.unam.mx'],
-        fail_silently=False,
-        )
+
         return redirect("Home:login")
         #return render(request, self.template, self.context)
 
@@ -132,15 +136,17 @@ class RegistrarO(View):
 
 
             user = User.objects.create_user(username=form.cleaned_data['correo'],email=form.cleaned_data['correo'],password='default', last_name = form.cleaned_data['nombre'], first_name = 'Organizador')            
-        
+            send_mail(
+            'Crea contraseña',
+            'Da click para establecer tu contraseña',
+            'pumaeventosunam@gmail.com',
+            [user.email],
+            fail_silently=False,
+            )
+
+
         self.context['form'] = form
-        send_mail(
-        'Subject here',
-        'Here is the message.',
-        'pumaeventosunam@gmail.com',
-        ['ori@ciencias.unam.mx'],
-        fail_silently=False,
-        )
+
         return redirect("Home:homeA")
         #return render(request, self.template, self.context)
 
