@@ -1,0 +1,51 @@
+.out{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.center{
+    text-align: center;
+}
+.event{
+    margin-left: 5%;
+    margin-top: 5%;
+    background: linear-gradient(120deg, rgb(62, 62, 170), purple);
+    border-radius: 20px;
+    width: 30%;
+}
+.event div{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
+.event div .datos{
+    
+    color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    width: 70%;
+
+}
+.event div .actions{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 30%;
+    margin-top: -8%;
+}
+.event div .actions a {
+    margin-top: 25px;
+}
+.event div div {
+    padding: 20px 30px;
+}
+.event div div a {
+    color: white;
+    position: relative;
+    left: 70%;
+    top: 50%;
+    font-size: 2em;
+}

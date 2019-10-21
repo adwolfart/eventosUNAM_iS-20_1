@@ -1,8 +1,0 @@
-{% block content %}
-    <h2>Evento</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ evento.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
-    </form>
-{% endblock %}

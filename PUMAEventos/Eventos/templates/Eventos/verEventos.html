@@ -1,0 +1,83 @@
+{% extends "Home/base.html" %}
+
+{% block css_content %}
+
+{% load static %}
+<link rel="stylesheet" href={% static "Eventos/css/verEventos.css" %}>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+{% endblock %}
+
+
+{% block body_content %}
+
+<div id="aveces">
+        {% if user.is_authenticated %}
+        
+                
+        
+                {% if user.username == 'admin' %}
+        
+                <div class="out">
+                        <h1>Necesitas ser organizador para ingresar a esta página</h1>
+                </div>
+        
+                {% else %}
+                {% if user.first_name == 'Organizador' %}
+        
+                
+                        <h1 class="center">Estos son los eventos que has creado!</h1>
+
+                        <h2 class="center">Eventos:</h2>
+
+                        {% for post in posts %}
+
+
+
+                            {% if post.correo == user.email %}
+                        <div class="event" href="{% url 'Eventos:onePost' post.id %}"></a>
+                                        <div class="post_title">
+                                                <div class="datos">
+                                                                <h3>{{ post.titulo }} ({{ post.entidad}}, {{post.ubicacion}})</h3>
+                                                                <h5>{{ post.fecha_de_inicio}} {{post.hora_de_inicio}} - {{post.fecha_final}} {{post.hora_final}}<h5>
+                                                                <h5>{{ post.cupo_maximo}} capacidad</h5>
+                                                                <h5>{{post.etiqueta1}}, {{post.etiqueta2}}, {{post.etiqueta3}}</h5>
+                                                </div>
+                                                
+                                                <div class="actions">
+                                                                                                        
+                                                <a href="{% url 'Eventos:onePost' post.id %}"><i class="fas fa-edit"></i></a>
+                                                <a href="{% url 'Eventos:deleteEventos'%}"><i class="fas fa-trash"></i></a>
+                                                </div>
+                                        </div>
+
+                        </div>
+
+
+                            {% else %}
+
+                            {% endif %}
+
+                        {% endfor %}
+            
+                
+                {% else %}
+                
+                        <h1>Necesitas ser organizador para ingresar a esta página</h1>
+
+                
+                {% endif %}                
+
+
+                
+                {% endif %}
+
+
+        {% else %}
+        
+                <h1 class="out">Necesitas logearte y ser organizador</h1>
+        {% endif %}
+</div>
+
+{% endblock %}

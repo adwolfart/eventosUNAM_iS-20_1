@@ -40,72 +40,15 @@ class Evento(models.Model):
     cupo_maximo = models.IntegerField()
     descripcion = models.TextField(blank=False, null=False)
     ubicacion = models.CharField(max_length=100, null=False)
+    entidad = models.CharField(max_length = 150)
+    etiqueta1 = models.CharField(max_length = 50, null = True)
+    etiqueta2 = models.CharField(max_length = 50, null = True)
+    etiqueta3 = models.CharField(max_length = 50, null = True)
+    correo = models.EmailField(max_length = 150, null = False, default = 'null@c.com')
     #duracion = hora_final - hora_de_inicio
     
     class Meta:
         db_table = 'evento'
-
-
-class Direccion(models.Model):
-    """
-    Un clase que representa la direccion fisica de un evento
-    ...
-
-    Atributos
-    ----------
-    evento: Evento (llave foranea)
-        Es el evento al que pertence la direccion
-    calle: str
-        calle de la direccion
-    numero: str
-        numero exterior de la calle donde se ubica el evento
-    cp: str
-        codigo postal de la ubicacion del evento
-    edo: str
-        estado de la republica donde se realiza el evento
-    colonia:
-        colonia o barrio donde se realiza el evento
-
-    Subclases
-    -------
-    Meta
-        Representa la direccion en la base de datos
-    """
-    evento = models.OneToOneField(
-        Evento,
-        on_delete=models.CASCADE,
-        primary_key=True,
-    )
-    calle = models.CharField(max_length=100)
-    numero = models.CharField(max_length=100)
-    cp = models.CharField(max_length=100)
-    edo = models.CharField(max_length=100)
-    colonia = models.CharField(max_length=100)
-
-    class Meta:
-        db_table = 'direccion'
-
-
-class Etiquetas(models.Model):
-    """
-    Un clase que representa las etiquetas con las que se 
-    identifica un evento
-    ...
-
-    Atributos
-    ----------
-    evento: Evento
-        evento al que pertenece la etiqueta
-    etiqueta: str
-        etiqueta del evento, sirve para categorizar los eventos.
-        Ejemplos de etiquetas: cultura, deporte, sexualidad, musica, etc. 
-    """
-    evento = models.ForeignKey(Evento, on_delete=models.CASCADE)
-    lista = models.CharField(max_length=400)
-
-
-    class Meta:
-        db_table = 'Etiquetas'
 
 
 

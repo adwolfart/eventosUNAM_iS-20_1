@@ -2,6 +2,7 @@ html {
     width: 100%;
     margin: 0 0;
     background-color: white;
+    color: black;
 }
 
 
@@ -19,6 +20,7 @@ ul {
   padding: 5px;
   overflow: hidden;
   background-color: black;
+  border-bottom: white 1px solid;
 }
 
 li {

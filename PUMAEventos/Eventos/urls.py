@@ -12,7 +12,10 @@ urlpatterns = [
 
     path('crearevento/', views.EventoCreate.as_view(), name = 'crearEvento'),
     path('updateevento/', views.EventoUpdate.as_view(), name = 'updateEvento'),
-    path('borrarevento/', views.EventoDelete.as_view(), name = 'deleteEvento'),
-    path('eventolista/', views.EventoList.as_view(), name = 'listaEvento'),
+    path('borrarevento/', views.EventoDelete.as_view(), name = 'deleteEventos'),
+    path('listaeventos/', views.EventoList.as_view(), name = 'listaEventos'),
+
+    path('<int:post_id>/', views.OnePost.as_view(), name='onePost'),    
     
-] 
+]
+

@@ -12,16 +12,53 @@
 
 {% block body_content %}
 
-<div id="formas">
-        <h3>Registrar Organizador</h3>
-        <hr>
-        <form method="post">
-                {% csrf_token %}
-                <input type="text" name="nombre" required placeholder="Nombre Completo"> <br>
-                <input type="email" name="correo" required placeholder="Correo"><br>
-                <hr>
-                <input id="button-loggin" type="submit" value="Registrar">
+<div id="aveces">
+        {% if user.is_authenticated %}
+        
+                
+        
+                {% if user.username == 'admin' %}
+        
+                <div id="formas">
+                        <h3>Registrar Organizador</h3>
+                        <hr>
+                        <form method="post">
+                                {% csrf_token %}
+                                <input type="text" name="nombre" required placeholder="Nombre Completo"> <br>
+                                <input type="email" name="correo" required placeholder="Correo"><br>
+                                <hr>
+                                <input id="button-loggin" type="submit" value="Registrar">
+                            
+                            </form>
+                </div>
+        
+                {% else %}
+                {% if user.first_name == 'Organizador' %}
+        
+                        <h1>Necesitas ser administrador para ingresar a esta página</h1>
             
-            </form>
+                
+                {% else %}
+                
+                        <h1>Necesitas ser administrador </h1>
+                
+                {% endif %}                
+
+
+                
+                {% endif %}
+
+
+        {% else %}
+        
+                <h1>Necesitas logearte y ser administrador</h1>
+        {% endif %}
 </div>
+
 {% endblock %}
+
+
+
+
+
+

@@ -1,0 +1,60 @@
+{% extends "Home/base.html" %}
+
+{% load static %}
+
+{% block css_content %}
+
+<link rel="stylesheet" href={% static "Eventos/css/detallesEvento.css" %}>
+
+{% endblock %}
+
+{% block body_content %}
+
+
+
+
+{% if user.is_authenticated %}
+
+
+
+{% if user.username == 'admin' %}
+
+<div class="out">
+    <h1>Necesitas ser organizador para ingresar a esta página</h1>
+</div>
+
+{% else %}
+{% if user.first_name == 'Organizador' %}
+
+<div id="formas">
+    <h3>Borrar Evento</h3>
+    <hr>
+    <form method="post">
+        {% csrf_token %}
+        <input type="emal" name="correo" required placeholder="Tu Correo"><br>
+        <input name="id" type="number" required placeholder="id evento">
+        <hr>
+        <input id="button-loggin" type="submit" value="Eliminar Evento">
+
+    </form>
+</div>
+
+
+{% else %}
+
+<h1>Necesitas ser organizador para ingresar a esta página</h1>
+
+
+{% endif %}
+
+
+
+{% endif %}
+
+
+{% else %}
+
+<h1 class="out">Necesitas logearte y ser organizador</h1>
+{% endif %}
+
+{% endblock %}

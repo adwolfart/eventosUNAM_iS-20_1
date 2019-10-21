@@ -1,0 +1,154 @@
+{% extends "Home/base.html" %}
+
+{% load static %}
+
+{% block css_content %}
+
+<link rel="stylesheet" href={% static "Eventos/css/detallesEvento.css" %}>
+
+{% endblock %}
+
+
+
+{% block body_content %}
+
+
+
+
+{% if user.is_authenticated %}
+
+
+
+{% if user.username == 'admin' %}
+
+<div class="out">
+    <h1>Necesitas ser organizador para ingresar a esta página</h1>
+</div>
+
+{% else %}
+{% if user.first_name == 'Organizador' %}
+
+<div id="formas">
+        <h3>Actualizar Evento</h3>
+        <hr>
+        <form method="post">
+                {% csrf_token %}        
+                <input type="text" value="{{post.titulo}}" name="titulo" required placeholder="Titulo"> <br>
+                <input type="date" value="{{post.fecha_de_inicio}}" name="fecha_de_inicio" required> <br>
+                <input type="time" value="{{post.hora_de_inicio}}" name="hora_de_inicio" required placeholder="Hora de inicio"> <br>
+                <input type="date" name="fecha_final" required placeholder="Fecha final"> <br>
+                <input type="time" name="hora_final" required placeholder="Hora final"> <br>
+                <input type="number" value="{{post.cupo_maximo}}" name="cupo_maximo" required placeholder="Cupo Maximo"> <br>
+                <input type="text" value="{{post.descripcion}}" name="descripcion" required placeholder="Descripcion"> <br>
+                <input type="text" value="{{post.ubicacion}}" name="ubicacion" required placeholder="Ubicacion"> <br>
+                <select name="entidad" id="combo_facultades" class="form-control" required>
+                        <option value="0">Seleccione una opción(Entidad)</option>
+                        <option value="21">CENTRO DE FISICA APLICADA Y TECNOLOGIA AVANZADA</option>
+                        <option value="22">CENTRO DE INVESTIGACIONES EN ECOSISTEMAS</option>
+                        <option value="75">CENTRO DE NANOCIENCIAS Y NANOTECNOLOGIA</option>
+                        <option value="20">CENTRO PENINSULAR EN HUMANIDADES Y CIENCIAS SOCIAL</option>
+                        <option value="80">E.N.E.S. LEON</option>
+                        <option value="81">E.N.E.S. LEON</option>
+                        <option value="259">E.N.E.S. LEON (CIENCIAS POLITICAS) </option>
+                        <option value="77">E.N.E.S. LEON (CONTADURIA)</option>
+                        <option value="78">E.N.E.S. LEON (ECONOMIA)</option>
+                        <option value="79">E.N.E.S. LEON (FILOSOFIA)</option>
+                        <option value="82">E.N.E.S. LEON (GENOMICAS)</option>
+                        <option value="83">E.N.E.S. MORELIA (ARTES PLASTICAS)</option>
+                        <option value="85">E.N.E.S. MORELIA (CIENCIAS POLITICAS)</option>
+                        <option value="84">E.N.E.S. MORELIA (CIENCIAS)</option>
+                        <option value="86">E.N.E.S. MORELIA (FILOSOFIA)</option>
+                        <option value="258">E.N.E.S. MORELIA (MUSICA)</option>
+                        <option value="9">ESCUELA NACIONAL DE ENFERMERIA Y OBSTETRICIA</option>
+                        <option value="15">ESCUELA NACIONAL DE TRABAJO SOCIAL</option>
+                        <option value="32">F.E.S. ACATLAN (ACTUARIA)</option>
+                        <option value="30">F.E.S. ACATLAN (ARQUITECTURA)</option>
+                        <option value="31">F.E.S. ACATLAN (ARTES PLASTICAS)</option>
+                        <option value="39">F.E.S. ACATLAN (C IDIOMAS)</option>
+                        <option value="33">F.E.S. ACATLAN (CIENCIAS POLITICAS)</option>
+                        <option value="38">F.E.S. ACATLAN (COMPUTACION)</option>
+                        <option value="34">F.E.S. ACATLAN (DERECHO)</option>
+                        <option value="35">F.E.S. ACATLAN (ECONOMIA)</option>
+                        <option value="36">F.E.S. ACATLAN (FILOSOFIA)</option>
+                        <option value="37">F.E.S. ACATLAN (INGENIERIA)</option>
+                        <option value="40">F.E.S. ACATLAN (LENGUA EXTRANJERA)</option>
+                        <option value="53">F.E.S. ARAGON (AGROPECUARIO)</option>
+                        <option value="47">F.E.S. ARAGON (ARQUITECTURA)</option>
+                        <option value="48">F.E.S. ARAGON (CIENCIAS POLITICAS)</option>
+                        <option value="49">F.E.S. ARAGON (DERECHO)</option>
+                        <option value="50">F.E.S. ARAGON (ECONOMIA)</option>
+                        <option value="51">F.E.S. ARAGON (FILOSOFIA)</option>
+                        <option value="52">F.E.S. ARAGON (INGENIERIA)</option>
+                        <option value="28">F.E.S. CUAUTITLAN (AGRICOLA)</option>
+                        <option value="23">F.E.S. CUAUTITLAN (ARTES PLASTICAS)</option>
+                        <option value="25">F.E.S. CUAUTITLAN (CONTADURIA)</option>
+                        <option value="26">F.E.S. CUAUTITLAN (INGENIERIA)</option>
+                        <option value="24">F.E.S. CUAUTITLAN (QUIMICA)</option>
+                        <option value="29">F.E.S. CUAUTITLAN (TECNOLOGIA)</option>
+                        <option value="27">F.E.S. CUAUTITLAN (VETERINARIA)</option>
+                        <option value="44">F.E.S. IZTACALA</option>
+                        <option value="41">F.E.S. IZTACALA (BIOLOGIA)</option>
+                        <option value="42">F.E.S. IZTACALA (ENFERMERIA)</option>
+                        <option value="43">F.E.S. IZTACALA (MEDICINA)</option>
+                        <option value="46">F.E.S. IZTACALA (OPTOMETRIA)</option>
+                        <option value="45">F.E.S. IZTACALA (PSICOLOGIA)</option>
+                        <option value="58">F.E.S. ZARAGOZA</option>
+                        <option value="54">F.E.S. ZARAGOZA (BIOLOGIA)</option>
+                        <option value="56">F.E.S. ZARAGOZA (ENFERMERIA)</option>
+                        <option value="57">F.E.S. ZARAGOZA (MEDICINA)</option>
+                        <option value="59">F.E.S. ZARAGOZA (PSICOLOGIA)</option>
+                        <option value="55">F.E.S. ZARAGOZA (QUIMICAS)</option>
+                        <option value="76">F.E.S. ZARAGOZA (TRABAJO SOCIAL)</option>
+                        <option value="16">FAC DE MED VETERINARIA Y ZOOTECNIA</option>
+                        <option value="1">FACULTAD DE ARQUITECTURA</option>
+                        <option value="2">FACULTAD DE ARTES Y DISEÑO</option>
+                        <option value="3">FACULTAD DE CIENCIAS</option>
+                        <option value="4">FACULTAD DE CIENCIAS POLITICAS Y SOCIALES</option>
+                        <option value="6">FACULTAD DE CONTADURIA Y ADMON</option>
+                        <option value="7">FACULTAD DE DERECHO</option>
+                        <option value="8">FACULTAD DE ECONOMIA</option>
+                        <option value="10">FACULTAD DE FILOSOFIA Y LETRAS</option>
+                        <option value="11">FACULTAD DE INGENIERIA</option>
+                        <option value="12">FACULTAD DE MEDICINA</option>
+                        <option value="13">FACULTAD DE MUSICA</option>
+                        <option value="14">FACULTAD DE ODONTOLOGIA</option>
+                        <option value="17">FACULTAD DE PSICOLOGIA</option>
+                        <option value="5">FACULTAD DE QUIMICA</option>
+                        <option value="19">INSTITUTO DE BIOTECNOLOGIA</option>
+                        <option value="74">INSTITUTO DE ENERGIAS RENOVABLES</option>
+                </select><br>
+        
+                <input type="text" value="{{post.etiqueta1}}" name="etiqueta1" required placeholder="Etiqueta"> <br>
+                <input type="text" value="{{post.etiqueta2}}" name="etiqueta2"  required placeholder="Etiqueta"> <br>
+                <input type="text" value="{{post.etiqueta3}}" name="etiqueta3" required placeholder="Etiqueta"> <br>
+                <h3>Confirma ingresando tu correo: </h3>
+                <input type="email" value="{{post.correo}}" name="correo" required placeholder="Correo">
+                <hr>
+                <h3>Confirma ingresado el id del evento</h3>
+                <input type="number" required name="id" value="{{post.id}}">
+                <hr>
+                <input id="button-loggin" type="submit" value="Actualizar">
+    
+            </form>
+    </div>
+    
+
+
+{% else %}
+
+<h1>Necesitas ser organizador para ingresar a esta página</h1>
+
+
+{% endif %}
+
+
+
+{% endif %}
+
+
+{% else %}
+
+<h1 class="out">Necesitas logearte y ser organizador</h1>
+{% endif %}
+
+{% endblock %}

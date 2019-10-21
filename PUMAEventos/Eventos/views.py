@@ -3,144 +3,237 @@ from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.http import HttpResponse
-from Eventos.models import Evento, Direccion, Etiquetas
-from Eventos.forms import EventoForm,DireccionForm,EtiquetasForm
+from Eventos.models import Evento
+from Eventos.forms import EventoForm, DelEventoForm, UpdateForm
 from django.http import HttpResponse, HttpResponseRedirect
 
 def index(request):
     return HttpResponse("Index")
 
+class OnePost(View):
+    """
+        Displays just one post
+    """
+    template = 'Eventos/detallesEvento.html'
+    context = {}
+
+    def get(self, request, post_id):
+        """
+            GET in one post
+        """
+        post = Evento.objects.get(id=post_id)
+        #post = get_object_or_404(Post, id=post_id)
+        self.context['post'] = post
+
+        self.context['title'] = str(post)
+
+        return render(request, self.template, self.context)
+
+
+    def post(self, request, post_id):
+        """
+            Validates and do the login
+        """
+        form = UpdateForm(request.POST)
+        print(form)
+
+
+        if form.is_valid():
+            try:
+                u = Evento.objects.get(id = form.cleaned_data['id'])
+                correo = request.POST.get('correo', '')
+
+                if(u.correo == correo):
+                    titulo = request.POST.get('titulo', '')
+                    fecha_de_inicio = request.POST.get('fecha_de_inicio','')
+                    hora_de_inicio = request.POST.get('hora_de_inicio','')
+                    fecha_final = request.POST.get('fecha_final','')
+                    hora_final = request.POST.get('hora_final','')
+                    cupo_maximo = request.POST.get('cupo_maximo','')
+                    descripcion = request.POST.get('descripcion','')
+                    ubicacion = request.POST.get('ubicacion','')
+                    entidad = request.POST.get('entidad','')
+                    etiqueta1 = request.POST.get('etiqueta1','')
+                    etiqueta2 = request.POST.get('etiqueta2','')
+                    etiqueta3 =  request.POST.get('etiqueta3','') 
+
+                    u.titulo = titulo
+                    u.fecha_de_inicio = fecha_de_inicio
+                    u.hora_de_inicio = hora_de_inicio
+                    u.fecha_final = fecha_final
+                    u.hora_final = hora_final
+                    u.cupo_maximo = cupo_maximo
+                    u.descripcion = descripcion
+                    u.ubicacion = ubicacion
+                    u.entidad = entidad
+                    u.etiqueta1 = etiqueta1
+                    u.etiqueta2 = etiqueta2
+                    u.etiqueta3 = etiqueta3
+                    u.save()                  
+                    print("actualizado")
+                else:
+                    print("No puedes eliminar este evento, no te pertenece")
+                
+            except:
+                print("no existe o error") 
+
+        self.context['form'] = form
+
+        return redirect("Home:home")
+        #return render(request, self.template, self.context)
+
 
 class EventoList(ListView):
     """
-    Clase que representa una lista de eventos
-    ...
-
-    Atributos
-    ----------
-    model: 
-        indica el modelo al que hace referencia la lista
-    template_name: str
-        nombre del template con la vista de la lista
+        Index in my Web Page but with Clased based views.
     """
+    template = 'Eventos/verEventos.html'
+    context = {'title': 'Index'}
 
-    template_name = 'Eventos/evento_lista.html'
+    #def get(self, request):
 
-    def get_queryset(self):
-        return Evento.objects.all().order_by('pk')
+        #all_posts = Post.objects.all()
+        #self.context['posts'] = all_posts
+    def get(self, request):
+        """
+            Get in my Index.
+        """
+        all_posts = Evento.objects.all()
+        self.context['posts'] = all_posts
+        return render(request, self.template, self.context)
 
-    def get_context_data(self, **kwargs):
-        context = super(ListView, self).get_context_data(**kwargs)
-        if 'evento' not in context:
-            context['evento'] = Evento.objects.all().order_by('pk')
-        if 'direccion' not in context:
-            context['direccion'] = Direccion.objects.all().order_by('evento')
-        return context   
+
+    def post(self, request):
+        """
+            Validates and do the login
+        """
+        form = EventoForm(request.POST)
+        print(form)
+        if form.is_valid():
+            print("creado")                  
+
+
+        self.context['form'] = form
+
+        return redirect("Home:home")
+        #return render(request, self.template, self.context) 
 
 
 
 class EventoCreate(CreateView):
     """
-    Clase que representa la creacion de un evento
-    ...
-
-    Atributos
-    ----------
-    model: 
-        indica el modelo al que hace referencia la lista
-    template_name: str
-        nombre del template con la vista de la lista
+        Index in my Web Page but with Clased based views.
     """
-    model = Evento
-    form_class = EventoForm
-    dir_form = DireccionForm
-    etiq_form = EtiquetasForm
-    template_name = 'Eventos/eventosform.html'
-    success_url = reverse_lazy('evento_lista')
+    template = 'Eventos/crearEvento.html'
+    context = {'title': 'Index'}
+
+    def get(self, request):
+        """
+            Get in my Index.
+        """
+        #all_posts = Post.objects.all()
+        #self.context['posts'] = all_posts
+        return render(request, self.template, self.context)
 
 
-    def get(self, request, *args, **kwargs):
-        form = self.form_class(initial=self.initial)
-        direccion_f = self.dir_form(initial=self.initial)
-        context = {
-            'form': EventoForm(),
-            'direccion': DireccionForm(),
-            'etiquetas': EtiquetasForm(),
-        }
-        return render(request, self.template_name, context)
+    def post(self, request):
+        """
+            Validates and do the login
+        """
+        form = EventoForm(request.POST)
+        print(form)
+        if form.is_valid():
+            titulo = request.POST.get('titulo', '')
+            fecha_de_inicio = request.POST.get('fecha_de_inicio','')
+            hora_de_inicio = request.POST.get('hora_de_inicio','')
+            fecha_final = request.POST.get('fecha_final','')
+            hora_final = request.POST.get('hora_final','')
+            cupo_maximo = request.POST.get('cupo_maximo','')
+            descripcion = request.POST.get('descripcion','')
+            ubicacion = request.POST.get('ubicacion','')
+            entidad = request.POST.get('entidad','')
+            etiqueta1 = request.POST.get('etiqueta1','')
+            etiqueta2 = request.POST.get('etiqueta2','')
+            etiqueta3 =  request.POST.get('etiqueta3','')
+            correo = request.POST.get('correo','')
+
+            Evento.objects.create(titulo = titulo, 
+                                    fecha_de_inicio = fecha_de_inicio,
+                                    hora_de_inicio = hora_de_inicio,
+                                    fecha_final = fecha_final,
+                                    hora_final = hora_final,
+                                    cupo_maximo = cupo_maximo,
+                                    descripcion = descripcion,
+                                    ubicacion = ubicacion,
+                                    entidad = entidad, 
+                                    etiqueta1 = etiqueta1,
+                                    etiqueta2 = etiqueta2,
+                                    etiqueta3 = etiqueta3,
+                                    correo = correo)
+
+        self.context['form'] = form
+
+        return redirect("Home:home")
+        #return render(request, self.template, self.context)
 
 
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        direccion_f = self.dir_form(request.POST)
-        e_f = self.etiq_form(request.POST)
-        if form.is_valid() and direccion_f.is_valid() and e_f.is_valid():
-            eventon = form.save()
-            direccion = direccion_f.save(commit=False)
-            direccion.evento = eventon
-            direccion.save()
-            etiqueta = e_f.save(commit=False)
-            lista_de_etiquetas = str(etiqueta.lista).split(",")
-            for e in lista_de_etiquetas:
-                etiqueta.lista = e
-                etiqueta.evento = eventon
-                etiqueta.save()
-            return redirect('Eventos:listaEvento')
-        context = {
-        'form': form,
-        'direccion': direccion_f,
-        }
-        return render(request, self.template_name, context)
 
 
 class EventoUpdate(UpdateView):
     """
-    Clase que representa la edicion y actualizacion de un evento
-    ...
-
-    Atributos
-    ----------
-    model: 
-        indica el modelo al que hace referencia la lista
-    template_name: str
-        nombre del template con la vista de la lista
-    model = Evento
-    form_class = EventoForm
-    template_name = 'Eventos/eventosform.html'
-    success_url = reverse_lazy('evento_lista')
+        Index in my Web Page but with Clased based views.
     """
-    model = Evento
-    form_class = EventoForm
-    dir_form = DireccionForm
-    template_name = 'Eventos/eventosform.html'
-    success_url = reverse_lazy('evento_lista')
+    template = 'Eventos/crearEvento.html'
+    context = {'title': 'Index'}
 
-    def get_context_data(self, **kwargs):
-        context = super(UpdateView, self).get_context_data(**kwargs)
-        if 'evento' not in context:
-            context['evento'] = self.form_class()
-        if 'direccion' not in context:
-            context['direccion'] = self.dir_form()
-        return context
+    def get(self, request):
+        """
+            Get in my Index.
+        """
+        #all_posts = Post.objects.all()
+        #self.context['posts'] = all_posts
+        return render(request, self.template, self.context)
 
 
 
 
 
-class EventoDelete(DeleteView):
+        
+class EventoDelete(View):
     """
-    Clase que representa la eliminacion de un evento
-    ...
-
-    Atributos
-    ----------
-    model: 
-        indica el modelo al que hace referencia la lista
-    template_name: str
-        nombre del template con la vista de la lista
+        Index in my Web Page but with Clased based views.
     """
-    model = Evento
-    template_name = 'Eventos/evento_delete.html'
-    success_url = reverse_lazy('evento_lista')
+    template = 'Eventos/borrarEvento.html'
+    context = {'title': 'Index'}
+
+    def get(self, request):
+        """
+            Get in my Index.
+        """
+        #all_posts = Post.objects.all()
+        #self.context['posts'] = all_posts
+        return render(request, self.template, self.context)
 
 
+
+    def post(self, request):
+        """
+            Validates and do the login
+        """
+        form = DelEventoForm(request.POST)
+        if form.is_valid():
+            try:
+                u = Evento.objects.get(id = form.cleaned_data['id'])
+                correo = request.POST.get('correo', '')
+
+                if(u.correo == correo):
+                    u.delete()
+                    print("eliminado")
+                else:
+                    print("No puedes eliminar este evento, no te pertenece")
+                
+            except:
+                print("no existe") 
+
+        return redirect("Home:home")
+        #return render(request, self.template, self.context)
