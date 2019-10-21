@@ -1,3 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Ubuntu|QuickSand|Open+Sans&display=swap');
+
+html {
+    width: 100%;
+    margin: 0 0;
+    background-color: white;
+    color: black;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: top;
+  background-image:url(https://gitlab.com/Ricardoengitlab/images/raw/master/images/787aoeu.jpg);
+  width: 100%;
+  height: 100%;
+  font-family: Arial, Helvetica;
+
+ }
+ 
+
+ .user-login-box{
+    position: relative;
+    margin-top: 50px;
+    text-align: center;
+    z-index: 1;
+}
+.blurred-box{
+    position: fixed;
+
+    width:450px;
+    height: 550px;
+    top: 50%;
+    left: 50%;
+    background: inherit;
+    border-radius: 2px;
+    overflow: hidden;
+    border-radius: 10px;
+    transform: translate(-50%,-50%)
+  }
+  
+.blurred-box:after{
+   content: '';
+   width: 500px;
+   height: 5500px;
+   background: inherit; 
+   position: absolute;
+   left: -25px;
+
+   right: 0;
+   top: -25px;  
+   bottom: 0;
+   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.747);
+   filter: blur(10px);
+  }
+
 #formas{
     position: fixed;
     left: 50%;
@@ -6,10 +60,12 @@
 }
 h3{
     text-align: center;
+    color: white;
+    font-family: 'Josefin Sans', monospace
 }
 #button-loggin{
     position: relative;
-    left: 50%;
+    left: 10%;
     top: 10px;
     transform: translate(-50%,-50%)
 }

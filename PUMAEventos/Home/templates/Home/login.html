@@ -13,19 +13,26 @@
 
 {% block body_content %}
 
-<div id="logina" class="center">
-    <h3>Log in</h3>
-    <hr>
-    <form method="post" id="login-form">
-        {% csrf_token %}
-        <!-- {{ form.as_ul }} -->
-        <input type="text" name="username" required placeholder="Correo"> <br>
-        <input type="password" name="password" required placeholder="Contraseña"> <br>
-        <hr>
-        <a href="{% url 'Home:registrarU' %}" id="registrarse">Registrarse</a><br>
-        <input id="button-loggin" type="submit" value="Login">
-    </form>
+<div class="blurred-box">
 
+
+<div class = "user-login-box">
+
+    <div id="logina" class="center">
+        <h3>Log in</h3>
+        <hr>
+        <form method="post" id="login-form">
+            {% csrf_token %}
+            <!-- {{ form.as_ul }} -->
+            <input type="text" name="username" required placeholder="Correo"> <br>
+            <input type="password" name="password" required placeholder="Contraseña"> <br>
+            <hr>
+            <a href="{% url 'Home:registrarU' %}" id="registrarse">Registrarse</a><br>
+            <input id="button-loggin" type="submit" value="Login">
+        </form>
+    
+    </div>
+</div>
 </div>
 
 {% endblock %}

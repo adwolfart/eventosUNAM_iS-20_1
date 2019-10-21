@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Ubuntu|QuickSand|Open+Sans&display=swap');
+
 h1{
     position: fixed;
-    left: 50%;
-    top: 50%;
+    left: 70%;
+    top: 40%;
     transform: translate(-50%,-50%);
-    color: black;
+    color: white;
+    font-family: 'Ubuntu', monospace;
+    font-size: 3em;
 }

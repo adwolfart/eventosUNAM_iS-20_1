@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Indie+Flower|QuickSand|Open+Sans&display=swap');
+
 .out{
     position: fixed;
     top: 50%;
@@ -9,13 +11,13 @@
 }
 .event{
     margin-left: 5%;
-    margin-top: 5%;
-    background: linear-gradient(120deg, rgb(62, 62, 170), purple);
+    margin-top: 1%;
+    background-color: rgba(0, 0, 0, 0.8);
     border-radius: 20px;
-    width: 30%;
+    width: 40%;
 }
 .event div{
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
     flex-direction: row;
 }
@@ -48,4 +50,17 @@
     left: 70%;
     top: 50%;
     font-size: 2em;
+}
+h1,h2{
+    font-family: 'Indie Flower', monospace;
+    color: white;
+    text-align: center;
+}
+.ids{
+    position: relative;
+    left: 90%;
+    margin-bottom: 35px;
+}
+h3, h5{
+    margin-top: 5px;
 }

@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|QuickSand|Open+Sans|Indie+Flower&display=swap');
+
+
 #aveces{
     position: fixed;
-    left: 50%;
-    top: 50%;
+    left: 75%;
+    top: 40%;
     transform: translate(-50%,-50%)
 }
 #aveces h1{
@@ -9,5 +12,6 @@
     text-align: center;
 }
 div h1 a{
-    color: black;
+    color: white;
+    font-family: 'Indie Flower', monospace
 }

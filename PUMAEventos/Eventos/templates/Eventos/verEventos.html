@@ -27,7 +27,7 @@
                 {% if user.first_name == 'Organizador' %}
         
                 
-                        <h1 class="center">Estos son los eventos que has creado!</h1>
+                        <h1 class="center"><u>Estos son los eventos que has creado!</u></h1>
 
                         <h2 class="center">Eventos:</h2>
 
@@ -38,6 +38,7 @@
                             {% if post.correo == user.email %}
                         <div class="event" href="{% url 'Eventos:onePost' post.id %}"></a>
                                         <div class="post_title">
+                                                <h2 class="ids">{{post.id}}</h2>
                                                 <div class="datos">
                                                                 <h3>{{ post.titulo }} ({{ post.entidad}}, {{post.ubicacion}})</h3>
                                                                 <h5>{{ post.fecha_de_inicio}} {{post.hora_de_inicio}} - {{post.fecha_final}} {{post.hora_final}}<h5>

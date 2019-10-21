@@ -1,7 +1,7 @@
 #formas{
     position: fixed;
-    left: 50%;
-    top: 50%;
+    left: 75%;
+    top: 35%;
     transform: translate(-50%,-50%)
 }
 h3{
@@ -9,7 +9,7 @@ h3{
 }
 #button-loggin{
     position: relative;
-    left: 10%;
+    left: 50%;
     top: 10px;
     transform: translate(-50%,-50%)
 }
@@ -36,7 +36,7 @@ h3{
 .blurred-box:after{
    content: '';
    width: 500px;
-   height: 750px;
+   height: 650px;
    background: inherit; 
    position: absolute;
    left: -25px;
@@ -44,7 +44,7 @@ h3{
    right: 0;
    top: -25px;  
    bottom: 0;
-   box-shadow: inset 0 0 0 200px rgba(0, 0, 0, 0.801);
+   box-shadow: inset 0 0 0 200px rgba(0, 0, 0, 0.822);
    filter: blur(10px);
   }
 h3{

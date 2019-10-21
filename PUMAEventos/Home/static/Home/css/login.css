@@ -1,24 +1,64 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|QuickSand|Open+Sans&display=swap');
 
-#logina {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
+
+body {
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    font-family: "Exo", sans-serif;
+    color: #fff;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: top;
+    background-image:url(https://gitlab.com/Ricardoengitlab/images/raw/master/images/787aoeu.jpg);
+    animation: gradientBG 15s ease infinite;
 }
-#logina > h3 {
-    text-align: center;
-}
-#button-loggin{
+
+
+.user-login-box{
     position: relative;
-    left: 50%;
-    top: 15px;
-    transform: translate(-50%,-50%)
+    margin-top: 50px;
+    text-align: center;
+    z-index: 1;
+}
+.blurred-box{
+    position: relative;
+
+    width: 250px;
+    height: 350px;
+    top: calc(50% - 175px);
+    left: calc(50% - 125px);
+    background: inherit;
+    border-radius: 2px;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  
+.blurred-box:after{
+   content: '';
+   width: 300px;
+   height: 350px;
+   background: inherit; 
+   position: absolute;
+   left: -25px;
+
+   right: 0;
+   top: -25px;  
+   bottom: 0;
+   box-shadow: inset 0 0 0 200px rgba(0, 0, 0, 0.541);
+   filter: blur(10px);
+  }
+
+h3{
+    color: white;
+    font-size: 1.5em;
+    font-family: 'QuickSand', monospace
 }
 #registrarse{
-    position: absolute;
-    text-decoration: none;
-    left: 50%;
+    color: rgb(0, 183, 255);
+    margin-bottom: 10px;
+}
+#button-loggin{
     margin-top: 10px;
-    font-size: 12px;
-    transform: translate(-50%,-50%)
 }
