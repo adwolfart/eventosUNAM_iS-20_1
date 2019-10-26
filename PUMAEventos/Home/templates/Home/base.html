@@ -8,49 +8,64 @@
     {% load static %}
     <link rel="stylesheet" href={% static "Home/css/base.css" %}>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     {% block css_content %}
     {% endblock %}
 </head>
 
 <body >
     {% block authentication %}
-    <nav id="navbar" class="nav">
+    {% if user.is_authenticated %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'Home:home' %}">Pumaeventos</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'Home:home' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'Eventos:listaEventos' %}">Eventos</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+          <form action="{% url 'Home:logout' %}">
+              <button class="btn btn-danger">Logout</button>
+          </form>
+        </div>
+      </nav>
+    {% else %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'Home:home' %}">Pumaeventos</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Eventos</a>
+            </li>
+          </ul>
+          <form action="{% url 'Home:registrarU' %}">
+            <button class="btn btn-dark">Registrarse</button>
+          </form>
+          <form action="{% url 'Home:login' %}">
+            <button class="btn btn-primary">Login</button>
+          </form>
+        </div>
+      </nav>
+      {% endif %}
 
-        <ul id="lista" class="nav-list">
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'Home:home' %}"><i class="fa fa-home"></i> Home</a></li>
-            {% else %}
-            <li><a href="{% url 'Home:login' %}"><i class="fa fa-home"></i> Home</a></li>    
-            {% endif %}
-
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'Eventos:listaEventos' %}"><i class="fas fa-calendar-alt"></i> Eventos</a></li>
-            {% else %}
-            {% endif %}
-
-            {% if user.is_authenticated %}
-            <div class="search-container">
-                <form action="/action_page.php">
-                  <input type="text" placeholder="Search.." name="search">
-                  <button type="submit"><i class="fa fa-search"></i></button>
-                </form>
-              </div>
-              
-            {% else %}
-            {% endif %}
-
-            {% if user.is_authenticated %}
-            <li style="float:right"><a id="logout-button" href="{% url 'Home:logout' %}">Salir <i class="fas fa-sign-out-alt"></i> </a></li>
-            {% else %}
-            <li style="float:right" class="active"><a id="login-button" href="{% url 'Home:login' %}">Iniciar sesión</a></li>
-            <li style="float:right" class="active"><a id="reg-button" href="{% url 'Home:registrarU' %}"><u>Registrarse</u></a></li>
-            {% endif %}
-
-        </ul>
-
-
-
-    </nav>
     {% endblock %}
 
     {% block body_header %}
@@ -58,5 +73,7 @@
     {% block body_content %}
     {% endblock %}
 </body>
-
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </html>

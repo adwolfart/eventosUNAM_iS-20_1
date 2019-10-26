@@ -51,5 +51,10 @@ class Evento(models.Model):
         db_table = 'evento'
 
 
+class RegEvento(models.Model):
+    id_Evento = models.IntegerField()
+    email_Organizador = models.EmailField()
+    email_Usuario = models.EmailField()
+
 
 
