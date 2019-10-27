@@ -7,24 +7,25 @@ html{
     background-attachment: fixed;
     background-size: cover;
     background-position: top;
-    background-image: url("https://assets.website-files.com/5bfd1275cc56e15ce750b18e/5c289afb9a1575537e893a5d_32.%20Banana%20Mania.jpg");    
+    background-image: url("/static/Home/img/1.jpg");    
 }
 #aveces{
-    position: fixed;
+    position: absolute;
+    z-index: -1;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%)
 }
-#aveces h1:hover{
+#aveces h3:hover{
     transform: scale(1.2);
     text-decoration: none;
     color: white;
 }
-div h1 a{
+div h3 a{
     color: white;
     font-family: 'Indie Flower', monospace
 }
-div h1 a:hover{
+div h3 a:hover{
     text-decoration: none;
     color: white;
     transform: scale(1.1);

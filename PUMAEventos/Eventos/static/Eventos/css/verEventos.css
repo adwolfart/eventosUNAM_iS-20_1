@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Indie+Flower|QuickSand|Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato|Josefin+Sans|Indie+Flower|QuickSand|Open+Sans&display=swap');
 html{
     margin: 0 0;
     background-color: #21D4FD;
@@ -6,7 +6,7 @@ html{
     background-attachment: fixed;
     background-size: cover;
     background-position: top;
-    background-image: url("https://assets.website-files.com/5bfd1275cc56e15ce750b18e/5c289afb9a1575537e893a5d_32.%20Banana%20Mania.jpg");    
+    background-image: url("/static/Home/img/1.jpg");    
 }
 .center{
     text-align: center;
@@ -48,4 +48,27 @@ html{
     background-image: url("https://assets.website-files.com/5bfd1275cc56e15ce750b18e/5c289afb9a1575537e893a5d_32.%20Banana%20Mania.jpg");    
     color: white;
     padding: 1% 0;
+}
+#eventos{
+    background-color: rgba(0, 0, 0, 0.404);
+    width: 50%;
+    margin: 0 25%;
+    padding: 2% 2%;
+    border-radius: 10px;
+}
+#eventos h1,h2{
+    font-family: 'Lato', monospace;
+}
+@media only screen and (max-width: 600px) {
+
+    #eventos{
+        background-color: rgba(0, 0, 0, 0.404);
+        width: 80%;
+        margin: 0 10%;
+        padding: 2% 2%;
+        border-radius: 10px;
+    }
+    #eventos h1,h2{
+        font-family: 'Lato', monospace;
+    }
 }

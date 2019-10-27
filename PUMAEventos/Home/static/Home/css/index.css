@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Ubuntu|QuickSand|Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato|Josefin+Sans|Ubuntu|QuickSand|Open+Sans&display=swap');
 html {
     width: 100%;
     margin: 0 0;
@@ -31,7 +31,7 @@ body {
     background-attachment: fixed;
     background-size: cover;
     background-position: top;
-    background-image: url("https://assets.website-files.com/5bfd1275cc56e15ce750b18e/5c289afb9a1575cb2f893a3b_15.%20Perfume.jpg");
+    background-image: url("/static/Home/img/2.jpg");
     color: white;
 }
 
