@@ -22,14 +22,24 @@
                 <div id="formas">
                         <h3>Registrar Organizador</h3>
                         <hr>
-                        <form method="post">
-                                {% csrf_token %}
-                                <input type="text" name="nombre" required placeholder="Nombre Completo"> <br>
-                                <input type="email" name="correo" required placeholder="Correo"><br>
-                                <hr>
-                                <input id="button-loggin" type="submit" value="Registrar">
-                            
-                            </form>
+
+
+
+                            <form method="post">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                          <label for="exampleInputEmail1">Nombre Completo</label>
+                                          <input name="nombre" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre completo" required>
+                                          <small id="emailHelp" class="form-text text-muted">Esta acción no se puede deshacer.</small>
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="exampleInputPassword1">Correo</label>
+                                          <input name="correo" type="email" class="form-control" id="exampleInputPassword1" placeholder="Correo" required>
+                                        </div>
+                                        <button style="width: 100%" type="submit" class="btn btn-primary">Registrar</button>
+                        
+                                        
+                                </form>
                 </div>
         
                 {% else %}

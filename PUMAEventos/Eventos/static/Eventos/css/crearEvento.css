@@ -1,71 +1,40 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Ubuntu|QuickSand|Open+Sans&display=swap');
 
-html {
-    width: 100%;
+html{
     margin: 0 0;
-    background-color: white;
-    color: black;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: top;
-  background-image:url(https://gitlab.com/Ricardoengitlab/images/raw/master/images/787aoeu.jpg);
-  width: 100%;
-  height: 100%;
-  font-family: Arial, Helvetica;
-
- }
- 
-
- .user-login-box{
-    position: relative;
-    margin-top: 50px;
-    text-align: center;
-    z-index: 1;
+    background-color: #21D4FD;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: top;
+    background-image: url("https://assets.website-files.com/5bfd1275cc56e15ce750b18e/5c289afb9a1575537e893a5d_32.%20Banana%20Mania.jpg");    
 }
-.blurred-box{
-    position: fixed;
 
-    width:450px;
-    height: 550px;
-    top: 50%;
-    left: 50%;
-    background: inherit;
-    border-radius: 2px;
-    overflow: hidden;
-    border-radius: 10px;
-    transform: translate(-50%,-50%)
-  }
-  
-.blurred-box:after{
-   content: '';
-   width: 500px;
-   height: 5500px;
-   background: inherit; 
-   position: absolute;
-   left: -25px;
-
-   right: 0;
-   top: -25px;  
-   bottom: 0;
-   box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.747);
-   filter: blur(10px);
-  }
 
 #formas{
-    position: fixed;
+    width: 80%;
+    position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%)
-}
-h3{
-    text-align: center;
+    transform: translate(-50%,-50%);
+    background-color: rgba(0, 0, 0, 0.336);
     color: white;
-    font-family: 'Josefin Sans', monospace
+    border-radius: 10px;
+    padding: 2%;
+
 }
-#button-loggin{
-    position: relative;
-    left: 10%;
-    top: 10px;
-    transform: translate(-50%,-50%)
+@media only screen and (max-width: 600px) {
+
+    #formas{
+        width: 80%;
+        position: absolute;
+        left: 50%;
+        top: 130%;
+        transform: translate(-50%,-50%);
+        background-color: rgba(0, 0, 0, 0.336);
+        color: white;
+        border-radius: 10px;
+        padding: 2%;
+    
+    }
 }

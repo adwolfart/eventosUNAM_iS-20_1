@@ -1,66 +1,51 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Indie+Flower|QuickSand|Open+Sans&display=swap');
-
-.out{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+html{
+    margin: 0 0;
+    background-color: #21D4FD;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: top;
+    background-image: url("https://assets.website-files.com/5bfd1275cc56e15ce750b18e/5c289afb9a1575537e893a5d_32.%20Banana%20Mania.jpg");    
 }
 .center{
     text-align: center;
 }
-.event{
-    margin-left: 5%;
-    margin-top: 1%;
-    background-color: rgba(0, 0, 0, 0.8);
-    border-radius: 20px;
-    width: 40%;
+.fa-trash{
+    color: black;
+    font-size: 1.5em;
 }
-.event div{
-    margin-top: 10px;
-    display: flex;
-    flex-direction: row;
+.fa-edit{
+    color: black;
+    margin-left: 15px;
+    font-size: 1.5em;
 }
-.event div .datos{
-    
+.fa-facebook{
+    color: blue;
+    margin-left: 15px;
+    font-size: 1.5em;
+}
+.fa-linkedin, .fa-twitter{
+    color: rgb(0, 132, 255);
+    margin-left: 15px;
+    font-size: 1.5em;
+}
+.col-sm-12{
+    background-color: #21D4FD;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: top;
+    background-image: url("https://assets.website-files.com/5bfd1275cc56e15ce750b18e/5c289afb9a1575537e893a5d_32.%20Banana%20Mania.jpg");    
+    padding: 1% 5%;
+}
+#aveces{
+    background-color: #21D4FD;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: top;
+    background-image: url("https://assets.website-files.com/5bfd1275cc56e15ce750b18e/5c289afb9a1575537e893a5d_32.%20Banana%20Mania.jpg");    
     color: white;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    background-color: transparent;
-    width: 70%;
-
-}
-.event div .actions{
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    width: 30%;
-    margin-top: -8%;
-}
-.event div .actions a {
-    margin-top: 25px;
-}
-.event div div {
-    padding: 20px 30px;
-}
-.event div div a {
-    color: white;
-    position: relative;
-    left: 70%;
-    top: 50%;
-    font-size: 2em;
-}
-h1,h2{
-    font-family: 'Indie Flower', monospace;
-    color: white;
-    text-align: center;
-}
-.ids{
-    position: relative;
-    left: 90%;
-    margin-bottom: 35px;
-}
-h3, h5{
-    margin-top: 5px;
+    padding: 1% 0;
 }

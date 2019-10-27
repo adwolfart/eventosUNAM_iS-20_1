@@ -4,7 +4,8 @@
 
 {% load static %}
 <link rel="stylesheet" href={% static "Eventos/css/verEventos.css" %}>
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
 {% endblock %}
@@ -36,7 +37,7 @@
 
 
                             {% if post.correo == user.email %}
-                        <div class="event" href="{% url 'Eventos:onePost' post.id %}"></a>
+                        <!-- <div class="event" href="{% url 'Eventos:onePost' post.id %}"></a>
                                         <div class="post_title">
                                                 <h2 class="ids">{{post.id}}</h2>
                                                 <div class="datos">
@@ -53,13 +54,30 @@
                                                 </div>
                                         </div>
 
-                        </div>
+                        </div> -->
+<div class="column"></div>
+<div class="col-sm-12">
+        <ul class="list-group">
+                <li class="list-group-item active"><b>Evento: </b>{{post.titulo}} ({{post.entidad}}, {{post.ubicacion}})
+                        <b style="float: right">{{post.id}} </b></li>
+                <li class="list-group-item"><b>Horario: </b>{{post.fecha_de_inicio}} {{post.hora_de_inicio}} -
+                        {{post.fecha_final}} {{post.hora_final}}</li>
+                <li class="list-group-item"><b>Capacidad:</b> {{post.cupo_maximo}}</li>
+                <li class="list-group-item list-group-item-dark"><a href="#"><i class="fab fa-twitter"></i></a> <a
+                                href="#"><i class="fab fa-facebook"></i></a> <a href="#"><i
+                                        class="fab fa-linkedin"></i></a><a href="{% url 'Eventos:onePost' post.id %}"><i
+                                                class="fas fa-edit"></i></a><a style="float: right" href="{% url 'Eventos:deleteEventos'%}"><i
+                                                        class="fas fa-trash"></i></a></li>
+        </ul>
+        <br>
+
+</div>
 
 
                             {% else %}
 
                             {% endif %}
-
+                        </div>
                         {% endfor %}
             
                 

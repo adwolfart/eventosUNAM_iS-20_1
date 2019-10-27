@@ -79,7 +79,7 @@ class OnePost(View):
 
         self.context['form'] = form
 
-        return redirect("Home:home")
+        return redirect("Eventos:listaEventos")
         #return render(request, self.template, self.context)
 
 
@@ -152,9 +152,6 @@ class EventoCreate(CreateView):
             descripcion = request.POST.get('descripcion','')
             ubicacion = request.POST.get('ubicacion','')
             entidad = request.POST.get('entidad','')
-            etiqueta1 = request.POST.get('etiqueta1','')
-            etiqueta2 = request.POST.get('etiqueta2','')
-            etiqueta3 =  request.POST.get('etiqueta3','')
             correo = request.POST.get('correo','')
 
             Evento.objects.create(titulo = titulo, 
@@ -166,14 +163,11 @@ class EventoCreate(CreateView):
                                     descripcion = descripcion,
                                     ubicacion = ubicacion,
                                     entidad = entidad, 
-                                    etiqueta1 = etiqueta1,
-                                    etiqueta2 = etiqueta2,
-                                    etiqueta3 = etiqueta3,
                                     correo = correo)
 
         self.context['form'] = form
 
-        return redirect("Home:home")
+        return redirect("Eventos:listaEventos")
         #return render(request, self.template, self.context)
 
 
@@ -235,5 +229,5 @@ class EventoDelete(View):
             except:
                 print("no existe") 
 
-        return redirect("Home:home")
+        return redirect("Eventos:listaEventos")
         #return render(request, self.template, self.context)

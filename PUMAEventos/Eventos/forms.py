@@ -12,9 +12,6 @@ class EventoForm(forms.Form):
     descripcion = forms.CharField()
     ubicacion = forms.CharField(max_length=100)
     entidad = forms.CharField(max_length = 150)
-    etiqueta1 = forms.CharField(max_length = 50)
-    etiqueta2 = forms.CharField(max_length = 50)
-    etiqueta3 = forms.CharField(max_length = 50)  
     correo = forms.EmailField(max_length = 150)
 
 
@@ -32,9 +29,6 @@ class UpdateForm(forms.Form):
     cupo_maximo = forms.IntegerField()
     descripcion = forms.CharField()
     ubicacion = forms.CharField(max_length=100)
-    entidad = forms.CharField(max_length = 150)
-    etiqueta1 = forms.CharField(max_length = 50)
-    etiqueta2 = forms.CharField(max_length = 50)
-    etiqueta3 = forms.CharField(max_length = 50)  
+    entidad = forms.CharField(max_length = 150)  
     correo = forms.EmailField(max_length = 150)
     id = forms.IntegerField()

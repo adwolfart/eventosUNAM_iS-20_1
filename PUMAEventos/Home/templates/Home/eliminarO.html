@@ -19,15 +19,22 @@
                 {% if user.username == 'admin' %}
         
                 <div id="formas">
-                        <h3>Eliminar</h3>
-                        <hr>
-                        <form method="post">
-                                {% csrf_token %}
-                                <input type="text" name="correo" required placeholder="Correo"> <br>
-                                <hr>
-                                <input id="button-loggin" type="submit" value="Eliminar">
-                            
-                            </form>
+
+
+
+                            <h5 style="text-align: center">Eliminar Organizador</h5>
+                            <hr style="background-color: white">
+                            <form method="post" id="eliminar">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                      <label for="exampleInputEmail1">Correo</label>
+                                      <input name="correo" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo" required>
+                                      <small style="color: black" id="emailHelp" class="form-text text-muted">Esta acción no puede deshacerse.</small>
+                                    </div>
+                                    <button style="width: 100%" type="submit" class="btn btn-primary">Eliminar</button>
+                    
+                                    
+                                  </form>
                 </div>
         
                 {% else %}

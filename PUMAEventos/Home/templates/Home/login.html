@@ -5,7 +5,8 @@
 
 {% load static %}
 <link rel="stylesheet" href={% static "Home/css/login.css" %}>
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 {% endblock %}
 
 {% block authentication %}
@@ -13,26 +14,36 @@
 
 {% block body_content %}
 
-<div class="blurred-box">
+
+<body>
+  
 
 
-<div class = "user-login-box">
+<div id="background">
+<div id="login-container">
+        <h5 style="text-align: center">Log in</h5>
+        <hr style="background-color: white">
+        <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+                </div>
+                <div style="text-align: center">
+                        <label for="reg"><a href="{% url 'Home:registrarU' %}">Registrarse</a></label>
+                </div>
+                <button style="width: 100%" type="submit" class="btn btn-primary">Login</button>
 
-    <div id="logina" class="center">
-        <h3>Log in</h3>
-        <hr>
-        <form method="post" id="login-form">
-            {% csrf_token %}
-            <!-- {{ form.as_ul }} -->
-            <input type="text" name="username" required placeholder="Correo"> <br>
-            <input type="password" name="password" required placeholder="Contraseña"> <br>
-            <hr>
-            <a href="{% url 'Home:registrarU' %}" id="registrarse">Registrarse</a><br>
-            <input id="button-loggin" type="submit" value="Login">
-        </form>
-    
-    </div>
+                
+              </form>
 </div>
+
 </div>
+</body>
 
 {% endblock %}

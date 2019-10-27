@@ -41,9 +41,6 @@ class Evento(models.Model):
     descripcion = models.TextField(blank=False, null=False)
     ubicacion = models.CharField(max_length=100, null=False)
     entidad = models.CharField(max_length = 150)
-    etiqueta1 = models.CharField(max_length = 50, null = True)
-    etiqueta2 = models.CharField(max_length = 50, null = True)
-    etiqueta3 = models.CharField(max_length = 50, null = True)
     correo = models.EmailField(max_length = 150, null = False, default = 'null@c.com')
     #duracion = hora_final - hora_de_inicio
     
