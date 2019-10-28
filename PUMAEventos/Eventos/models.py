@@ -53,5 +53,8 @@ class RegEvento(models.Model):
     email_Organizador = models.EmailField()
     email_Usuario = models.EmailField()
 
+    class Meta:
+        unique_together = ('id_Evento', 'email_Usuario')
+
 
 

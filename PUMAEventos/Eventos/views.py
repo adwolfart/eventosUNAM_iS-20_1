@@ -3,7 +3,7 @@ from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.http import HttpResponse
-from Eventos.models import Evento
+from Eventos.models import Evento, RegEvento
 from Eventos.forms import EventoForm, DelEventoForm, UpdateForm
 from django.http import HttpResponse, HttpResponseRedirect
 
@@ -304,4 +304,21 @@ class TwoPost(View):
         self.context['form'] = form
 
         return redirect("Eventos:listaEventos")
+        #return render(request, self.template, self.context)
+
+
+
+def registrar(self, request, post_id, user_email, post_email):
+        """
+            Validates and do the login
+        """
+
+        try:
+            RegEvento.objects.create(id_Evento = post_id, email_Organizador = post_email, email_Usuario = user_email)
+        except:
+            print("Error en el registro al evento") 
+
+        self.context['form'] = form
+
+        #return redirect("Eventos:listaEventos")
         #return render(request, self.template, self.context)

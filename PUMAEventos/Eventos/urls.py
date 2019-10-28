@@ -17,6 +17,7 @@ urlpatterns = [
 
     path('update/<int:post_id>/', views.OnePost.as_view(), name='onePost'),  
     path('<int:post_id>/', views.TwoPost.as_view(), name='twoPost'),    
+    path('registrar', views.registrar, name = 'registerEvent'),
     
 ]
 
