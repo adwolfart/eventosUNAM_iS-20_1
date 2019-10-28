@@ -11,7 +11,7 @@ html{
 .center{
     text-align: center;
 }
-.fa-trash{
+.fa-trash, .fa-plus-square{
     color: black;
     font-size: 1.5em;
 }

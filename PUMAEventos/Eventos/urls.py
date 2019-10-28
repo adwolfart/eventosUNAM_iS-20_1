@@ -15,7 +15,8 @@ urlpatterns = [
     path('borrarevento/', views.EventoDelete.as_view(), name = 'deleteEventos'),
     path('listaeventos/', views.EventoList.as_view(), name = 'listaEventos'),
 
-    path('<int:post_id>/', views.OnePost.as_view(), name='onePost'),    
+    path('update/<int:post_id>/', views.OnePost.as_view(), name='onePost'),  
+    path('<int:post_id>/', views.TwoPost.as_view(), name='twoPost'),    
     
 ]
 
