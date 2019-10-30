@@ -55,3 +55,6 @@ class RegEvento(models.Model):
 
     class Meta:
         unique_together = ('id_Evento', 'email_Usuario')
+
+
+

@@ -13,8 +13,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
-from django.contrib.messages import constants as messages
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -43,7 +41,6 @@ INSTALLED_APPS = [
     'Home',
     'Eventos',
     'Usuario',
-    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +58,7 @@ ROOT_URLCONF = 'PUMAEventos.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,8 +127,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+STATICFILES_DIR = [
+    os.path.join(BASE_DIR, "static")
 ]
 
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
@@ -147,33 +144,3 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'pumaeventosunam@gmail.com>'
 
 AUTH_PROFILE_MODULE = 'Home.UserProfile'
-
-
-# Custom Django auth settings
-
-AUTH_USER_MODEL = 'Usuario.User'
-
-LOGIN_URL = 'login'
-
-LOGOUT_URL = 'logout'
-
-LOGIN_REDIRECT_URL = 'home'
-
-LOGOUT_REDIRECT_URL = 'home'
-
-
-# Messages built-in framework
-
-MESSAGE_TAGS = {
-    messages.DEBUG: 'alert-secondary',
-    messages.INFO: 'alert-info',
-    messages.SUCCESS: 'alert-success',
-    messages.WARNING: 'alert-warning',
-    messages.ERROR: 'alert-danger',
-}
-
-
-# Third party apps configuration
-
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
-

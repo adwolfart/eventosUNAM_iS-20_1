@@ -322,4 +322,3 @@ def registrar(self, request, post_id, user_email, post_email):
 
         #return redirect("Eventos:listaEventos")
         #return render(request, self.template, self.context)
-

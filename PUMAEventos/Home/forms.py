@@ -30,3 +30,5 @@ class UserProfileForm(forms.ModelForm):
     def clean_avatar(self):
         avatar = self.cleaned_data['avatar']
         return avatar
+
+  
