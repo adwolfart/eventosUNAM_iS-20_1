@@ -1,0 +1,50 @@
+{% extends "Home/base.html" %}
+
+{% block css_content %}
+
+{% load static %}
+<link rel="stylesheet" href={% static "Eventos/css/verEventos.css" %}>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+{% endblock %}
+
+
+{% block body_content %}
+
+<div id="aveces">
+
+                <div id="eventos">
+                        <h4 class="center"><u>Esta es la informacion del evento!</u></h4>
+
+                </div>
+
+
+
+
+<div class="column"></div>
+<div class="col-sm-12">
+<ul class="list-group">
+        <li class="list-group-item active"><b>Evento: </b>{{post.titulo}} ({{post.entidad}}, {{post.ubicacion}})
+                <b style="float: right"> # {{post.id}} </b></li>
+        <li style="color: black" class="list-group-item"><b>Horario: </b>{{post.fecha_de_inicio}} {{post.hora_de_inicio}} -
+                {{post.fecha_final}} {{post.hora_final}}</li>
+        <li style="color: black" class="list-group-item"><b>Descripción: </b>{{post.descripcion}}</li>
+        <li class="list-group-item list-group-item-dark"><b>Compartir: </b><a href="#"><i class="fab fa-twitter"></i></a> <a
+                        href="#"><i class="fab fa-facebook"></i></a> <a href="#"><i
+                                class="fab fa-linkedin"></i></a></li>
+</ul>
+<br>
+
+</div>
+
+
+
+                </div>
+
+
+
+</div>
+
+{% endblock %}

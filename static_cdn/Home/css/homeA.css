@@ -1,0 +1,13 @@
+#aveces{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%)
+}
+#aveces h1{
+    position: relative;
+    text-align: center;
+}
+div h1 a{
+    color: black;
+}
