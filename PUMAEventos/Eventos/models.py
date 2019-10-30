@@ -1,39 +1,57 @@
 from django.db import models
 
+
+
 class Evento(models.Model):
-    titulo = models.CharField(label= "titulo", max_length=100)
-    inicio = models.DateTimeField()
-    fin = models.DateTimeField()
-    #numero maximo de asistentes al evento
-    n_max = models.IntegerField()
-    descripcion = models.CharField(widget=forms.Textarea)
-    #recinto del evento
-    ubicacion = models.CharField(label= "ubicacion",max_lenght=100)
-    #duracion del evento, es valor calculado
-    duracion = self.fin - self.inicio
     """
-    periodicidad
+    Un clase que representa un evento del sistema
+    ...
+
+    Atributos
+    ----------
+    titulo: str
+        El titulo del evento
+    fecha_de_inicio : date
+        fecha de inicio del evento
+    hora_de_inicio : time
+        hora de inicio del evento
+    fecha_final : date
+        fecha del fin,cierre o clausura del evento
+    hora_final : time
+        hora del fin,cierre o clausura del evento
+    decripcion: Text
+        una breve descripcion del evento
+    ubicacion: str
+        recinto o lugar donde se realiza el evento. 
+        Ejemplo: Universum, Torre mayor, Facultad de ciencias, etc.
+    duracion: 
+        duracion total del evento en horas:minutos:segundos
+
+    Subclases
+    -------
+    Meta
+        Representa al evento en la base de datos
     """
+    titulo = models.CharField(max_length=100)
+    fecha_de_inicio = models.DateField()
+    hora_de_inicio = models.TimeField()
+    fecha_final = models.DateField()
+    hora_final = models.TimeField()
+    cupo_maximo = models.IntegerField()
+    descripcion = models.TextField(blank=False, null=False)
+    ubicacion = models.CharField(max_length=100, null=False)
+    entidad = models.CharField(max_length = 150)
+    correo = models.EmailField(max_length = 150, null = False, default = 'null@c.com')
+    #duracion = hora_final - hora_de_inicio
+    
     class Meta:
         db_table = 'evento'
 
-class Direccion(models.Model):
-    evento = models.OneToOneField(
-        EventoModelo,
-        primary_key = True
-    )
-    calle = models.CharField(max_length=100)
-    numero = models.CharField(max_length=100)
-    cp = models.CharField(max_length=100)
-    edo = models.CharField(max_length=100)
-    colonia = models.CharField(max_length=100)
 
-class Etiquetas(models.Model):
-    eventos = models.ManyToManyField(Evento)
-    etiqueta = models.CharField(max_lenght=100)
+class RegEvento(models.Model):
+    id_Evento = models.IntegerField()
+    email_Organizador = models.EmailField()
+    email_Usuario = models.EmailField()
 
     class Meta:
-        db_table = 'etiquetas'
-        unique_together = (('eventos', 'etiqueta'),)
-
-
+        unique_together = ('id_Evento', 'email_Usuario')
