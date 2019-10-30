@@ -134,6 +134,21 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn")
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'pumaeventosunam@gmail.com'
+EMAIL_HOST_PASSWORD = 'acmduoxbfkiohutu'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'pumaeventosunam@gmail.com>'
+
+AUTH_PROFILE_MODULE = 'Home.UserProfile'
+
+
 # Custom Django auth settings
 
 AUTH_USER_MODEL = 'Usuario.User'
