@@ -1,80 +1,34 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Evento,Direccion,Etiquetas
+from .models import Evento
+
+class EventoForm(forms.Form):
+    titulo = forms.CharField(max_length=100)
+    fecha_de_inicio = forms.DateField()
+    hora_de_inicio = forms.TimeField()
+    fecha_final = forms.DateField()
+    hora_final = forms.TimeField()
+    cupo_maximo = forms.IntegerField()
+    descripcion = forms.CharField()
+    ubicacion = forms.CharField(max_length=100)
+    entidad = forms.CharField(max_length = 150)
+    correo = forms.EmailField(max_length = 150)
 
 
-class EventoForm(forms.ModelForm):
-    fecha_de_inicio = forms.DateField(widget=forms.DateInput(attrs={'placeholder': "mm/dd/yyyy"}))
-    fecha_final = forms.DateField(widget=forms.DateInput(attrs={'placeholder': "mm/dd/yyyy"}))
-    
-    class Meta:
-        model = Evento
-        fields = [
-            'titulo', 
-            'fecha_de_inicio', 
-            'hora_de_inicio',
-            'fecha_final',
-            'hora_final', 
-            'cupo_maximo', 
-            'descripcion', 
-            'ubicacion',
-        ]
+class DelEventoForm(forms.Form):
+    correo = forms.EmailField()
+    id = forms.IntegerField()
 
 
-        
-class DireccionForm(forms.ModelForm):
-    class Meta:
-        model = Direccion
-
-        fields = [
-            'calle', 
-            'numero', 
-            'cp', 
-            'edo', 
-            'colonia',
-            ]
-
-        labels = {
-            'cp': 'Codigo Postal',
-            'edo': 'Estado',
-        }
-
-class EtiquetasForm(forms.ModelForm):
-
-
-    lista = forms.CharField(widget=forms.TextInput(
-        attrs={'placeholder': "etiqueta1, etiqueta2, etc..."}))
-
-    class Meta:
-
-        model = Etiquetas 
-
-        fields = ['lista']
-        
-        labels = {
-            'lista': 'Etiquetas del evento: ',
-        }
-
-
-'''
-from django import forms
-from django.forms import ModelForm
-from .models import Evento,Direccion,Etiquetas
-
-
-class EventoForm(ModelForm):
-    class Meta:
-        model = Evento
-        fields = ['titulo', 'inicio', 'fin', 'n_max', 'descripcion', 'ubicacion']
-
-class DireccionForm(ModelForm):
-    class Meta:
-        model = Direccion
-        fields = ['calle', 'numero', 'cp', 'edo', 'colonia']
-
-class EtiquetasForm(ModelForm):
-    class Meta:
-        model = Etiquetas
-        fields = ['etiqueta']
-'''
-
+class UpdateForm(forms.Form):
+    titulo = forms.CharField(max_length=100)
+    fecha_de_inicio = forms.DateField()
+    hora_de_inicio = forms.TimeField()
+    fecha_final = forms.DateField()
+    hora_final = forms.TimeField()
+    cupo_maximo = forms.IntegerField()
+    descripcion = forms.CharField()
+    ubicacion = forms.CharField(max_length=100)
+    entidad = forms.CharField(max_length = 150)  
+    correo = forms.EmailField(max_length = 150)
+    id = forms.IntegerField()
