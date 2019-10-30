@@ -1,9 +1,6 @@
 from django.db import models
 
 # Create your models here.
-from django.db import models
-
-# Create your models here.
 from django.contrib.auth.models import User
 from django import forms
 
@@ -17,5 +14,5 @@ class UserProfile(models.Model):
           return "%s's profile" % self.entidad  
 
 def create_user_profile(sender, instance, created, **kwargs):  
-    if created:
-        profile, created = UserProfile.objects.get_or_create(user=instance) 
+    if created:  
+       profile, created = UserProfile.objects.get_or_create(user=instance) 
