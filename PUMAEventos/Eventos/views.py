@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from Eventos.models import Evento, RegEvento, AsigStaff
 from Eventos.forms import EventoForm, DelEventoForm, UpdateForm
 from django.http import HttpResponse, HttpResponseRedirect
+from django.core.mail import send_mail
 
 def index(request):
     return HttpResponse("Index")
@@ -235,9 +236,23 @@ class EventoDelete(View):
                 u = Evento.objects.get(id = form.cleaned_data['id'])
                 correo = request.POST.get('correo', '')
 
+                v = RegEvento.objects.all()
+                                    
+
                 if(u.correo == correo):
-                    u.delete()
-                    print("eliminado")
+                    for i in v:
+                        if(i.id_Evento == u.id):
+                            print("eliminado")
+                            print(i.id_Evento)
+                            print("aoeu")
+                            print(u.id)
+                            send_mail(
+                            'Cancelacion Evento',
+                            'Da click para confirmar tu registro',
+                            'pumaeventosunam@gmail.com',
+                            [i.email_Usuario],
+                            fail_silently=False,
+                            )  
                 else:
                     print("No puedes eliminar este evento, no te pertenece")
                 
