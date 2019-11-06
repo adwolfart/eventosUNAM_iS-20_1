@@ -50,11 +50,17 @@ class Evento(models.Model):
 
 class RegEvento(models.Model):
     id_Evento = models.IntegerField()
-    email_Organizador = models.EmailField()
     email_Usuario = models.EmailField()
 
     class Meta:
         unique_together = ('id_Evento', 'email_Usuario')
+
+class AsigStaff(models.Model):
+    id_Evento = models.IntegerField()
+    email_staff = models.EmailField()
+
+    class Meta:
+        unique_together = ('id_Evento', 'email_staff')
 
 
 

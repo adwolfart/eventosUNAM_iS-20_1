@@ -3,7 +3,7 @@ from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.http import HttpResponse
-from Eventos.models import Evento, RegEvento
+from Eventos.models import Evento, RegEvento, AsigStaff
 from Eventos.forms import EventoForm, DelEventoForm, UpdateForm
 from django.http import HttpResponse, HttpResponseRedirect
 
@@ -173,19 +173,34 @@ class EventoCreate(CreateView):
 
 
 
-class EventoUpdate(UpdateView):
+class EventoUpdate(View):
     """
         Index in my Web Page but with Clased based views.
     """
-    template = 'Eventos/crearEvento.html'
+    template = 'Eventos/verEventosInscritos.html'
     context = {'title': 'Index'}
 
-    def get(self, request):
+    def get(self, request, post_id, user_mail):
         """
             Get in my Index.
         """
         #all_posts = Post.objects.all()
         #self.context['posts'] = all_posts
+        all_posts = Evento.objects.all()
+        self.context['posts'] = all_posts
+        all_events = RegEvento.objects.all()
+        self.context['eventos'] = all_events
+
+        try:
+            RegEvento.objects.create(id_Evento = post_id, email_Usuario = user_mail)
+        
+            print(post_id)
+            print(user_mail)
+        except:
+            print("Error")
+
+
+
         return render(request, self.template, self.context)
 
 
@@ -307,18 +322,27 @@ class TwoPost(View):
         #return render(request, self.template, self.context)
 
 
+class AsignarStaff(View):
+    """
+        Displays just one post
+    """
+    template = 'Eventos/asigStaff.html'
+    context = {}
 
-def registrar(self, request, post_id, user_email, post_email):
+
+    def post(self, request):
         """
             Validates and do the login
         """
 
         try:
-            RegEvento.objects.create(id_Evento = post_id, email_Organizador = post_email, email_Usuario = user_email)
+            eventoid = request.POST.get('id', '')
+            correo = request.POST.get('correo', '')
+            AsigStaff.objects.create(id_Evento = eventoid, email_staff = correo)
+            print("Exito en la asignación de staff")
         except:
-            print("Error en el registro al evento") 
+            print("Error en la asignacion de staff")
 
-        self.context['form'] = form
-
-        #return redirect("Eventos:listaEventos")
+        
+        return render(request, self.template, self.context)
         #return render(request, self.template, self.context)
