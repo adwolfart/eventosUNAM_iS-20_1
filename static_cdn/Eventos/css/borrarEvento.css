@@ -5,25 +5,20 @@ html{
     background-attachment: fixed;
     background-size: cover;
     background-position: top;
-    background-image: url("https://assets.website-files.com/5bfd1275cc56e15ce750b18e/5c289afb9a1575537e893a5d_32.%20Banana%20Mania.jpg");    
+    background-image: url("/static/Home/img/1.jpg");    
 }
 #formas{
     position: fixed;
     left:50%;
-    top: 60%;
+    top: 50%;
     transform: translate(-50%,-50%);
     padding: 2%;
     background-color: rgba(0, 0, 0, 0.336);
     color: white;
     border-radius: 10px;
+    z-index: -1;
 }
 h3{
     text-align: center;
     color: white;
-}
-#button-loggin{
-    position: relative;
-    left: 50%;
-    top: 10px;
-    transform: translate(-50%,-50%)
 }

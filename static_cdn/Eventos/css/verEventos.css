@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Josefin+Sans|Indie+Flower|QuickSand|Open+Sans&display=swap');
+html {
+    margin: 0 0;
+    background-color: #21D4FD;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: top;
+    background-image: url("/static/Home/img/1.jpg");
+}
+
+.center {
+    text-align: center;
+}
+
+.fa-trash,
+.fa-plus-square {
+    color: black;
+    font-size: 1.5em;
+}
+
+.fa-edit {
+    color: black;
+    margin-left: 15px;
+    font-size: 1.5em;
+}
+
+.fa-facebook {
+    color: blue;
+    margin-left: 15px;
+    font-size: 1.5em;
+}
+
+.fa-linkedin,
+.fa-twitter {
+    color: rgb(0, 132, 255);
+    margin-left: 15px;
+    font-size: 1.5em;
+}
+
+.col-sm-12 {
+    background-color: #21D4FD;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: top;
+    background-image: url("https://assets.website-files.com/5bfd1275cc56e15ce750b18e/5c289afb9a1575537e893a5d_32.%20Banana%20Mania.jpg");
+    padding: 1% 5%;
+}
+
+#aveces {
+    background-color: #21D4FD;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: top;
+    background-image: url("https://assets.website-files.com/5bfd1275cc56e15ce750b18e/5c289afb9a1575537e893a5d_32.%20Banana%20Mania.jpg");
+    color: white;
+    padding: 1% 0;
+}
+
+#eventos {
+    background-color: rgba(0, 0, 0, 0.404);
+    width: 50%;
+    margin: 0 25%;
+    padding: 2% 2%;
+    border-radius: 10px;
+}
+
+#eventos h1,
+h2 {
+    font-family: 'Lato', monospace;
+}
+
+#aveces>h1 {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.692);
+    top: 3%;
+    padding: 3% 20%;
+    margin: 0 20%;
+    color: black;
+    border-radius: 20px;
+    font-family: 'Indie Flower', monospace;
+}
+
+@media only screen and (max-width: 600px) {
+    #eventos {
+        background-color: rgba(0, 0, 0, 0.404);
+        width: 80%;
+        margin: 0 10%;
+        padding: 2% 2%;
+        border-radius: 10px;
+    }
+    #eventos h1,
+    h2 {
+        font-family: 'Lato', monospace;
+    }
+}

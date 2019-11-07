@@ -8,7 +8,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null = True)
     nombre = models.CharField(max_length = 150,default='SOME STRING')
     entidad = models.CharField(max_length = 150, default='SOME STRING')
-    avatar = models.ImageField(upload_to='images/',blank=True)
+    avatar = models.ImageField(upload_to='images/',blank=True, null= True)
     
     def __str__(self):  
           return "%s's profile" % self.entidad  

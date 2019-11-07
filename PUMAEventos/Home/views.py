@@ -66,18 +66,27 @@ class RegistrarU(View):
         """
             Validates and do the login
         """
-        form = UserProfileForm(request.POST)
+        form = UserProfileForm(request.POST, request.FILES)
+        print(form)
         if form.is_valid():
+            avatar = request.POST.get('avatar', '')
+            print(avatar)
             try:
-                print("h")
+
                 nombre = request.POST.get('nombre', '')
                 correo = request.POST.get('correo', '')
                 password = request.POST.get('password', '')
                 entidad = request.POST.get('entidad', '')
-                avatar = request.POST.get('avatar', '')
-                print("i")
+                avatar = request.FILES.get('avatar', '')
+                print(avatar)
+
                 user = User.objects.create_user(username = correo, password = password, email = correo, first_name = 'Estudiante', last_name = nombre)
-                UserProfile.objects.create( user = user, nombre = nombre,  entidad = entidad, avatar = avatar)  
+                userprofile = UserProfile.objects.create( user = user, nombre = nombre,  entidad = entidad)  
+                try:
+                    userprofile.avatar = avatar
+                    userprofile.save()
+                except: 
+                    print("Error al upload")
                 send_mail(
                 'Confirmacion de cuenta',
                 'Da click para confirmar tu registro',
@@ -85,7 +94,10 @@ class RegistrarU(View):
                 [correo],
                 fail_silently=False,
                 )            
-            except Exception as e: print(e)       
+            except Exception as e: print(e)  
+            print("exito en el registro") 
+        else:
+            print("registro invalido")    
 
 
         self.context['form'] = form

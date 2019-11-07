@@ -10,7 +10,7 @@ html{
 #formas{
     position: fixed;
     left:50%;
-    top: 60%;
+    top: 50%;
     transform: translate(-50%,-50%);
     padding: 2%;
     background-color: rgba(0, 0, 0, 0.336);
@@ -23,7 +23,15 @@ h3{
 }
 #button-loggin{
     position: relative;
-    left: 50%;
+    left: 10%;
     top: 10px;
     transform: translate(-50%,-50%)
 }
+.user-login-box{
+    position: relative;
+    margin-top: 50px;
+    text-align: center;
+    z-index: 1;
+}
+
+
