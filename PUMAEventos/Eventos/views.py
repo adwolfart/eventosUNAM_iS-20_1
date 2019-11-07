@@ -423,3 +423,43 @@ class Etiquetas(View):
         return redirect("Eventos:listaEventos")
         #return render(request, self.template, self.context)
 
+
+
+class Buscar(View):
+    """
+        Displays just one post
+    """
+    template = 'Eventos/busqueda.html'
+    context = {}
+
+
+    def post(self, request):
+        """
+            Validates and do the login
+        """
+
+        try:
+            busqueda = request.POST.get('busqueda', '')
+            u = Evento.objects.all()
+
+            ids = []
+            for i in u:
+                
+                tmp = str(i.titulo) + str(i.descripcion) + str(i.etiquetas)
+                if( busqueda in tmp):
+                    print("True")
+                    ids.append(i.id)
+            print(ids)
+
+            u = Evento.objects.all(id in ids)
+            print(u)
+            print("Exito en la actualizacion de etiquetas")
+        except:
+            print("Error en la actualizacion")
+
+        self.context['ids'] = ids
+        all_posts = Evento.objects.all()
+        self.context['posts'] = all_posts
+        #return redirect("Eventos:listaEventos")
+        return render(request, self.template, self.context)
+
