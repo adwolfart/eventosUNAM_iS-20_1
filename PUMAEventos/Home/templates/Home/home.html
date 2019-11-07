@@ -1,0 +1,59 @@
+{% extends "Home/base.html" %}
+
+{% block css_content %}
+
+{% load static %}
+<link rel="stylesheet" href={% static "Home/css/homeA.css" %}>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+{% endblock %}
+
+{% block body_content %}
+
+<div id="aveces">
+        {% if user.is_authenticated %}
+        
+                
+        
+                {% if user.username == 'admin' %}
+        
+                <div id="aveces">
+                        <h3><a href="{% url 'Home:registrarO' %}">Registrar </a></h3><br>
+                        <h3><a href="{% url 'Home:eliminarO' %}">Eliminar</a></h3>
+                </div>
+        
+                {% else %}
+                {% if user.first_name == 'Organizador' %}
+        
+                        <div  id="aveces">
+                                <h3><a href="{% url 'Eventos:crearEvento' %}">Crear Evento</a></h3><br> <br>
+                                <h3><a href="{% url 'Eventos:listaEventos' %}">Lista Eventos</a></h3>
+                        </div>
+                
+                {% else %}
+                
+                        <div  id="aveces">
+                                <h3 ><a href="{% url 'Home:registrarO' %}">Ver detalles de eventos </a></h3>
+                                <h3><a href="{% url 'Home:eliminarO' %}">Cuenta</a></h3>
+                        </div>
+
+                
+                {% endif %}                
+
+
+                
+                {% endif %}
+
+
+        {% else %}
+        <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading">Well done!</h4>
+                        <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+                        <hr>
+                        <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+                      </div>
+        {% endif %}
+</div>
+
+{% endblock %}

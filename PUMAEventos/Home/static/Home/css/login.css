@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|QuickSand|Open+Sans&display=swap');
+body {
+    margin: 0;
+    width: 100%;
+    font-family: "Exo", sans-serif;
+}
+html{
+    background-color: #21D4FD;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: top;
+    background-image: url("https://assets.website-files.com/5bfd1275cc56e15ce750b18e/5c289afb9a1575862e893a21_01.%20Royal%20Heath.jpg");
+    width: 100%;
+    height: 100%;
+}
+#login-container {
+    width: 25%;
+    left: 50%;
+    top: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    padding: 35px;
+    font-size: 80%;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.801);
+    color: white;
+}
+
+#buttons {
+    position: relative;
+    left: 25%;
+}
+
+#buttons div {
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    #login-container {
+        width: 90%;
+        padding: 15px;
+    }
+    #buttons {
+        left: 10%;
+    }
+}

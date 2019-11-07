@@ -1,0 +1,74 @@
+{% extends "Home/base.html" %}
+
+
+
+{% block css_content %}
+
+{% load static %}
+<link rel="stylesheet" href={% static "Home/css/registrarO.css" %}>
+
+
+{% endblock %}
+
+{% block body_content %}
+
+<div id="aveces">
+        {% if user.is_authenticated %}
+        
+                
+        
+                {% if user.username == 'admin' %}
+        
+                <div id="formas">
+                        <h3>Registrar Organizador</h3>
+                        <hr>
+
+
+
+                            <form method="post">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                          <label for="exampleInputEmail1">Nombre Completo</label>
+                                          <input name="nombre" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre completo" required>
+                                          <small id="emailHelp" class="form-text text-muted">Esta acción no se puede deshacer.</small>
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="exampleInputPassword1">Correo</label>
+                                          <input name="correo" type="email" class="form-control" id="exampleInputPassword1" placeholder="Correo" required>
+                                        </div>
+                                        <button style="width: 100%" type="submit" class="btn btn-primary">Registrar</button>
+                        
+                                        
+                                </form>
+                </div>
+        
+                {% else %}
+                {% if user.first_name == 'Organizador' %}
+        
+                        <h1>Necesitas ser administrador para ingresar a esta página</h1>
+            
+                
+                {% else %}
+                
+                        <h1>Necesitas ser administrador </h1>
+                
+                {% endif %}                
+
+
+                
+                {% endif %}
+
+
+        {% else %}
+        
+                <h1>Necesitas logearte y ser administrador</h1>
+        {% endif %}
+</div>
+
+{% endblock %}
+
+
+
+
+
+

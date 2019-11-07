@@ -1,0 +1,16 @@
+
+#logina {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+#logina > h3 {
+    text-align: center;
+}
+#button-loggin{
+    position: relative;
+    left: 50%;
+    top: 10px;
+    transform: translate(-50%,-50%)
+}
