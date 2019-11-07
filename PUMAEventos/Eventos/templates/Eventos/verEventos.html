@@ -48,14 +48,24 @@
                         {{post.fecha_final}} {{post.hora_final}}</li>
                 <li style="color: black" class="list-group-item"><b>Descripción: </b>{{post.descripcion}}</li>
                 <li class="list-group-item"><b>Capacidad:</b> {{post.cupo_maximo}}</li>
-                <li class="list-group-item"><form action="/asignar/staff" method="post">
-                                                                        {% csrf_token %}
-                                                                        <b>Id evento</b>
-                                                                        <input type="number" name="id" value="{{post.id}}">
-                                                                        <b>Correo del staff: </b><input id="correo" type="email" name="correo" value="" placeholder="Ingresa el correo del staff">
-                                                                        <input style="float: right" class="btn btn-primary" type="submit" value="Asignar staff">
-                                                                        </form></li>
-                <li class="list-group-item list-group-item-dark"><b>Compartir: </b>
+                <li class="list-group-item">
+                        <form action="/asignar/staff" method="post">
+                        {% csrf_token %}
+                        <b>Id evento</b>
+                        <input type="number" name="id" value="{{post.id}}">
+                        <b>Correo del staff: </b><input id="correo" type="email" name="correo" value="" placeholder="Ingresa el correo del staff">
+                        <input style="float: right" class="btn btn-dark" type="submit" value="Asignar staff">
+                        </form></li>
+                <li class="list-group-item">
+                        <form action="/etiquetas/update" method="post">
+                        {% csrf_token %}
+                        <b>Id evento</b>
+                        <input type="number" name="id" value="{{post.id}}">
+                        <b>Etiquetas</b>
+                        <input type="text" name="etiquetas" value="{{post.etiquetas}}">
+                        <input style="float: right" class="btn btn-dark" type="submit" value="Guardar">
+                        </form></li>                        
+                <li class="list-group-item list-group-item-light"><b>Compartir: </b>
                         <a href="https://twitter.com/intent/tweet?text=¡Ven a este evento puma!&url=http://127.0.0.1:8000{% url 'Eventos:twoPost' post.id %}"><i class="fab fa-twitter"></i></a> 
                         <a href="#"><i class="fab fa-facebook"></i></a> 
                         <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
@@ -63,9 +73,9 @@
                         <div class="fb-share-button" data-href="http://127.0.0.1:8000{% url 'Eventos:twoPost' post.id %}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
                         <a href="#"><i  class="fab fa-linkedin"></i></a>
                         <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="¡Ven a este evento PUMA!" data-url="{% url 'Eventos:twoPost' post.id %}" data-hashtags="UNAM" data-related="" data-lang="es" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></li>                        
-                <li class="list-group-item list-group-item-primary"> 
-                        <a href="{% url 'Eventos:onePost' post.id %}"><i class="fas fa-edit"></i></a>
-                        <a style="float: right" href="{% url 'Eventos:deleteEventos'%}"><i class="fas fa-trash"></i></a></li>
+                <li class="list-group-item list-group-item-dark"> 
+                        <a href="{% url 'Eventos:onePost' post.id %}"><b style = "color: black;">Actualizar evento: </b><i class="fas fa-edit"></i></a>
+                        <a style="float: right;" href="{% url 'Eventos:deleteEventos'%}"><b style = "color: red;">Borrar evento: </b><i class="fas fa-trash" style="color: red"></i></a></li>
         </ul>
         <br>
 
@@ -97,7 +107,8 @@
                                 <li style="color: black" class="list-group-item"><b>Horario: </b>{{post.fecha_de_inicio}} {{post.hora_de_inicio}} -
                                         {{post.fecha_final}} {{post.hora_final}}</li>
                                 <li style="color: black" class="list-group-item"><b>Descripción: </b>{{post.descripcion}}</li>
-                                <li style="color: black" class="list-group-item"><b>Asignar staff: </b></li>
+                                <li style="color: black" class="list-group-item"><b>Etiquetas: </b>{{post.etiquetas}}</li>                                
+                                <li style="color: black" class="list-group-item"><b>Organizador: </b>{{post.correo}}</li>
                                 <li class="list-group-item list-group-item-dark"><b>Compartir: </b>
                                                 <a href="https://twitter.com/intent/tweet?text=¡Ven a este evento puma!&url=http://127.0.0.1:8000{% url 'Eventos:twoPost' post.id %}"><i class="fab fa-twitter"></i></a> 
                                                 <a href="#"><i class="fab fa-facebook"></i></a> 

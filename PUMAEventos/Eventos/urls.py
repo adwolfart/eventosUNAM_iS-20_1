@@ -18,7 +18,8 @@ urlpatterns = [
     path('update/evento/<int:post_id>/', views.OnePost.as_view(), name='onePost'),  
     
     path('<int:post_id>/', views.TwoPost.as_view(), name='twoPost'),   
-    path('asignar/staff', views.AsignarStaff.as_view(), name='asignarStaff'),   
+    path('asignar/staff', views.AsignarStaff.as_view(), name='asignarStaff'),  
+    path('etiquetas/update', views.Etiquetas.as_view(), name='etiquetas'),   
      
     
 ]

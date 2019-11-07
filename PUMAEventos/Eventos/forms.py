@@ -5,13 +5,13 @@ from .models import Evento
 class EventoForm(forms.Form):
     titulo = forms.CharField(max_length=100)
     fecha_de_inicio = forms.DateField()
-    hora_de_inicio = forms.TimeField()
-    fecha_final = forms.DateField()
-    hora_final = forms.TimeField()
+    #hora_de_inicio = forms.TimeField()
+    #fecha_final = forms.DateField()
+    #hora_final = forms.TimeField()
     cupo_maximo = forms.IntegerField()
     descripcion = forms.CharField()
     ubicacion = forms.CharField(max_length=100)
-    entidad = forms.CharField(max_length = 150)
+    #entidad = forms.CharField(max_length = 150)
     correo = forms.EmailField(max_length = 150)
 
 

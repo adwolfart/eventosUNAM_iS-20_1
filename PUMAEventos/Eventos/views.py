@@ -154,17 +154,48 @@ class EventoCreate(CreateView):
             ubicacion = request.POST.get('ubicacion','')
             entidad = request.POST.get('entidad','')
             correo = request.POST.get('correo','')
+            etiquetas = request.POST.get('etiquetas','')
 
-            Evento.objects.create(titulo = titulo, 
+            u = Evento.objects.create(titulo = titulo, 
                                     fecha_de_inicio = fecha_de_inicio,
-                                    hora_de_inicio = hora_de_inicio,
-                                    fecha_final = fecha_final,
-                                    hora_final = hora_final,
                                     cupo_maximo = cupo_maximo,
                                     descripcion = descripcion,
                                     ubicacion = ubicacion,
-                                    entidad = entidad, 
                                     correo = correo)
+
+            try:
+                u.entidad = entidad
+                u.save()
+            except:
+                print("entidad invalida")
+
+            try:               
+                u.etiquetas = etiquetas
+                u.save()
+            except:
+                print("etiquetas invalida")                                    
+
+            try:
+                u.hora_de_inicio = hora_de_inicio
+                u.save()
+            except:
+                print("hora de inicio invalida")
+
+
+            try:
+                u.fecha_final = fecha_final
+                u.save()
+            except:
+                print("fecha final invalida")
+
+            try:
+                u.hora_final = hora_final
+                u.save()
+            except:
+                print("hora final invalida")
+
+
+                           
 
         self.context['form'] = form
 
@@ -361,3 +392,34 @@ class AsignarStaff(View):
         
         return render(request, self.template, self.context)
         #return render(request, self.template, self.context)
+
+
+
+class Etiquetas(View):
+    """
+        Displays just one post
+    """
+    template = 'Eventos/verEventos.html'
+    context = {}
+
+
+    def post(self, request):
+        """
+            Validates and do the login
+        """
+
+        try:
+            eventoid = request.POST.get('id', '')
+            etiquetas = request.POST.get('etiquetas', '')
+            u = Evento.objects.get(id=eventoid)
+
+            u.etiquetas = etiquetas
+            u.save()
+            print("Exito en la actualizacion de etiquetas")
+        except:
+            print("Error en la actualizacion")
+
+        
+        return redirect("Eventos:listaEventos")
+        #return render(request, self.template, self.context)
+

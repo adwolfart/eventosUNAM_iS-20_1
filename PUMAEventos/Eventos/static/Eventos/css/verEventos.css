@@ -1,74 +1,87 @@
 @import url('https://fonts.googleapis.com/css?family=Lato|Josefin+Sans|Indie+Flower|QuickSand|Open+Sans&display=swap');
-html{
+html {
     margin: 0 0;
     background-color: #21D4FD;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     background-position: top;
-    background-image: url("/static/Home/img/1.jpg");    
+    background-image: url("/static/Home/img/1.jpg");
 }
-.center{
+
+.center {
     text-align: center;
 }
-.fa-trash, .fa-plus-square{
+
+.fa-trash,
+.fa-plus-square {
     color: black;
     font-size: 1.5em;
 }
-.fa-edit{
+
+.fa-edit {
     color: black;
     margin-left: 15px;
     font-size: 1.5em;
 }
-.fa-facebook{
+
+.fa-facebook {
     color: blue;
     margin-left: 15px;
     font-size: 1.5em;
 }
-.fa-linkedin, .fa-twitter{
+
+.fa-linkedin,
+.fa-twitter {
     color: rgb(0, 132, 255);
     margin-left: 15px;
     font-size: 1.5em;
 }
-.col-sm-12{
+
+.col-sm-12 {
     background-color: #21D4FD;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     background-position: top;
-    background-image: url("https://assets.website-files.com/5bfd1275cc56e15ce750b18e/5c289afb9a1575537e893a5d_32.%20Banana%20Mania.jpg");    
+    background-image: url("https://assets.website-files.com/5bfd1275cc56e15ce750b18e/5c289afb9a1575537e893a5d_32.%20Banana%20Mania.jpg");
     padding: 1% 5%;
 }
-#aveces{
+
+#aveces {
     background-color: #21D4FD;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     background-position: top;
-    background-image: url("https://assets.website-files.com/5bfd1275cc56e15ce750b18e/5c289afb9a1575537e893a5d_32.%20Banana%20Mania.jpg");    
+    background-image: url("https://assets.website-files.com/5bfd1275cc56e15ce750b18e/5c289afb9a1575537e893a5d_32.%20Banana%20Mania.jpg");
     color: white;
     padding: 1% 0;
 }
-#eventos{
+
+#eventos {
     background-color: rgba(0, 0, 0, 0.404);
     width: 50%;
     margin: 0 25%;
     padding: 2% 2%;
     border-radius: 10px;
 }
-#eventos h1,h2{
+
+#eventos h1,
+h2 {
     font-family: 'Lato', monospace;
 }
-@media only screen and (max-width: 600px) {
 
-    #eventos{
+@media only screen and (max-width: 600px) {
+    #eventos {
         background-color: rgba(0, 0, 0, 0.404);
         width: 80%;
         margin: 0 10%;
         padding: 2% 2%;
         border-radius: 10px;
     }
-    #eventos h1,h2{
+    #eventos h1,
+    h2 {
         font-family: 'Lato', monospace;
     }
 }
