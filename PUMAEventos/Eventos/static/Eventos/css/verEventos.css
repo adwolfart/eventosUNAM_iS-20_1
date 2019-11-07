@@ -72,6 +72,17 @@ h2 {
     font-family: 'Lato', monospace;
 }
 
+#aveces>h1 {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.692);
+    top: 3%;
+    padding: 3% 20%;
+    margin: 0 20%;
+    color: black;
+    border-radius: 20px;
+    font-family: 'Indie Flower', monospace;
+}
+
 @media only screen and (max-width: 600px) {
     #eventos {
         background-color: rgba(0, 0, 0, 0.404);

@@ -12,7 +12,7 @@
 
 
 {% block body_content %}
-    <h1> Resultados </h1>
+    <div id="aveces"> <h1>Resultados </h1> </div>
 
 
                 {% for id in ids %}
@@ -30,7 +30,7 @@
                                             <li style="color: black" class="list-group-item"><b>Descripción: </b>{{post.descripcion}}</li>
                                             <li style="color: black" class="list-group-item"><b>Etiquetas: </b>{{post.etiquetas}}</li>                                
                                             <li style="color: black" class="list-group-item"><b>Organizador: </b>{{post.correo}}</li>
-                                            <li class="list-group-item list-group-item-dark"><b>Compartir: </b>
+                                            <li class="list-group-item"><b>Compartir: </b>
                                                             <a href="https://twitter.com/intent/tweet?text=¡Ven a este evento puma!&url=http://127.0.0.1:8000{% url 'Eventos:twoPost' post.id %}"><i class="fab fa-twitter"></i></a> 
                                                             <a href="#"><i class="fab fa-facebook"></i></a> 
                                                             <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>

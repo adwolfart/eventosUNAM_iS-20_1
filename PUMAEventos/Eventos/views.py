@@ -224,12 +224,25 @@ class EventoUpdate(View):
         self.context['eventos'] = all_events
 
         try:
-            RegEvento.objects.create(id_Evento = post_id, email_Usuario = user_mail)
-        
-            print(post_id)
-            print(user_mail)
-        except:
-            print("Error")
+            post = Evento.objects.get(id=post_id)
+            count = 0
+            for i in all_events:
+                if(i.id_Evento == post_id):
+                    count+=1
+            if(count< post.cupo_maximo):
+                RegEvento.objects.create(id_Evento = post_id, email_Usuario = user_mail)        
+                send_mail(
+                    'Inscripción a Evento',
+                    'Te acabas de registrar a un evento',
+                    'pumaeventosunam@gmail.com',
+                    [user_mail],
+                    fail_silently=False,
+                    ) 
+                print("Exito en el registro")
+            else:
+                print("Ya no hay cupo")
+        except Exception as e: print(e)
+
 
 
 
@@ -454,8 +467,7 @@ class Buscar(View):
             u = Evento.objects.all(id in ids)
             print(u)
             print("Exito en la actualizacion de etiquetas")
-        except:
-            print("Error en la actualizacion")
+        except Exception as e: print(e)
 
         self.context['ids'] = ids
         all_posts = Evento.objects.all()

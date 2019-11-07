@@ -67,24 +67,25 @@ class RegistrarU(View):
             Validates and do the login
         """
         form = UserProfileForm(request.POST)
-        print(form)
         if form.is_valid():
-            print("h")
-            nombre = request.POST.get('nombre', '')
-            correo = request.POST.get('correo', '')
-            password = request.POST.get('password', '')
-            entidad = request.POST.get('entidad', '')
-            avatar = request.POST.get('avatar', '')
-            print("i")
-            user = User.objects.create_user(username = correo, password = password, email = correo, first_name = 'Estudiante', last_name = nombre)
-            UserProfile.objects.create( user = user, nombre = nombre,  entidad = entidad, avatar = avatar)  
-            send_mail(
-            'Confirmacion de cuenta',
-            'Da click para confirmar tu registro',
-            'pumaeventosunam@gmail.com',
-            [correo],
-            fail_silently=False,
-            )                    
+            try:
+                print("h")
+                nombre = request.POST.get('nombre', '')
+                correo = request.POST.get('correo', '')
+                password = request.POST.get('password', '')
+                entidad = request.POST.get('entidad', '')
+                avatar = request.POST.get('avatar', '')
+                print("i")
+                user = User.objects.create_user(username = correo, password = password, email = correo, first_name = 'Estudiante', last_name = nombre)
+                UserProfile.objects.create( user = user, nombre = nombre,  entidad = entidad, avatar = avatar)  
+                send_mail(
+                'Confirmacion de cuenta',
+                'Da click para confirmar tu registro',
+                'pumaeventosunam@gmail.com',
+                [correo],
+                fail_silently=False,
+                )            
+            except Exception as e: print(e)       
 
 
         self.context['form'] = form
@@ -132,17 +133,18 @@ class RegistrarO(View):
         """
         form = OrgForm(request.POST)
         if form.is_valid():
-            print("h")
 
+            try:
 
-            user = User.objects.create_user(username=form.cleaned_data['correo'],email=form.cleaned_data['correo'],password='default', last_name = form.cleaned_data['nombre'], first_name = 'Organizador')            
-            send_mail(
-            'Crea contraseña',
-            'Da click para establecer tu contraseña',
-            'pumaeventosunam@gmail.com',
-            [user.email],
-            fail_silently=False,
-            )
+                user = User.objects.create_user(username=form.cleaned_data['correo'],email=form.cleaned_data['correo'],password='default', last_name = form.cleaned_data['nombre'], first_name = 'Organizador')            
+                send_mail(
+                'Crea contraseña',
+                'Da click para establecer tu contraseña',
+                'pumaeventosunam@gmail.com',
+                [user.email],
+                fail_silently=False,
+                )
+            except Exception as e: print(e)
 
 
         self.context['form'] = form
