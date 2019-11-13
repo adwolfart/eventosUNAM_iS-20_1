@@ -80,22 +80,27 @@ class RegistrarU(View):
                 avatar = request.FILES.get('avatar', '')
                 print(avatar)
 
-                user = User.objects.create_user(username = correo, password = password, email = correo, first_name = 'Estudiante', last_name = nombre)
-                userprofile = UserProfile.objects.create( user = user, nombre = nombre,  entidad = entidad)  
-                try:
-                    userprofile.avatar = avatar
-                    userprofile.save()
-                except: 
-                    print("Error al upload")
-                send_mail(
-                'Confirmacion de cuenta',
-                'Da click para confirmar tu registro',
-                'pumaeventosunam@gmail.com',
-                [correo],
-                fail_silently=False,
-                )            
+
+                if("unam.mx" in correo):
+                    user = User.objects.create_user(username = correo, password = password, email = correo, first_name = 'Estudiante', last_name = nombre)
+                    userprofile = UserProfile.objects.create( user = user, nombre = nombre,  entidad = entidad)  
+                    try:
+                        userprofile.avatar = avatar
+                        userprofile.save()
+                    except: 
+                        print("Error al upload")
+                    send_mail(
+                    'Confirmacion de cuenta',
+                    'Da click para confirmar tu registro',
+                    'pumaeventosunam@gmail.com',
+                    [correo],
+                    fail_silently=False,
+                    )        
+                    print("exito en el registro") 
+                else:
+                    print("Correo invalido")   
             except Exception as e: print(e)  
-            print("exito en el registro") 
+
         else:
             print("registro invalido")    
 
