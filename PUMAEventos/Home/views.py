@@ -102,7 +102,9 @@ class RegistrarU(View):
                 else:
                     messages.info(request, 'No se ha podido concluir tu registro!')
                     print("Correo invalido")   
-            except Exception as e: print(e)  
+            except Exception as e: 
+                messages.info(request, e)
+                print(e)  
 
         else:
             print("registro invalido")    
