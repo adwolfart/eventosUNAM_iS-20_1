@@ -13,6 +13,7 @@ html {
     height: 100%;
     font-family: Arial, Helvetica;
 }
+
 .btn {
     margin-left: 10px;
 }
@@ -24,15 +25,16 @@ html {
 .nav-item {
     color: white;
 }
-.navbar{
+
+.navbar {
     background-color: black;
     font-family: 'Josefin Sans', monospace
-    
 }
-.home{
+
+.home {
     color: white;
 }
 
-.navbar{
+.navbar {
     background-color: rgb(0, 1, 48);
 }

@@ -15,6 +15,7 @@ from Home.models import UserProfile
 
 
 from django.contrib.auth.forms import PasswordResetForm
+from django.contrib import messages
 
 
 # Function Views
@@ -96,8 +97,10 @@ class RegistrarU(View):
                     [correo],
                     fail_silently=False,
                     )        
+                    messages.info(request, 'Te has registrado con éxito!')
                     print("exito en el registro") 
                 else:
+                    messages.info(request, 'No se ha podido concluir tu registro!')
                     print("Correo invalido")   
             except Exception as e: print(e)  
 
@@ -161,12 +164,15 @@ class RegistrarO(View):
                 [user.email],
                 fail_silently=False,
                 )
-            except Exception as e: print(e)
+                messages.info(request, 'Te has registrado con éxito!')
+            except Exception as e: 
+                messages.info(request, e)
+                print(e)
 
 
         self.context['form'] = form
 
-        return redirect("Home:home")
+        return redirect("Home:registrarO")
         #return render(request, self.template, self.context)
 
 def del_user(request, username):    
