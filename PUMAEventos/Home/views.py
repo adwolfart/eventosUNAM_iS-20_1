@@ -19,6 +19,7 @@ from django.contrib import messages
 
 from django.core.files.storage import default_storage
 from django.template import loader
+import qrcode
 
 # Function Views
 def index(request):
@@ -286,11 +287,13 @@ class Login(IsNotAuthenticatedMixin, View):
 
             user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user is not None:
-
+                img = qrcode.make('Some data here')
+                print(type(img))
+                print(img.size)
+                img.save('Home/static/Home/img/aoeu.png')
                 try:
                     usuario = User.objects.get(username = form.cleaned_data["username"])
                     profile = UserProfile.objects.get(user = usuario)
-                    
                     if( profile.nombre == 'confirmado'):
     
 

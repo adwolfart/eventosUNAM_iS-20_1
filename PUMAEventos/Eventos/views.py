@@ -8,6 +8,11 @@ from Eventos.forms import EventoForm, DelEventoForm, UpdateForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.mail import send_mail
 
+
+from django.template import loader
+import qrcode
+
+
 def index(request):
     return HttpResponse("Index")
 
@@ -231,12 +236,23 @@ class EventoUpdate(View):
                     count+=1
             if(count< post.cupo_maximo):
                 RegEvento.objects.create(id_Evento = post_id, email_Usuario = user_mail)        
+                img = qrcode.make(str(user_mail) + '$' + str(post_id))                
+                img.save('Eventos/static/Eventos/img/'+ str(user_mail) + '$' + str(post_id) + '.png')
+                html_message = loader.render_to_string(
+                    'Eventos/invitacion.html',
+                    {
+                        'user_mail': user_mail,
+                        'post_id':  post_id,
+                        
+                    }
+                )
                 send_mail(
                     'Inscripción a Evento',
                     'Te acabas de registrar a un evento',
                     'pumaeventosunam@gmail.com',
                     [user_mail],
                     fail_silently=False,
+                    html_message = html_message,
                     ) 
                 print("Exito en el registro")
             else:
