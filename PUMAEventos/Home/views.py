@@ -17,6 +17,8 @@ from Home.models import UserProfile
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib import messages
 
+from django.core.files.storage import default_storage
+from django.template import loader
 
 # Function Views
 def index(request):
@@ -70,16 +72,15 @@ class RegistrarU(View):
         form = UserProfileForm(request.POST, request.FILES)
         print(form)
         if form.is_valid():
-            avatar = request.POST.get('avatar', '')
+            avatar = request.POST.get('avatar', None)
             print(avatar)
             try:
-
+                form.save()
                 nombre = request.POST.get('nombre', '')
                 correo = request.POST.get('correo', '')
                 password = request.POST.get('password', '')
                 entidad = request.POST.get('entidad', '')
                 avatar = request.FILES.get('avatar', '')
-                print(avatar)
 
 
                 if("unam.mx" in correo):
@@ -90,12 +91,17 @@ class RegistrarU(View):
                         userprofile.save()
                     except: 
                         print("Error al upload")
+
+                    html_message = loader.render_to_string(
+                        'Home/link.html'
+                    )
                     send_mail(
                     'Confirmacion de cuenta',
                     'Da click para confirmar tu registro',
                     'pumaeventosunam@gmail.com',
                     [correo],
-                    fail_silently=False,
+                    fail_silently=True,
+                    html_message=html_message,
                     )        
                     messages.info(request, 'Te has registrado con éxito!')
                     print("exito en el registro") 
@@ -186,11 +192,11 @@ def del_user(request, username):
         print(request, "The user not found")    
     return redirect("Home:home")
 
-class EliminarO(View):
+class ConfirmarU(View):
     """
         Index in my Web Page but with Clased based views.
     """
-    template = 'Home/eliminarO.html'
+    template = 'Home/confirmarU.html'
     context = {'title': 'Index'}
 
     def get(self, request):
@@ -209,7 +215,23 @@ class EliminarO(View):
         """
         form = DelForm(request.POST)
         if form.is_valid():
-                del_user(request, username=form.cleaned_data['correo'])
+                correo = request.POST.get('correo', '')
+
+                try:
+                    #post = UserProfile.objects.get(email=mail)
+                    usuario = User.objects.get(username = correo)
+                    
+                    profile = UserProfile.objects.get(user = usuario)
+                    
+                    profile.nombre = 'confirmado'
+                    profile.save()
+
+                    print("Correo confirmado")
+                    messages.info(request, 'Correo confirmado')
+                except Exception as e: 
+                    messages.info(request, e)
+                    print(e)
+
 
         self.context['form'] = form
         send_mail(
@@ -219,7 +241,7 @@ class EliminarO(View):
         ['ori@ciencias.unam.mx'],
         fail_silently=False,
         )
-        return redirect("Home:home")
+        return redirect("Home:confirmarU")
         #return render(request, self.template, self.context)
 
 
@@ -260,15 +282,37 @@ class Login(IsNotAuthenticatedMixin, View):
         form = LoginForm(request.POST)
         print(form)
         if form.is_valid():
+
+
             user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
-            print(user)
             if user is not None:
-                print(user)
-                login(request, user)
-                if request.GET.get("next", None) is not None:
-                    return redirect(request.GET.get("next"))
+
+                try:
+                    usuario = User.objects.get(username = form.cleaned_data["username"])
+                    profile = UserProfile.objects.get(user = usuario)
+                    
+                    if( profile.nombre == 'confirmado'):
+    
+
+                        login(request, user)
+                        if request.GET.get("next", None) is not None:
+                            return redirect(request.GET.get("next"))
+                        
+                        return redirect("Home:home")
+                    else:
+                        messages.info(request, 'Registrate o confirma tu correo')
+                        return redirect("Home:login")
+
+                except Exception as e: 
+                    print(e)
+                    login(request, user)
+                    if request.GET.get("next", None) is not None:
+                        return redirect(request.GET.get("next"))
+                    
+                    return redirect("Home:home")
                 
-                return redirect("Home:home")
+
+
 
         self.context['form'] = form
         return render(request, self.template, self.context)
