@@ -40,7 +40,7 @@
                             {% if post.correo == user.email %}
 
 <div class="column"></div>
-<div class="col-sm-12">
+<div class="col-sm-12" style="background-color: black; padding-left: 15%; padding-right: 15%">
         <ul class="list-group">
                 <li class="list-group-item active"><b>Evento: </b>{{post.titulo}} ({{post.entidad}}, {{post.ubicacion}})
                         <b style="float: right"># {{post.id}} </b></li>
@@ -63,16 +63,23 @@
                         <input type="number" name="id" value="{{post.id}}">
                         <b>Etiquetas</b>
                         <input type="text" name="etiquetas" value="{{post.etiquetas}}">
-                        <input style="float: right" class="btn btn-dark" type="submit" value="Guardar">
+                        <input style="float: right" class="btn btn-dark" type="submit" value="Guardar Etiqueta">
+                        </form></li>  
+
+                <li class="list-group-item">
+                        <form action="/anular/invitacion" method="post">
+                        {% csrf_token %}
+                        <b>Id evento</b>
+                        <input type="number" name="id" value="{{post.id}}">
+                        <b>Correo del usuario por anular:</b>
+                        <input type="text" name="correo" placeholder="Ingresa el correo">
+                        <input style="float: right" class="btn btn-dark" type="submit" value="Anular Invitacion">
                         </form></li>                        
                 <li class="list-group-item list-group-item-light"><b>Compartir: </b>
                         <a href="https://twitter.com/intent/tweet?text=¡Ven a este evento puma!&url=http://127.0.0.1:8000{% url 'Eventos:twoPost' post.id %}"><i class="fab fa-twitter"></i></a> 
-                        <a href="#"><i class="fab fa-facebook"></i></a> 
                         <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
                         <script type="IN/Share" data-url="http://127.0.0.1:8000{% url 'Eventos:twoPost' post.id %}"></script>
                         <div class="fb-share-button" data-href="http://127.0.0.1:8000{% url 'Eventos:twoPost' post.id %}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
-                        <a href="#"><i  class="fab fa-linkedin"></i></a>
-                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="¡Ven a este evento PUMA!" data-url="{% url 'Eventos:twoPost' post.id %}" data-hashtags="UNAM" data-related="" data-lang="es" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></li>                        
                 <li class="list-group-item list-group-item-dark"> 
                         <a href="{% url 'Eventos:onePost' post.id %}"><b style = "color: black;">Actualizar evento: </b><i class="fas fa-edit"></i></a>
                         <a style="float: right;" href="{% url 'Eventos:deleteEventos'%}"><b style = "color: red;">Borrar evento: </b><i class="fas fa-trash" style="color: red"></i></a></li>
@@ -118,6 +125,20 @@
                                                 <a href="#"><i  class="fab fa-linkedin"></i></a>
                                                 <a href="{% url 'Eventos:updateEvento' post_id=post.id user_mail=user.email %}"><i  class="fas fa-plus-square" style="float: right"><b>Inscribirse: </b></i></a>
                                                 <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="¡Ven a este evento PUMA!" data-url="{% url 'Eventos:twoPost' post.id %}" data-hashtags="UNAM" data-related="" data-lang="es" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></li>
+                                <li class="list-group-item"> 
+                                        <select name="entidad" id="combo_facultades" class="form-control">
+                                                <option value="0">Da click si quieres ver la lista de usuarios</option>
+                                                {% for usuario in inscritos%}
+                                                        {% if usuario.id_Evento == post.id %}
+                                                                <option value={{usuario.email_Usuario}}>{{usuario.email_Usuario}}</option>
+                                                        {% else %}
+
+                                                        {% endif %}
+
+                                                {% endfor %}
+                                         </select>
+                                
+                                </li>
                                                         
                         </ul>
                         <br>

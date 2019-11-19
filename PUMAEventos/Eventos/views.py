@@ -105,7 +105,9 @@ class EventoList(ListView):
             Get in my Index.
         """
         all_posts = Evento.objects.all()
+        all_regs = RegEvento.objects.all()
         self.context['posts'] = all_posts
+        self.context['inscritos'] = all_regs
         return render(request, self.template, self.context)
 
 
@@ -312,7 +314,8 @@ class EventoDelete(View):
                             'pumaeventosunam@gmail.com',
                             [i.email_Usuario],
                             fail_silently=False,
-                            )  
+                            )
+                            i.delete()
                 else:
                     print("No puedes eliminar este evento, no te pertenece")
                 
@@ -491,3 +494,53 @@ class Buscar(View):
         #return redirect("Eventos:listaEventos")
         return render(request, self.template, self.context)
 
+
+
+class AnularInvitacion(View):
+    """
+        Index in my Web Page but with Clased based views.
+    """
+    template = 'Home/home.html'
+    context = {'title': 'Index'}
+
+    def get(self, request):
+        """
+            Get in my Index.
+        """
+        #all_posts = Post.objects.all()
+        #self.context['posts'] = all_posts
+        return render(request, self.template, self.context)
+
+
+
+    def post(self, request):
+        """
+            Validates and do the login
+        """
+        form = DelEventoForm(request.POST)
+        if form.is_valid():
+            try:
+                u = Evento.objects.get(id = form.cleaned_data['id'])
+                correo = request.POST.get('correo', '')
+
+                v = RegEvento.objects.all()
+                                    
+
+
+                for i in v:
+                    if(i.id_Evento == u.id and i.email_Usuario == correo):
+                        print(str(correo)  + "Elminado del evento" + str(i.id_Evento))
+                        send_mail(
+                        'Anulacion de invitacion',
+                        'Has sido dado de baja del evento',
+                        'pumaeventosunam@gmail.com',
+                        [i.email_Usuario],
+                        fail_silently=False,
+                        )  
+                        i.delete()
+
+                
+            except:
+                print("no existe") 
+
+        return redirect("Eventos:listaEventos")
