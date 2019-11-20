@@ -52,6 +52,7 @@ class Evento(models.Model):
 class RegEvento(models.Model):
     id_Evento = models.IntegerField()
     email_Usuario = models.EmailField()
+    confirmacion = models.CharField(null = True, default = 'No Confirmado', max_length=50)
 
     class Meta:
         unique_together = ('id_Evento', 'email_Usuario')

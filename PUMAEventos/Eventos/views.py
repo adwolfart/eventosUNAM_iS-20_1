@@ -573,9 +573,35 @@ class ConfirmarAsistencia(View):
         all_staff = AsigStaff.objects.all()
         self.context['staffs'] = all_staff
 
-
-
-
-
-
         return render(request, self.template, self.context)
+
+
+class Confirmacion(View):
+    """
+        Index in my Web Page but with Clased based views.
+    """
+    template = 'Eventos/confirmarAsistencia.html'
+    context = {'title': 'Index'}
+
+
+    def get(self, request,correo, id, idevento):
+        """
+            Validates and do the login
+        """
+
+        
+        try:
+            print("aoeuoeu")
+            reg = RegEvento.objects.get(id = id)
+            print(reg.confirmacion)
+            reg.confirmacion = "Confirmado"
+            reg.save()
+
+            print("Usuario confirmado")
+        except Exception as e: print(e)
+
+
+                
+
+        return redirect("Eventos:confirmarA", user_mail=correo, post_id=idevento)
+

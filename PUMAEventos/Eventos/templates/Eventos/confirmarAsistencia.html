@@ -23,9 +23,12 @@
         {% for event in eventos%}
 
             {% if event.id_Evento == evento and  event.email_Usuario == usuario%}
-                <a style = "background-color:black; color: white">{{usuario}}</a>
-                <img class="img-fluid" style="width: 30%"src= "https://images.unsplash.com/photo-1562887250-9a52d844ad30?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80">
-    
+                <a style = "background-color:black; color: white">{{usuario}}</a><br>
+                <img class="img-fluid" style="width: 30%"src= "https://images.unsplash.com/photo-1562887250-9a52d844ad30?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80"><br>
+                <h1>{{event.confirmacion}}</h1>
+                <h3>{{evento}}{{usuario}}</h2>
+                <h4>{{event.id}}
+                <a href={% url 'Eventos:confirmacion' correo=usuario id=event.id idevento=event.id_Evento%} class="btn btn-warning">Confirmar</a>
             {% else%}
 
             {% endif%}
