@@ -544,3 +544,38 @@ class AnularInvitacion(View):
                 print("no existe") 
 
         return redirect("Eventos:listaEventos")
+
+
+
+
+class ConfirmarAsistencia(View):
+    """
+        Index in my Web Page but with Clased based views.
+    """
+    template = 'Eventos/confirmarAsistencia.html'
+    context = {'title': 'Index'}
+
+    def get(self, request, user_mail, post_id):
+        """
+            Get in my Index.
+        """
+        #all_posts = Post.objects.all()
+        #self.context['posts'] = all_posts
+        all_posts = Evento.objects.all()
+        self.context['posts'] = all_posts
+        all_events = RegEvento.objects.all()
+        self.context['eventos'] = all_events
+        
+        self.context['usuario'] = user_mail
+
+        self.context['evento'] = post_id
+
+        all_staff = AsigStaff.objects.all()
+        self.context['staffs'] = all_staff
+
+
+
+
+
+
+        return render(request, self.template, self.context)

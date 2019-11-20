@@ -21,7 +21,9 @@ urlpatterns = [
     path('asignar/staff', views.AsignarStaff.as_view(), name='asignarStaff'),  
     path('etiquetas/update', views.Etiquetas.as_view(), name='etiquetas'),   
     path('search/substring', views.Buscar.as_view(), name='registrarU'),
-    path('anular/invitacion', views.AnularInvitacion.as_view(), name='anularI')
+    path('anular/invitacion', views.AnularInvitacion.as_view(), name='anularI'),
+
+    path('confirmar/<user_mail>/<int:post_id>', views.ConfirmarAsistencia.as_view(), name='confirmarA')
     
 ]
 
