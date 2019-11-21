@@ -14,8 +14,8 @@ html {
 
 .fa-trash,
 .fa-plus-square {
-    color: black;
-    font-size: 1.5em;
+    color: white;
+    font-size: 1em;
 }
 
 .fa-edit {
@@ -24,17 +24,11 @@ html {
     font-size: 1.5em;
 }
 
-.fa-facebook {
-    color: blue;
-    margin-left: 15px;
-    font-size: 1.5em;
-}
-
 .fa-linkedin,
 .fa-twitter {
     color: rgb(0, 132, 255);
     margin-left: 15px;
-    font-size: 1.5em;
+    font-size: 1em;
 }
 
 .col-sm-12 {

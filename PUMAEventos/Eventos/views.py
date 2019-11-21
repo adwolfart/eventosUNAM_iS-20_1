@@ -11,6 +11,8 @@ from django.core.mail import send_mail
 
 from django.template import loader
 import qrcode
+from django.contrib import messages
+
 
 
 def index(request):
@@ -278,17 +280,19 @@ class EventoDelete(View):
     template = 'Eventos/borrarEvento.html'
     context = {'title': 'Index'}
 
-    def get(self, request):
+    def get(self, request, post_id):
         """
             Get in my Index.
         """
+        evento = post_id
+        self.context['evento'] = evento
         #all_posts = Post.objects.all()
         #self.context['posts'] = all_posts
         return render(request, self.template, self.context)
 
 
 
-    def post(self, request):
+    def post(self, request,post_id):
         """
             Validates and do the login
         """
@@ -316,11 +320,14 @@ class EventoDelete(View):
                             fail_silently=False,
                             )
                             i.delete()
+                    u.delete()
+                    messages.info(request, 'Evento eliminado')
+
                 else:
-                    print("No puedes eliminar este evento, no te pertenece")
+                    messages.info(request, 'No puedes eliminar este evento, porque no es tuyo(valores incorrectos)')
                 
             except:
-                print("no existe") 
+                    messages.info(request, 'El evento no existe, cambiaste valores')
 
         return redirect("Eventos:listaEventos")
         #return render(request, self.template, self.context)
@@ -408,7 +415,7 @@ class AsignarStaff(View):
     context = {}
 
 
-    def post(self, request):
+    def post(self, request, post_id, email):
         """
             Validates and do the login
         """

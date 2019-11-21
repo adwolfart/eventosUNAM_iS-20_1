@@ -39,7 +39,7 @@ class Index(View):
         Index in my Web Page but with Clased based views.
     """
     template = 'Home/index.html'
-    context = {'title': 'Index'}
+    context = {'title': 'Home - PUMA Eventos'}
 
     def get(self, request):
         """
@@ -55,7 +55,7 @@ class RegistrarU(View):
         Index in my Web Page but with Clased based views.
     """
     template = 'Home/registrarU.html'
-    context = {'title': 'Index'}
+    context = {'title': 'Registro - PUMA Eventos'}
 
     def get(self, request):
         """
@@ -128,7 +128,7 @@ class Home(View):
         Index in my Web Page but with Clased based views.
     """
     template = 'Home/home.html'
-    context = {'title': 'Index'}
+    context = {'title': 'Home - PUMA Eventos'}
 
     def get(self, request):
         """
@@ -146,7 +146,7 @@ class RegistrarO(View):
         Index in my Web Page but with Clased based views.
     """
     template = 'Home/registrarO.html'
-    context = {'title': 'Index'}
+    context = {'title': 'RegistrarO - PUMA Eventos'}
 
     def get(self, request):
         """
@@ -198,7 +198,7 @@ class ConfirmarU(View):
         Index in my Web Page but with Clased based views.
     """
     template = 'Home/confirmarU.html'
-    context = {'title': 'Index'}
+    context = {'title': 'Confirmacion - PUMA Eventos'}
 
     def get(self, request):
         """
@@ -265,7 +265,7 @@ class Login(IsNotAuthenticatedMixin, View):
         Admin login
     """
     template = 'Home/login.html'
-    context = {'title': 'Admin Login'}
+    context = {'title': 'Login - PUMA Eventos'}
 
     def get(self, request):
         """
