@@ -6,12 +6,12 @@ from django.views import View
 
 from .utils import IsNotAuthenticatedMixin
 #from Post.models import Post
-from .forms import LoginForm, OrgForm, DelForm, UserProfileForm
+from .forms import LoginForm, OrgForm, DelForm, UserProfileForm, PasswordResetF
 
 
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
-from Home.models import UserProfile
+from Home.models import UserProfile, PasswordF
 
 
 from django.contrib.auth.forms import PasswordResetForm
@@ -20,6 +20,8 @@ from django.contrib import messages
 from django.core.files.storage import default_storage
 from django.template import loader
 import qrcode
+import random 
+import string
 
 # Function Views
 def index(request):
@@ -139,6 +141,10 @@ class Home(View):
         return render(request, self.template, self.context)
 
 
+def randomString(stringLength=10):
+    """Generate a random string of fixed length """
+    letters = string.ascii_lowercase
+    return ''.join(random.choice(letters) for i in range(stringLength))
 
 
 class RegistrarO(View):
@@ -165,15 +171,27 @@ class RegistrarO(View):
 
             try:
 
-                user = User.objects.create_user(username=form.cleaned_data['correo'],email=form.cleaned_data['correo'],password='default', last_name = form.cleaned_data['nombre'], first_name = 'Organizador')            
-                send_mail(
-                'Crea contraseña',
-                'Da click para establecer tu contraseña',
-                'pumaeventosunam@gmail.com',
-                [user.email],
-                fail_silently=False,
+                #user = User.objects.create_user(username=form.cleaned_data['correo'],email=form.cleaned_data['correo'],password='default', last_name = form.cleaned_data['nombre'], first_name = 'Organizador')            
+                x = randomString(10)
+                username = form.cleaned_data['correo']
+                PasswordF.objects.create(correo = username, token = x)
+                html_message = loader.render_to_string(
+                    'Home/pass.html',
+                    {
+                        'token': x,
+                        
+                    }
                 )
-                messages.info(request, 'Te has registrado con éxito!')
+                send_mail(
+                    'Inscripción a Evento',
+                    'Te acabas de registrar a un evento',
+                    'pumaeventosunam@gmail.com',
+                    [username],
+                    fail_silently=False,
+                    html_message = html_message,
+                    ) 
+                messages.info(request, "Se ha enviado un correo para que el usuario establezca la contraseña")
+
             except Exception as e: 
                 messages.info(request, e)
                 print(e)
@@ -183,6 +201,55 @@ class RegistrarO(View):
 
         return redirect("Home:registrarO")
         #return render(request, self.template, self.context)
+
+
+class PasswordReset(View):
+    """
+        Index in my Web Page but with Clased based views.
+    """
+    template = 'Home/password.html'
+    context = {'title': 'Password - PUMA Eventos'}
+
+    def get(self, request):
+        """
+            Get in my Index.
+        """
+        #all_posts = Post.objects.all()
+        #self.context['posts'] = all_posts
+        return render(request, self.template, self.context)
+
+    def post(self, request):
+        """
+            Validates and do the login
+        """
+        form = PasswordResetF(request.POST)
+        print(form)
+        print(form.is_valid())
+        if form.is_valid():
+            print("aoeuoeau")
+            try:
+                token = request.POST.get('token', '')
+                correo = request.POST.get('username', '')
+                password = request.POST.get('password', '')
+                
+                x = PasswordF.objects.get(correo = correo, token = token)
+                print(x)
+                
+                user = User.objects.create_user(username= correo,email=correo,password=password,first_name = 'Organizador')            
+                messages.info(request, "Usuario Registrado")
+                
+
+            except Exception as e: 
+                messages.info(request, e)
+                print(e)
+
+
+        self.context['form'] = form
+
+        return redirect("Home:passwordR")
+        #return render(request, self.template, self.context)
+
+
 
 def del_user(request, username):    
     try:

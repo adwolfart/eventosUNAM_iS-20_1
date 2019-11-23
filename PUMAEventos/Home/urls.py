@@ -15,5 +15,6 @@ urlpatterns = [
     path('registrarO/', views.RegistrarO.as_view(), name='registrarO'),
     path('confirmarU/', views.ConfirmarU.as_view(), name='confirmarU'),
     path('registrarU/', views.RegistrarU.as_view(), name='registrarU'),
+    path('password/reset', views.PasswordReset.as_view(),  name='passwordR')
 
 ] 

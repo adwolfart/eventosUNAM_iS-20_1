@@ -30,7 +30,6 @@ class OnePost(View):
             GET in one post
         """
         post = Evento.objects.get(id=post_id)
-        #post = get_object_or_404(Post, id=post_id)
         self.context['post'] = post
 
         self.context['title'] = str(post)
@@ -93,15 +92,11 @@ class OnePost(View):
 
 class EventoList(ListView):
     """
-        Index in my Web Page but with Clased based views.
+        Muestra toda la lista de eventos
     """
     template = 'Eventos/verEventos.html'
-    context = {'title': 'Index'}
+    context = {'title': 'Lista de eventos - PUMA Eventos'}
 
-    #def get(self, request):
-
-        #all_posts = Post.objects.all()
-        #self.context['posts'] = all_posts
     def get(self, request):
         """
             Get in my Index.
@@ -126,8 +121,6 @@ class EventoList(ListView):
         self.context['form'] = form
 
         return redirect("Home:home")
-        #return render(request, self.template, self.context) 
-
 
 
 class EventoCreate(CreateView):
@@ -148,7 +141,7 @@ class EventoCreate(CreateView):
 
     def post(self, request):
         """
-            Validates and do the login
+            Crea el evento.
         """
         form = EventoForm(request.POST)
         print(form)
@@ -209,9 +202,6 @@ class EventoCreate(CreateView):
         self.context['form'] = form
 
         return redirect("Eventos:listaEventos")
-        #return render(request, self.template, self.context)
-
-
 
 
 class EventoUpdate(View):

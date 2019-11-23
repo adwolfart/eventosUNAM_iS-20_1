@@ -16,3 +16,11 @@ class UserProfile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):  
     if created:  
        profile, created = UserProfile.objects.get_or_create(user=instance) 
+
+
+class PasswordF(models.Model):
+    correo = models.EmailField(max_length = 150, null = False, default = 'null@c.com')
+    token = models.CharField(max_length=50, default='null0', null=False)
+
+
+  
