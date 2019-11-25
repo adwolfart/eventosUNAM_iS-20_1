@@ -34,7 +34,42 @@ html{
         width: 80%;
         position: absolute;
         left: 50%;
-        top: 130%;
+        top: 170%;
+        transform: translate(-50%,-50%);
+        background-color: rgba(0, 0, 0, 0.336);
+        color: white;
+        border-radius: 10px;
+        padding: 2%;
+    
+    }
+}
+
+
+@media only screen and (min-width: 601px) {
+
+    #formas{
+        width: 80%;
+        position: absolute;
+        left: 50%;
+        top: 170%;
+        transform: translate(-50%,-50%);
+        background-color: rgba(0, 0, 0, 0.336);
+        color: white;
+        border-radius: 10px;
+        padding: 2%;
+    
+    }
+}
+
+
+
+@media only screen and (min-width: 901px) {
+
+    #formas{
+        width: 80%;
+        position: absolute;
+        left: 50%;
+        top: 120%;
         transform: translate(-50%,-50%);
         background-color: rgba(0, 0, 0, 0.336);
         color: white;

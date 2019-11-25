@@ -25,7 +25,7 @@ h3{
 
 @media only screen and (max-width: 600px) {
     #formas {
-        top: 100%;
+        top: 70%;
         width: 90%;
         padding: 2% 2%;
         border-radius: 10px;

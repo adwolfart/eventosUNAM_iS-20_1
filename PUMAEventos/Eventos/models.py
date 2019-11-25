@@ -46,7 +46,7 @@ class Evento(models.Model):
     etiquetas = models.CharField(max_length=100, null=True)
     #duracion = hora_final - hora_de_inicio
     mostrar = models.CharField(max_length=100, null=False, default = "0")
-    periodicidad = models.CharField(max_length=100, null=False, default = "")
+    periodicidad = models.CharField(max_length=100, null=False)
     
     class Meta:
         db_table = 'evento'

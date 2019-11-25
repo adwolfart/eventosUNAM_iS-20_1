@@ -41,50 +41,112 @@ class OnePost(View):
         """
             Validates and do the login
         """
-        form = UpdateForm(request.POST)
-        print(form)
 
+        try:
 
-        if form.is_valid():
-            try:
-                u = Evento.objects.get(id = form.cleaned_data['id'])
-                correo = request.POST.get('correo', '')
+            u = Evento.objects.get(id = post_id)
+            correo = request.POST.get('correo', '')
 
-                if(u.correo == correo):
-                    titulo = request.POST.get('titulo', '')
-                    fecha_de_inicio = request.POST.get('fecha_de_inicio','')
-                    hora_de_inicio = request.POST.get('hora_de_inicio','')
-                    fecha_final = request.POST.get('fecha_final','')
-                    hora_final = request.POST.get('hora_final','')
-                    cupo_maximo = request.POST.get('cupo_maximo','')
-                    descripcion = request.POST.get('descripcion','')
-                    ubicacion = request.POST.get('ubicacion','')
-                    entidad = request.POST.get('entidad','')
-                    etiqueta1 = request.POST.get('etiqueta1','')
-                    etiqueta2 = request.POST.get('etiqueta2','')
-                    etiqueta3 =  request.POST.get('etiqueta3','') 
-
-                    u.titulo = titulo
-                    u.fecha_de_inicio = fecha_de_inicio
-                    u.hora_de_inicio = hora_de_inicio
-                    u.fecha_final = fecha_final
-                    u.hora_final = hora_final
-                    u.cupo_maximo = cupo_maximo
-                    u.descripcion = descripcion
-                    u.ubicacion = ubicacion
-                    u.entidad = entidad
-                    u.etiqueta1 = etiqueta1
-                    u.etiqueta2 = etiqueta2
-                    u.etiqueta3 = etiqueta3
-                    u.save()                  
-                    print("actualizado")
-                else:
-                    print("No puedes eliminar este evento, no te pertenece")
+            if(u.correo == correo):
+                titulo = request.POST.get('titulo', '')
+                fecha_de_inicio = request.POST.get('fecha_de_inicio','')
+                hora_de_inicio = request.POST.get('hora_de_inicio','')
+                fecha_final = request.POST.get('fecha_final','')
+                hora_final = request.POST.get('hora_final','')
+                periodicidad = request.POST.get('periodicidad','')
+                cupo_maximo = request.POST.get('cupo_maximo','')
+                descripcion = request.POST.get('descripcion','')
+                ubicacion = request.POST.get('ubicacion','')
+                entidad = request.POST.get('entidad','')
+                etiquetas = request.POST.get('etiquetas','')
+                direccion = request.POST.get('direccion','')
                 
-            except:
-                print("no existe o error") 
+                try:
+                    if(titulo != ""):
+                        u.titulo = titulo
+                        u.save()
+                except:
+                    print("titulo invalida")
 
-        self.context['form'] = form
+                try:
+                    if(fecha_de_inicio != ""):
+                        u.fecha_de_inicio= fecha_de_inicio
+                        u.save()
+                except:
+                    print("fecha_de_inicio invalida")
+
+                try:
+                    if(hora_de_inicio != ""):
+                        u.hora_de_inicio = hora_de_inicio
+                        u.save()
+                except:
+                    print("hora_de_inicio invalida")                                                
+                
+                try:
+                    if(fecha_final != ""):
+                        u.fecha_final = fecha_final
+                        u.save()
+                except:
+                    print("fecha_final invalida")
+
+                try:
+                    if(hora_final != ""):
+                        u.hora_final = hora_final
+                        u.save()
+                except:
+                    print("hora_final invalida")
+
+                try:
+                    u.cupo_maximo = cupo_maximo
+                    u.save()
+                except:
+                    print("cupo_maximo invalida")
+
+                try:
+                    if(periodicidad != ""):
+                        print(periodicidad)
+                        print(u.periodicidad)
+                        u.periodicidad = periodicidad
+                        print(u.periodicidad)
+                        u.save()
+                except:
+                    print("periodicidad invalida")
+
+                try:
+                    if(descripcion != ""):
+                        u.descripcion = descripcion
+                        u.save()
+                except:
+                    print("descripcion invalida")
+
+                try:
+                    if(ubicacion != ""):
+                        u.ubicacion = ubicacion
+                        u.save()
+                except:
+                    print("ubicacion invalida")
+
+                try:
+                    if(etiquetas != ""):
+                        u.etiquetas = etiquetas
+                        u.save()
+                except:
+                    print("etiquetas invalida")                                                
+
+                try:
+                    if(direccion != ""):
+                        u.direccion = direccion
+                        u.save()
+                except:
+                    print("direccion invalida")
+
+
+                print("actualizado")
+            else:
+                print("No puedes eliminar este evento, no te pertenece")
+            
+        except:
+            print("no existe o error") 
 
         return redirect("Eventos:listaEventos")
         #return render(request, self.template, self.context)
