@@ -179,6 +179,7 @@ class RegistrarO(View):
                     'Home/pass.html',
                     {
                         'token': x,
+                        'correo': username,
                         
                     }
                 )
@@ -210,7 +211,7 @@ class PasswordReset(View):
     template = 'Home/password.html'
     context = {'title': 'Password - PUMA Eventos'}
 
-    def get(self, request):
+    def get(self, request, user_mail, tok):
         """
             Get in my Index.
         """
@@ -218,18 +219,16 @@ class PasswordReset(View):
         #self.context['posts'] = all_posts
         return render(request, self.template, self.context)
 
-    def post(self, request):
+    def post(self, request, user_mail, tok):
         """
             Validates and do the login
         """
         form = PasswordResetF(request.POST)
-        print(form)
-        print(form.is_valid())
         if form.is_valid():
             print("aoeuoeau")
             try:
-                token = request.POST.get('token', '')
-                correo = request.POST.get('username', '')
+                token = tok
+                correo = user_mail
                 password = request.POST.get('password', '')
                 
                 x = PasswordF.objects.get(correo = correo, token = token)
@@ -237,16 +236,16 @@ class PasswordReset(View):
                 
                 user = User.objects.create_user(username= correo,email=correo,password=password,first_name = 'Organizador')            
                 messages.info(request, "Usuario Registrado")
-                
+                return redirect("Home:login")
 
             except Exception as e: 
-                messages.info(request, e)
+                messages.info(request, "Url invalida para elegir contraseña")
                 print(e)
 
 
         self.context['form'] = form
 
-        return redirect("Home:passwordR")
+        return redirect("Home:passwordR", user_mail = user_mail, tok = tok)
         #return render(request, self.template, self.context)
 
 

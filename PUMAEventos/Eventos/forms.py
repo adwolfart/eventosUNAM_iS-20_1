@@ -10,6 +10,7 @@ class EventoForm(forms.Form):
     #hora_final = forms.TimeField()
     cupo_maximo = forms.IntegerField()
     descripcion = forms.CharField()
+    direccion = forms.CharField(max_length=100)
     ubicacion = forms.CharField(max_length=100)
     #entidad = forms.CharField(max_length = 150)
     correo = forms.EmailField(max_length = 150)

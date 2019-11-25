@@ -33,7 +33,5 @@ class UserProfileForm(forms.ModelForm):
         return avatar
 
 class PasswordResetF(forms.Form):
-    token = forms.CharField(max_length=50)
-#    correo = forms.EmailField(max_length=50)
     password = forms.CharField(max_length=50)
   

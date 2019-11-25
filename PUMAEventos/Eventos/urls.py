@@ -23,6 +23,8 @@ urlpatterns = [
     path('search/substring', views.Buscar.as_view(), name='registrarU'),
     path('anular/invitacion', views.AnularInvitacion.as_view(), name='anularI'),
 
+    path('mostrar/invitados', views.MostrarInvitados.as_view(), name='mostrarI'),
+
     path('confirmar/<user_mail>/<int:post_id>', views.ConfirmarAsistencia.as_view(), name='confirmarA'),
     path('confirmar/<correo>/<int:idevento>/<int:id>', views.Confirmacion.as_view(), name = 'confirmacion')
     

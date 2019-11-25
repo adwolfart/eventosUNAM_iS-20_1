@@ -65,6 +65,10 @@
                                                                         <input name="hora_final" type="time" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Hora final">
                                                         </div>
                                                         <div class="form-group">
+                                                                        <label for="exampleInputEmail1">Periodicidad</label>
+                                                                        <input name="periodicidad" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Periodicidad">
+                                                        </div> 
+                                                        <div class="form-group">
                                                                         <label for="exampleInputEmail1">Cupo maximo</label>
                                                                         <input name="cupo_maximo" type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Cupo maximo" required>
                                                         </div>                                                                      
@@ -76,12 +80,44 @@
                                                         </div>
                                                         <div class="form-group">
                                                                         <label for="exampleFormControlTextarea1">Etiquetas</label>
-                                                                        <textarea name="etiquetas" class="form-control" id="exampleFormControlTextarea2" rows="1" ></textarea>
-                                                        </div>                                                        
+                                                                        <textarea name="etiquetas" class="form-control" id="exampleFormControlTextarea2" rows="1" required></textarea>
+                                                        </div>   
+                                                        <div class="form-group">
+                                                                        <label for="exampleFormControlTextarea1">Dirección</label>
+                                                                        <textarea name="direccion" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
+                                                        </div>                                                     
                                                         <div class="form-group">
                                                                         <label for="exampleInputEmail1">Ubicacion</label>
-                                                                        <input name="ubicacion" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ubicacion" required>
-                                                        </div>  
+                                                                        <input id="ubicacion" name="ubicacion" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Ubicacion" required>
+                                                        </div> 
+    <script>
+// Initialize and add the map
+window.onload = function() {
+    var latlng = new google.maps.LatLng(19.3238617, -99.1834288);
+    var map = new google.maps.Map(document.getElementById('map'), {
+        center: latlng,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+    var marker = new google.maps.Marker({
+        position: latlng,
+        map: map,
+        title: 'Set lat/lon values for this property',
+        draggable: true
+    });
+    google.maps.event.addListener(marker, 'dragend', function(a) {
+        document.getElementById("ubicacion").value = a.latLng.lat().toFixed(8) + ", " + a.latLng.lng().toFixed(8);
+
+    });
+};
+    </script>
+
+<div id="map"></div>
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD139VGTcPSH3RXaOF5FOWUFgv0g0RyrWA&callback=initMap">
+    </script>
+
                                                         <div class="form-group">
                                                                         <label for="exampleInputEmail1">Entidad</label>
                                                                         <select name="entidad" id="combo_facultades" class="form-control">

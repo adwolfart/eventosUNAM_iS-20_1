@@ -39,11 +39,14 @@ class Evento(models.Model):
     hora_final = models.TimeField(null=True)
     cupo_maximo = models.IntegerField(null=False)
     descripcion = models.TextField(blank=False, null=False)
+    direccion = models.CharField(max_length=100, null=False, default="null")
     ubicacion = models.CharField(max_length=100, null=False)
     entidad = models.CharField(max_length = 150, null=True)
     correo = models.EmailField(max_length = 150, null = False, default = 'null@c.com')
     etiquetas = models.CharField(max_length=100, null=True)
     #duracion = hora_final - hora_de_inicio
+    mostrar = models.CharField(max_length=100, null=False, default = "0")
+    periodicidad = models.CharField(max_length=100, null=False, default = "")
     
     class Meta:
         db_table = 'evento'

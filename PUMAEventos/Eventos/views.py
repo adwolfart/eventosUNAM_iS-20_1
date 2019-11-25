@@ -153,6 +153,7 @@ class EventoCreate(CreateView):
             hora_final = request.POST.get('hora_final','')
             cupo_maximo = request.POST.get('cupo_maximo','')
             descripcion = request.POST.get('descripcion','')
+            direccion = request.POST.get('direccion','')
             ubicacion = request.POST.get('ubicacion','')
             entidad = request.POST.get('entidad','')
             correo = request.POST.get('correo','')
@@ -161,6 +162,7 @@ class EventoCreate(CreateView):
             u = Evento.objects.create(titulo = titulo, 
                                     fecha_de_inicio = fecha_de_inicio,
                                     cupo_maximo = cupo_maximo,
+                                    direccion = direccion,
                                     descripcion = descripcion,
                                     ubicacion = ubicacion,
                                     correo = correo)
@@ -405,7 +407,7 @@ class AsignarStaff(View):
     context = {}
 
 
-    def post(self, request, post_id, email):
+    def post(self, request):
         """
             Validates and do the login
         """
@@ -497,7 +499,7 @@ class AnularInvitacion(View):
     """
         Index in my Web Page but with Clased based views.
     """
-    template = 'Home/home.html'
+    template = 'Eventos/anularInv.html'
     context = {'title': 'Index'}
 
     def get(self, request):
@@ -540,7 +542,7 @@ class AnularInvitacion(View):
             except:
                 print("no existe") 
 
-        return redirect("Eventos:listaEventos")
+        return render(request, self.template, self.context)
 
 
 
@@ -602,3 +604,29 @@ class Confirmacion(View):
 
         return redirect("Eventos:confirmarA", user_mail=correo, post_id=idevento)
 
+class MostrarInvitados(View):
+    """
+        Displays just one post
+    """
+    template = 'Eventos/asigStaff.html'
+    context = {}
+
+
+    def post(self, request):
+        """
+            Validates and do the login
+        """
+
+        try:
+            eventoid = request.POST.get('id', '')
+            correo = request.POST.get('mostrar', '')
+            x = Evento.objects.get(id = eventoid)
+            print(type(correo))
+            x.mostrar = correo
+            x.save()
+
+        except:
+            print("Error en el cambio de parametro, mostrar listade invitados")
+
+        
+        return redirect("Eventos:listaEventos")

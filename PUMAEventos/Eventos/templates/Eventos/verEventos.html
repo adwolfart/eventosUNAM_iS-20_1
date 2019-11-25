@@ -54,7 +54,9 @@
                 <li class="list-group-item"><b>Horario: </b>{{post.fecha_de_inicio}} {{post.hora_de_inicio}} -
                         {{post.fecha_final}} {{post.hora_final}}</li>
                 <li style="color: black" class="list-group-item"><b>Descripción: </b>{{post.descripcion}}</li>
+                <li style="color: black" class="list-group-item"><b>Dirección: </b>{{post.direccion}}</li>
                 <li class="list-group-item"><b>Capacidad:</b> {{post.cupo_maximo}}</li>
+                <li class="list-group-item"><b>Periodicidad:</b> {{post.periodiicidad}}</li>
                 <li class="list-group-item">
                         <form action="/asignar/staff" method="post">
                         {% csrf_token %}
@@ -81,6 +83,34 @@
                         <b>Correo del usuario por anular:</b>
                         <input type="text" name="correo" placeholder="Ingresa el correo" required>
                         <input style="float: right" class="btn btn-dark" type="submit" value="Anular Invitacion">
+                        </form></li>
+                <li class="list-group-item"> 
+                        <select name="entidad" id="combo_facultades" class="form-control">
+                                <option value="0">Da click si quieres ver la lista de usuarios</option>
+                                {% for usuario in inscritos%}
+                                        {% if usuario.id_Evento == post.id %}
+                                                <option value={{usuario.email_Usuario}}>{{usuario.email_Usuario}}</option>
+                                        {% else %}
+
+                                        {% endif %}
+
+                                {% endfor %}
+                        </select>
+                
+                </li>
+                
+                <li class="list-group-item">
+                        <form action="/mostrar/invitados" method="post">
+                        {% csrf_token %}
+                        <b>Id evento</b>
+                        <input type="number" name="id" value="{{post.id}}" required>
+                        <b>Mostra lista de invitados?</b>
+                        <select name="mostrar" id="combo_facultades">
+                                <option value={{post.mostrar}}>{{post.mostrar}} Da click para ver las opciones</option>
+                                <option value="0">No</option>
+                                <option value="1">Si</option>
+                        </select>
+                        <input style="float: right" class="btn btn-dark" type="submit" value="Guardar">
                         </form></li>                        
                 <li class="list-group-item list-group-item"><b>Compartir: </b>
                         <a href="https://twitter.com/intent/tweet?text=¡Ven a este evento puma!&url=http://127.0.0.1:8000{% url 'Eventos:twoPost' post.id %}"><i class="fab fa-twitter"></i></a> 
@@ -120,7 +150,10 @@
                                         <b style="float: right"> <a href="{% url 'Eventos:updateEvento' post_id=post.id user_mail=user.email %}"><i  class="fas fa-plus-square" style="float: right"><b></b></i></a> </b></li>
                                 <li style="color: black" class="list-group-item"><b>Horario: </b>{{post.fecha_de_inicio}} {{post.hora_de_inicio}} -
                                         {{post.fecha_final}} {{post.hora_final}}</li>
+                                <li class="list-group-item"><b>Capacidad:</b> {{post.cupo_maximo}}</li>                                
+                                <li class="list-group-item"><b>Periodicidad:</b> {{post.periodiicidad}}</li>
                                 <li style="color: black" class="list-group-item"><b>Descripción: </b>{{post.descripcion}}</li>
+                                <li style="color: black" class="list-group-item"><b>Dirección: </b>{{post.direccion}}</li>
                                 <li style="color: black" class="list-group-item"><b>Etiquetas: </b>{{post.etiquetas}}</li>                                
                                 <li style="color: black" class="list-group-item"><b>Organizador: </b>{{post.correo}}</li>
                                 <li class="list-group-item list-group-item-dark"><b>Compartir: </b>
@@ -132,14 +165,18 @@
                                 <li class="list-group-item"> 
                                         <select name="entidad" id="combo_facultades" class="form-control">
                                                 <option value="0">Da click si quieres ver la lista de usuarios</option>
-                                                {% for usuario in inscritos%}
-                                                        {% if usuario.id_Evento == post.id %}
-                                                                <option value={{usuario.email_Usuario}}>{{usuario.email_Usuario}}</option>
-                                                        {% else %}
+                                                {% if post.mostrar == "0"%}
 
-                                                        {% endif %}
+                                                {% else%}
+                                                        {% for usuario in inscritos%}
+                                                                {% if usuario.id_Evento == post.id %}
+                                                                        <option value={{usuario.email_Usuario}}>{{usuario.email_Usuario}}</option>
+                                                                {% else %}
 
-                                                {% endfor %}
+                                                                {% endif %}
+
+                                                        {% endfor %}
+                                                {% endif%}
                                          </select>
                                 
                                 </li>
