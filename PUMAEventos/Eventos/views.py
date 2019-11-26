@@ -196,6 +196,19 @@ class EventoCreate(CreateView):
         """
             Get in my Index.
         """
+
+        all_posts = Evento.objects.all()
+        #self.context['posts'] = all_posts
+
+        xy = ""
+        for i in all_posts:
+            xy = xy + " " + i.etiquetas
+
+        xy = xy.split()
+
+        self.context['posts'] = xy
+
+
         #all_posts = Post.objects.all()
         #self.context['posts'] = all_posts
         return render(request, self.template, self.context)
