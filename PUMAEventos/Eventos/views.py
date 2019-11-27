@@ -233,6 +233,7 @@ class EventoCreate(CreateView):
             entidad = request.POST.get('entidad','')
             correo = request.POST.get('correo','')
             etiquetas = request.POST.get('etiquetas','')
+            periodicidad = request.POST.get('periodicidad','')
 
             u = Evento.objects.create(titulo = titulo, 
                                     fecha_de_inicio = fecha_de_inicio,
@@ -241,6 +242,14 @@ class EventoCreate(CreateView):
                                     descripcion = descripcion,
                                     ubicacion = ubicacion,
                                     correo = correo)
+
+            try:
+                print(periodicidad)
+                u.periodicidad = periodicidad
+                u.save()
+            except:
+                print("periodicidad invalida")
+
 
             try:
                 u.entidad = entidad
@@ -280,6 +289,35 @@ class EventoCreate(CreateView):
 
         return redirect("Eventos:listaEventos")
 
+class Invitaciones(CreateView):
+    """
+        Index in my Web Page but with Clased based views.
+    """
+    template = 'Eventos/invitacion.html'
+    context = {'title': 'Index'}
+
+    def get(self, request, user_mail, post_id):
+        """
+            Get in my Index.
+        """
+
+        all_posts = Evento.objects.all()
+        self.context['user_mail'] = user_mail
+        self.context['post_id'] = post_id
+        #self.context['posts'] = all_posts
+
+        xy = ""
+        for i in all_posts:
+            xy = xy + " " + i.etiquetas
+
+        xy = xy.split()
+
+        self.context['posts'] = xy
+
+
+        #all_posts = Post.objects.all()
+        #self.context['posts'] = all_posts
+        return render(request, self.template, self.context)
 
 class EventoUpdate(View):
     """
@@ -310,7 +348,7 @@ class EventoUpdate(View):
                 img = qrcode.make(str(user_mail) + '$' + str(post_id))                
                 img.save('Eventos/static/Eventos/img/'+ str(user_mail) + '$' + str(post_id) + '.png')
                 html_message = loader.render_to_string(
-                    'Eventos/invitacion.html',
+                    'Eventos/linkinvitacion.html',
                     {
                         'user_mail': user_mail,
                         'post_id':  post_id,

@@ -184,8 +184,8 @@ class RegistrarO(View):
                     }
                 )
                 send_mail(
-                    'Inscripción a Evento',
-                    'Te acabas de registrar a un evento',
+                    'Se te ha asignado como organizador',
+                    'Ingresa ahora!',
                     'pumaeventosunam@gmail.com',
                     [username],
                     fail_silently=False,
@@ -301,12 +301,22 @@ class ConfirmarU(View):
 
 
         self.context['form'] = form
+
+
+        html_message = loader.render_to_string(
+            'Home/linkconfirmacion.html',
+            {
+                
+                
+            }
+        )
         send_mail(
         'Subject here',
         'Here is the message.',
         'pumaeventosunam@gmail.com',
-        ['ori@ciencias.unam.mx'],
+        [correo],
         fail_silently=False,
+        html_message = html_message,
         )
         return redirect("Home:confirmarU")
         #return render(request, self.template, self.context)
