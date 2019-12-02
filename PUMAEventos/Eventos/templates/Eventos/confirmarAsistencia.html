@@ -1,0 +1,47 @@
+{% extends "Home/base.html" %}
+
+{% block css_content %}
+
+{% load static %}
+<link rel="stylesheet" href={% static "Eventos/css/verEventos.css" %}>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+{% endblock %}
+
+
+{% block body_content %}
+
+
+
+{% for staff in staffs %}
+
+    {% if user.email == staff.email_staff and evento == staff.id_Evento%}
+
+
+        {% for event in eventos%}
+
+            {% if event.id_Evento == evento and  event.email_Usuario == usuario%}
+                <h3 style="text-align: center; color: black">{{user.last_name}}</h3><br>
+                <img class="img-fluid" style="width: 30%; border-radius: 50%; background-color: transparent"src= "https://images.unsplash.com/photo-1562887250-9a52d844ad30?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80"><br>
+                <h1 style="text-align: center;">{{event.confirmacion}}</h1>
+                <h3 style="text-align: center; background-color: transparent">{{usuario}}</h2>
+                <a  href={% url 'Eventos:confirmacion' correo=usuario id=event.id idevento=event.id_Evento%} class="btn btn-warning">Confirmar</a>
+            {% else%}
+
+            {% endif%}
+
+        {% endfor %}
+    
+    {% else %}
+
+    {% endif%}
+
+{% endfor%}
+
+<div class="alert alert-danger" role="alert">
+  Si estás viendo este mensaje y no se te ha mostrado ningún resultado, es posible que el usuario no esté registrado al evento, o que tú no tenga autorización para confirmar la asistencia a este evento.
+</div>
+
+{% endblock %}

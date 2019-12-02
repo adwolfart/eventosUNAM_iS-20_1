@@ -1,13 +1,34 @@
-#aveces{
-    position: fixed;
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|QuickSand|Open+Sans|Indie+Flower&display=swap');
+html {
+    margin: 0 0;
+    background-color: black;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: top;
+}
+
+#aveces {
+    position: absolute;
+    z-index: -1;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%)
+    transform: translate(-50%, -50%)
 }
-#aveces h1{
-    position: relative;
-    text-align: center;
+
+#aveces h3:hover {
+    transform: scale(1.2);
+    text-decoration: none;
+    color: white;
 }
-div h1 a{
-    color: black;
+
+div h3 a {
+    color: white;
+    font-family: 'Indie Flower', monospace
+}
+
+div h3 a:hover {
+    text-decoration: none;
+    color: white;
+    transform: scale(1.1);
 }

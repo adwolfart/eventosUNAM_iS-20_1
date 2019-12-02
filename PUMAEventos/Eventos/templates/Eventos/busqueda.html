@@ -1,0 +1,58 @@
+{% extends "Home/base.html" %}
+
+{% block css_content %}
+
+{% load static %}
+<link rel="stylesheet" href={% static "Eventos/css/verEventos.css" %}>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+{% endblock %}
+
+
+{% block body_content %}
+    <div id="aveces"> <h1>Resultados </h1> </div>
+
+
+                {% for id in ids %}
+
+                    {% for post in posts %}
+
+                        {% if id == post.id%}
+                            <div class="column"></div>
+                                    <div class="col-sm-12">
+                                    <ul class="list-group">
+                                            <li class="list-group-item active"><b>Evento: </b>{{post.titulo}} ({{post.entidad}}, {{post.ubicacion}})
+                                                    <b style="float: right"> # {{post.id}} </b></li>
+                                            <li style="color: black" class="list-group-item"><b>Horario: </b>{{post.fecha_de_inicio}} {{post.hora_de_inicio}} -
+                                                    {{post.fecha_final}} {{post.hora_final}}</li>
+                                            <li style="color: black" class="list-group-item"><b>Descripción: </b>{{post.descripcion}}</li>
+                                            <li style="color: black" class="list-group-item"><b>Etiquetas: </b>{{post.etiquetas}}</li>                                
+                                            <li style="color: black" class="list-group-item"><b>Organizador: </b>{{post.correo}}</li>
+                                            <li class="list-group-item"><b>Compartir: </b>
+                                                            <a href="https://twitter.com/intent/tweet?text=¡Ven a este evento puma!&url=http://127.0.0.1:8000{% url 'Eventos:twoPost' post.id %}"><i class="fab fa-twitter"></i></a> 
+                                                            <a href="#"><i class="fab fa-facebook"></i></a> 
+                                                            <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+                                                            <script type="IN/Share" data-url="http://127.0.0.1:8000{% url 'Eventos:twoPost' post.id %}"></script>
+                                                            <div class="fb-share-button" data-href="http://127.0.0.1:8000{% url 'Eventos:twoPost' post.id %}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
+                                                            <a href="#"><i  class="fab fa-linkedin"></i></a>
+                                                            <a href="{% url 'Eventos:updateEvento' post_id=post.id user_mail=user.email %}"><i  class="fas fa-plus-square" style="float: right"><b>Inscribirse: </b></i></a>
+                                                            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="¡Ven a este evento PUMA!" data-url="{% url 'Eventos:twoPost' post.id %}" data-hashtags="UNAM" data-related="" data-lang="es" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></li>
+                                                                    
+                                    </ul>
+                                    <br>
+
+                                    </div>
+
+
+
+                            </div>
+                        {% else%}
+
+                        {% endif%}
+                    {% endfor %}
+                {% endfor %}
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v5.0"></script>
+
+{% endblock %}

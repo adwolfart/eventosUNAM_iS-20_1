@@ -13,7 +13,8 @@ urlpatterns = [
     path('logout/', views.Logout.as_view(), name='logout'),
     path('home/', views.Home.as_view(), name='home'),
     path('registrarO/', views.RegistrarO.as_view(), name='registrarO'),
-    path('eliminarO/', views.EliminarO.as_view(), name='eliminarO'),
+    path('confirmarU/', views.ConfirmarU.as_view(), name='confirmarU'),
     path('registrarU/', views.RegistrarU.as_view(), name='registrarU'),
+    path('password/reset/<user_mail>/<tok>', views.PasswordReset.as_view(),  name='passwordR')
 
 ] 

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Home',
     'Eventos',
     'Usuario',
+    'qrcode'
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,8 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'pumaeventosunam@gmail.com>'
 
 AUTH_PROFILE_MODULE = 'Home.UserProfile'
+
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

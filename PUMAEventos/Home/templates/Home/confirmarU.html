@@ -12,17 +12,13 @@
 {% block body_content %}
 
 <div id="aveces">
-        {% if user.is_authenticated %}
         
-                
-        
-                {% if user.username == 'admin' %}
         
                 <div id="formas">
 
 
 
-                            <h5 style="text-align: center">Eliminar Organizador</h5>
+                            <h5 style="text-align: center">Confirmar Registro</h5>
                             <hr style="background-color: white">
                             <form method="post" id="eliminar">
                                     {% csrf_token %}
@@ -31,33 +27,21 @@
                                       <input name="correo" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo" required>
                                       <small style="color: black" id="emailHelp" class="form-text text-muted">Esta acción no puede deshacerse.</small>
                                     </div>
-                                    <button style="width: 100%" type="submit" class="btn btn-primary">Eliminar</button>
+
+                                    {% if messages %}
+                                    <ul class="messages">
+                                        {% for message in messages %}
+                                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %} 
+                                    <button style="width: 100%" type="submit" class="btn btn-primary">Confirmar registro</button>
                     
                                     
                                   </form>
                 </div>
         
-                {% else %}
-                {% if user.first_name == 'Organizador' %}
-        
-                        <h1>Necesitas ser administrador para ingresar a esta página</h1>
-            
-                
-                {% else %}
-                
-                        <h1>Necesitas ser administrador </h1>
-                
-                {% endif %}                
 
-
-                
-                {% endif %}
-
-
-        {% else %}
-        
-                <h1>Necesitas logearte y ser administrador</h1>
-        {% endif %}
 </div>
 
 {% endblock %}

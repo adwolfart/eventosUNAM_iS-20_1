@@ -34,15 +34,19 @@ class Evento(models.Model):
     """
     titulo = models.CharField(max_length=100)
     fecha_de_inicio = models.DateField()
-    hora_de_inicio = models.TimeField()
-    fecha_final = models.DateField()
-    hora_final = models.TimeField()
-    cupo_maximo = models.IntegerField()
+    hora_de_inicio = models.TimeField(null=True)
+    fecha_final = models.DateField(null=True)
+    hora_final = models.TimeField(null=True)
+    cupo_maximo = models.IntegerField(null=False)
     descripcion = models.TextField(blank=False, null=False)
+    direccion = models.CharField(max_length=100, null=False, default="null")
     ubicacion = models.CharField(max_length=100, null=False)
-    entidad = models.CharField(max_length = 150)
+    entidad = models.CharField(max_length = 150, null=True)
     correo = models.EmailField(max_length = 150, null = False, default = 'null@c.com')
+    etiquetas = models.CharField(max_length=100, null=True)
     #duracion = hora_final - hora_de_inicio
+    mostrar = models.CharField(max_length=100, null=False, default = "0")
+    periodicidad = models.CharField(max_length=100, null=False)
     
     class Meta:
         db_table = 'evento'
@@ -50,11 +54,18 @@ class Evento(models.Model):
 
 class RegEvento(models.Model):
     id_Evento = models.IntegerField()
-    email_Organizador = models.EmailField()
     email_Usuario = models.EmailField()
+    confirmacion = models.CharField(null = True, default = 'No Confirmado', max_length=50)
 
     class Meta:
         unique_together = ('id_Evento', 'email_Usuario')
+
+class AsigStaff(models.Model):
+    id_Evento = models.IntegerField()
+    email_staff = models.EmailField()
+
+    class Meta:
+        unique_together = ('id_Evento', 'email_staff')
 
 
 
