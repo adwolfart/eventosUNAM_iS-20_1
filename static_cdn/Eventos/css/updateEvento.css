@@ -2,35 +2,55 @@
 
 html{
     margin: 0 0;
-    background-color: #21D4FD;
+    background-color: black;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    background-position: top;
-    background-image: url("/static/Home/img/1.jpg");    
+    background-position: top;  
 }
 
 
-#formas{
-    width: 80%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    background-color: rgba(0, 0, 0, 0.336);
-    color: white;
-    border-radius: 10px;
-    padding: 2%;
-    z-index: -1;
-
-}
 @media only screen and (max-width: 600px) {
 
     #formas{
         width: 80%;
         position: absolute;
         left: 50%;
-        top: 140%;
+        top: 90%;
+        transform: translate(-50%,-50%);
+        background-color: rgba(0, 0, 0, 0.336);
+        color: white;
+        border-radius: 10px;
+        padding: 2%;
+    
+    }
+}
+
+@media only screen and (min-width: 601px) {
+
+    #formas{
+        width: 80%;
+        position: absolute;
+        left: 50%;
+        top: 70%;
+        transform: translate(-50%,-50%);
+        background-color: rgba(0, 0, 0, 0.336);
+        color: white;
+        border-radius: 10px;
+        padding: 2%;
+    
+    }
+}
+
+
+
+@media only screen and (min-width: 901px) {
+
+    #formas{
+        width: 80%;
+        position: absolute;
+        left: 50%;
+        top: 60%;
         transform: translate(-50%,-50%);
         background-color: rgba(0, 0, 0, 0.336);
         color: white;

@@ -1,12 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Lato|Josefin+Sans|Indie+Flower|QuickSand|Open+Sans&display=swap');
 html {
     margin: 0 0;
-    background-color: #21D4FD;
+    background-color: black;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     background-position: top;
-    background-image: url("/static/Home/img/1.jpg");
 }
 
 .center {
@@ -15,8 +14,8 @@ html {
 
 .fa-trash,
 .fa-plus-square {
-    color: black;
-    font-size: 1.5em;
+    color: white;
+    font-size: 1em;
 }
 
 .fa-edit {
@@ -25,37 +24,29 @@ html {
     font-size: 1.5em;
 }
 
-.fa-facebook {
-    color: blue;
-    margin-left: 15px;
-    font-size: 1.5em;
-}
-
 .fa-linkedin,
 .fa-twitter {
     color: rgb(0, 132, 255);
     margin-left: 15px;
-    font-size: 1.5em;
+    font-size: 1em;
 }
 
 .col-sm-12 {
-    background-color: #21D4FD;
+    background-color: black;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     background-position: top;
-    background-image: url("https://assets.website-files.com/5bfd1275cc56e15ce750b18e/5c289afb9a1575537e893a5d_32.%20Banana%20Mania.jpg");
     padding: 1% 5%;
 }
 
 #aveces {
-    background-color: #21D4FD;
+    background-color: black;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     background-position: top;
-    background-image: url("https://assets.website-files.com/5bfd1275cc56e15ce750b18e/5c289afb9a1575537e893a5d_32.%20Banana%20Mania.jpg");
-    color: white;
+    color: black;
     padding: 1% 0;
 }
 

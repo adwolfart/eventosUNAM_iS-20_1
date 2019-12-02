@@ -383,7 +383,7 @@ class Login(IsNotAuthenticatedMixin, View):
                         return redirect("Home:login")
 
                 except Exception as e: 
-                    print(e)
+                    messages.info(request,e)
                     login(request, user)
                     if request.GET.get("next", None) is not None:
                         return redirect(request.GET.get("next"))
@@ -391,7 +391,8 @@ class Login(IsNotAuthenticatedMixin, View):
                     return redirect("Home:home")
                 
 
-
+            else:
+                messages.info(request,"Error en el login: con " + str(form.cleaned_data['username'] + ' como usuario y ' + str(form.cleaned_data['password'] + " como contraseña.")))
 
         self.context['form'] = form
         return render(request, self.template, self.context)

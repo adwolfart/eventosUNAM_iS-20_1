@@ -29,6 +29,7 @@ urlpatterns = [
     path('confirmar/<correo>/<int:idevento>/<int:id>', views.Confirmacion.as_view(), name = 'confirmacion'),
 
     path('invitacion/<user_mail>/<int:post_id>', views.Invitaciones.as_view(), name = 'invitacioneS'),
-    
+    path('<user_mail>/eventosAsistidos', views.EventosInscritos.as_view(), name = 'vinscritoS'),
+    path('<user_mail>/eventosInscritos', views.EventosConfirmados.as_view(), name = 'vconfirmados'),
 ]
 

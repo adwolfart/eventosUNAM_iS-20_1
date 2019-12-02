@@ -31,9 +31,18 @@
         <li style="color: black" class="list-group-item"><b>Horario: </b>{{post.fecha_de_inicio}} {{post.hora_de_inicio}} -
                 {{post.fecha_final}} {{post.hora_final}}</li>
         <li style="color: black" class="list-group-item"><b>Descripción: </b>{{post.descripcion}}</li>
-        <li class="list-group-item list-group-item-dark"><b>Compartir: </b><a href="#"><i class="fab fa-twitter"></i></a> <a
-                        href="#"><i class="fab fa-facebook"></i></a> <a href="#"><i
-                                class="fab fa-linkedin"></i></a></li>
+	<li style="color: black" class="list-group-item"><b>Dirección: </b> {{post.direccion}}</li>
+	<li style="color: black" class="list-group-item"><b>Ubicación: </b> {{post.ubicacion}}</li>
+	<li style="color: black" class="list-group-item"><b>Periodicidad: </b> {{post.periodicidad}}</li>
+	<li style="color: black" class="list-group-item"><b>Capacidad: </b> {{post.cupo_maximo}}</li>
+	<li style="color: black" class="list-group-item"><b>Etiquetas: </b> {{post.etiquetas}}</li>
+	<li style="color: black" class="list-group-item"><b>Correo: </b> {{post.correo}}</li>
+        <li class="list-group-item list-group-item-dark"><b>Compartir: </b>
+                    <a href="https://twitter.com/intent/tweet?text=¡Ven a este evento puma!&url=http://ec2-54-167-69-130.compute-1.amazonaws.com:8000{% url 'Eventos:twoPost' post.id %}"><i class="fab fa-twitter"></i></a> 
+                                                
+                              <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+                                <script type="IN/Share" data-url="http://ec2-54-167-69-130.compute-1.amazonaws.com:8000{% url 'Eventos:twoPost' post.id %}"></script>
+                                <div class="fb-share-button" data-href="http://ec2-54-167-69-130.compute-1.amazonaws.com:8000{% url 'Eventos:twoPost' post.id %}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div> </li>
 </ul>
 <br>
 
@@ -46,5 +55,5 @@
 
 
 </div>
-
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v5.0"></script>
 {% endblock %}

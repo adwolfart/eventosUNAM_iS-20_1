@@ -8,11 +8,11 @@ from Eventos.forms import EventoForm, DelEventoForm, UpdateForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.mail import send_mail
 
-
+from django.contrib.auth.models import User
 from django.template import loader
 import qrcode
 from django.contrib import messages
-
+from django.core.mail import EmailMessage
 
 
 def index(request):
@@ -60,7 +60,7 @@ class OnePost(View):
                 entidad = request.POST.get('entidad','')
                 etiquetas = request.POST.get('etiquetas','')
                 direccion = request.POST.get('direccion','')
-                
+
                 try:
                     if(titulo != ""):
                         u.titulo = titulo
@@ -70,10 +70,24 @@ class OnePost(View):
 
                 try:
                     if(fecha_de_inicio != ""):
-                        u.fecha_de_inicio= fecha_de_inicio
+                        x = str(u.fecha_final)
+                        print(x)
+                        x = x.split("-")
+                        y = fecha_de_inicio.split("-")
+                        if(int(x[0]) >= int(y[0]) and int(x[1]) >= int(y[1]) and int(x[2]) >= int(y[2]) or u.fecha_final == ""):
+
+	                        u.fecha_de_inicio= fecha_de_inicio
+	                        u.save()
+                        else:
+                            print("fecha de inicio invalida")
+                            messages.info(request,"fecha de inicio invalida")
+                except Exception as e:
+                    print(e)
+                    if(fecha_de_inicio != ""):
+                        u.fecha_de_inicio = fecha_de_inicio
                         u.save()
-                except:
-                    print("fecha_de_inicio invalida")
+                    else:
+                        messages.info(request,"Fecha de inicio invalida")
 
                 try:
                     if(hora_de_inicio != ""):
@@ -84,10 +98,24 @@ class OnePost(View):
                 
                 try:
                     if(fecha_final != ""):
+                        x = str(u.fecha_de_inicio)
+                        x = x.split("-")
+                        y = fecha_final.split("-")
+                        print(x)
+                        print(y)
+                        if(int(y[0]) >= int(x[0]) and int(y[1]) >= int(x[1]) and int(y[2]) >= int(x[2])):
+
+	                        u.fecha_final = fecha_final
+	                        u.save()
+                        else:
+                            print("fecha final invalida")
+                            messages.info(request, "fecha final invalida")
+                except Exception as e:
+                    if(fecha_final != ""):
                         u.fecha_final = fecha_final
                         u.save()
-                except:
-                    print("fecha_final invalida")
+                    print(e)
+                    messages.info(request, "fecha final invalida")
 
                 try:
                     if(hora_final != ""):
@@ -165,8 +193,10 @@ class EventoList(ListView):
         """
         all_posts = Evento.objects.all()
         all_regs = RegEvento.objects.all()
+        all_staff = AsigStaff.objects.all()
         self.context['posts'] = all_posts
         self.context['inscritos'] = all_regs
+        self.context['staff'] = all_staff
         return render(request, self.template, self.context)
 
 
@@ -345,24 +375,11 @@ class EventoUpdate(View):
                     count+=1
             if(count< post.cupo_maximo):
                 RegEvento.objects.create(id_Evento = post_id, email_Usuario = user_mail)        
-                img = qrcode.make(str(user_mail) + '$' + str(post_id))                
-                img.save('Eventos/static/Eventos/img/'+ str(user_mail) + '$' + str(post_id) + '.png')
-                html_message = loader.render_to_string(
-                    'Eventos/linkinvitacion.html',
-                    {
-                        'user_mail': user_mail,
-                        'post_id':  post_id,
-                        
-                    }
-                )
-                send_mail(
-                    'Inscripción a Evento',
-                    'Te acabas de registrar a un evento',
-                    'pumaeventosunam@gmail.com',
-                    [user_mail],
-                    fail_silently=False,
-                    html_message = html_message,
-                    ) 
+                img = qrcode.make("http://ec2-54-167-69-130.compute-1.amazonaws.com:8000/confirmar/" + str(user_mail) + '/' + str(post_id))                
+                img.save('../static_cdn/Eventos/img/'+ str(user_mail) + '$' + str(post_id) + '.png')
+                email = EmailMessage('Invitacion a evento','Aquí está tu invitacion','pumaeventosunam@gmail.com',[user_mail])
+                email.attach_file('../static_cdn/Eventos/img/'+ str(user_mail)+ '$'+ str(post_id)+'.png')
+                email.send()
                 print("Exito en el registro")
             else:
                 print("Ya no hay cupo")
@@ -371,7 +388,7 @@ class EventoUpdate(View):
 
 
 
-        return render(request, self.template, self.context)
+        return redirect("Eventos:vconfirmados", user_mail = user_mail)
 
 
 
@@ -684,6 +701,8 @@ class ConfirmarAsistencia(View):
 
         all_staff = AsigStaff.objects.all()
         self.context['staffs'] = all_staff
+        all_user = User.objects.get(username = user_mail)
+        self.context['user'] = all_user
 
         return render(request, self.template, self.context)
 
@@ -743,3 +762,45 @@ class MostrarInvitados(View):
 
         
         return redirect("Eventos:listaEventos")
+
+
+
+class EventosInscritos(View):
+    """
+        Index in my Web Page but with Clased based views.
+    """
+    template = 'Eventos/vinscritos.html'
+    context = {'title': 'Index'}
+
+    def get(self, request, user_mail):
+        """
+            Get in my Index.
+        """
+        #all_posts = Post.objects.all()
+        #self.context['posts'] = all_posts
+        all_posts = Evento.objects.all()
+        self.context['posts'] = all_posts
+        all_events = RegEvento.objects.all()
+        self.context['eventos'] = all_events
+
+        return render(request, self.template, self.context)
+
+class EventosConfirmados(View):
+    """
+        Index in my Web Page but with Clased based views.
+    """
+    template = 'Eventos/vconfirmados.html'
+    context = {'title': 'Index'}
+
+    def get(self, request, user_mail):
+        """
+            Get in my Index.
+        """
+        #all_posts = Post.objects.all()
+        #self.context['posts'] = all_posts
+        all_posts = Evento.objects.all()
+        self.context['posts'] = all_posts
+        all_events = RegEvento.objects.all()
+        self.context['eventos'] = all_events
+
+        return render(request, self.template, self.context)

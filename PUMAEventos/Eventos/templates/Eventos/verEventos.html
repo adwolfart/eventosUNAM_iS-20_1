@@ -27,14 +27,14 @@
                 {% else %}
                 {% if user.first_name == 'Organizador' %}
         
-                        <div id="eventos">
+                        <div style="color:white;" id="eventos">
                                 <h4 class="center"><u>Estos son los eventos que has creado!</u></h4>
 
                         </div>
                         {% if messages %}
                         <ul class="messages">
                         {% for message in messages %}
-                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        <li{% if message.tags %} class="{{ message.tags }}" style="color:white;"{% endif %}>{{ message }}</li>
                         {% endfor %}
                         </ul>
                         {% endif %}  
@@ -89,7 +89,7 @@
                                 <option value="0">Da click si quieres ver la lista de usuarios</option>
                                 {% for usuario in inscritos%}
                                         {% if usuario.id_Evento == post.id %}
-                                                <option value={{usuario.email_Usuario}}>{{usuario.email_Usuario}}</option>
+                                                <option value={{usuario.email_Usuario}}>{{usuario.email_Usuario}} - {{usuario.confirmacion}}</option>
                                         {% else %}
 
                                         {% endif %}
@@ -113,10 +113,10 @@
                         <input style="float: right" class="btn btn-dark" type="submit" value="Guardar">
                         </form></li>                        
                 <li class="list-group-item list-group-item"><b>Compartir: </b>
-                        <a href="https://twitter.com/intent/tweet?text=¡Ven a este evento puma!&url=http://127.0.0.1:8000{% url 'Eventos:twoPost' post.id %}"><i class="fab fa-twitter"></i></a> 
+                        <a href="https://twitter.com/intent/tweet?text=¡Ven a este evento puma!&url=http://ec2-54-167-69-130.compute-1.amazonaws.com:8000{% url 'Eventos:twoPost' post.id %}"><i class="fab fa-twitter"></i></a> 
                         <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-                        <script type="IN/Share" data-url="http://127.0.0.1:8000{% url 'Eventos:twoPost' post.id %}"></script>
-                        <div class="fb-share-button" data-href="http://127.0.0.1:8000{% url 'Eventos:twoPost' post.id %}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
+                        <script type="IN/Share" data-url="http://ec2-54-167-69-130.compute-1.amazonaws.com:8000{% url 'Eventos:twoPost' post.id %}"></script>
+                        <div class="fb-share-button" data-href="http://ec2-54-167-69-130.compute-1.amazonaws.com:8000{% url 'Eventos:twoPost' post.id %}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
                 <li class="list-group-item list-group-item-danger"> 
                         <a href="{% url 'Eventos:onePost' post.id %}"><b style = "color: black;">Actualizar evento: </b><i class="fas fa-edit"></i></a>
                         <a style="float: right;" href="{% url 'Eventos:deleteEventos' post.id%}"><b style = "color: red;">Borrar evento: </b><i class="fas fa-trash" style="color: red"></i></a></li>
@@ -157,11 +157,39 @@
                                 <li style="color: black" class="list-group-item"><b>Etiquetas: </b>{{post.etiquetas}}</li>                                
                                 <li style="color: black" class="list-group-item"><b>Organizador: </b>{{post.correo}}</li>
                                 <li class="list-group-item list-group-item-dark"><b>Compartir: </b>
-                                                <a href="https://twitter.com/intent/tweet?text=¡Ven a este evento puma!&url=http://127.0.0.1:8000{% url 'Eventos:twoPost' post.id %}"><i class="fab fa-twitter"></i></a> 
+                                                <a href="https://twitter.com/intent/tweet?text=¡Ven a este evento puma!&url=http://ec2-54-167-69-130.compute-1.amazonaws.com:8000{% url 'Eventos:twoPost' post.id %}"><i class="fab fa-twitter"></i></a> 
                                                 
                                                 <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
-                                                <script type="IN/Share" data-url="http://127.0.0.1:8000{% url 'Eventos:twoPost' post.id %}"></script>
-                                                <div class="fb-share-button" data-href="http://127.0.0.1:8000{% url 'Eventos:twoPost' post.id %}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
+                                                <script type="IN/Share" data-url="http://ec2-54-167-69-130.compute-1.amazonaws.com:8000{% url 'Eventos:twoPost' post.id %}"></script>
+                                                <div class="fb-share-button" data-href="http://ec2-54-167-69-130.compute-1.amazonaws.com:8000{% url 'Eventos:twoPost' post.id %}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
+
+				{% for s in staff%}
+
+				{% if post.id == s.id_Evento and user.username == s.email_staff%}
+                                <li class="list-group-item"> 
+                                        <select name="entidad" id="combo_facultades" class="form-control">
+                                                <option value="0">Da click si quieres ver la lista de usuarios</option>
+                                                {% if post.mostrar == "0"%}
+
+                                                {% else%}
+                                                        {% for usuario in inscritos%}
+                                                                {% if usuario.id_Evento == post.id %}
+                                                                        <option value={{usuario.email_Usuario}}>{{usuario.email_Usuario}} {{usuario.confirmacion}}</option>
+                                                                {% else %}
+
+                                                                {% endif %}
+
+                                                        {% endfor %}
+                                                {% endif%}
+                                         </select>
+                                
+                                </li>
+
+				{% else %}
+
+				{% endif %}
+
+				{% endfor %}
                                 <li class="list-group-item"> 
                                         <select name="entidad" id="combo_facultades" class="form-control">
                                                 <option value="0">Da click si quieres ver la lista de usuarios</option>
