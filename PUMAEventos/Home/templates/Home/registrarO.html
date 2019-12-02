@@ -21,7 +21,7 @@
         
                 <div id="formas">
                         <h3>Registrar Organizador</h3>
-                        <hr>
+                        <hr style="background-color: black">
 
 
 
@@ -37,7 +37,13 @@
                                           <input name="correo" type="email" class="form-control" id="exampleInputPassword1" placeholder="Correo" required>
                                         </div>
                                         <button style="width: 100%" type="submit" class="btn btn-primary">Registrar</button>
-                        
+                                        {% if messages %}
+                                        <ul class="messages">
+                                        {% for message in messages %}
+                                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                        {% endfor %}
+                                        </ul>
+                                        {% endif %} 
                                         
                                 </form>
                 </div>

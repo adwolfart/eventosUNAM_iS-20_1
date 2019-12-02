@@ -19,8 +19,7 @@
                 {% if user.username == 'admin' %}
         
                 <div id="aveces">
-                        <h3><a href="{% url 'Home:registrarO' %}">Registrar </a></h3><br>
-                        <h3><a href="{% url 'Home:eliminarO' %}">Eliminar</a></h3>
+                        <h3><a href="{% url 'Home:registrarO' %}">Registrar Organizador</a></h3><br>
                 </div>
         
                 {% else %}
@@ -34,8 +33,9 @@
                 {% else %}
                 
                         <div  id="aveces">
-                                <h3 ><a href="{% url 'Home:registrarO' %}">Ver detalles de eventos </a></h3>
-                                <h3><a href="{% url 'Home:eliminarO' %}">Cuenta</a></h3>
+                                <h3 ><a href="{% url 'Eventos:listaEventos' %}">Ver lista de eventos </a></h3><br><br>
+				<h3><a href="{% url 'Eventos:vinscritoS' user.username %}"> Ver eventos asistidos</a></h3><br><br>
+				<h3><a href="{% url 'Eventos:vconfirmados' user.username %}"> Ver eventos inscritos</a></h3>
                         </div>
 
                 

@@ -33,12 +33,12 @@
                 {% csrf_token %}
                 <div class="form-group">
                   <label for="exampleInputEmail1">Correo</label>
-                  <input name="correo" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Tu correo" required>
+                  <input name="correo" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Confirma ingresando tu correo" required>
                   <small id="emailHelp" class="form-text text-muted">Esta acción no se puede deshacer.</small>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">ID</label>
-                  <input name="id" type="number" class="form-control" id="exampleInputPassword1" placeholder="ID" required>
+                  <input name="id" value={{evento}} type="number" class="form-control" id="exampleInputPassword1" placeholder="ID" required>
                 </div>
                 <button style="width: 100%" type="submit" class="btn btn-primary">Borrar evento</button>
 

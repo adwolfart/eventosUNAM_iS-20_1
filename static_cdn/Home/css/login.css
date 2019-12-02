@@ -1,16 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|QuickSand|Open+Sans&display=swap');
+body {
+    margin: 0;
+    width: 100%;
+    font-family: "Exo", sans-serif;
+}
 
-#logina {
-    position: fixed;
+html {
+    background-color: black;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: top;
+    width: 100%;
+    height: 100%;
+}
+
+#login-container {
+    width: 25%;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%);
+    position: fixed;
+    transform: translate(-50%, -50%);
+    padding: 35px;
+    font-size: 80%;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.911);
+    color: black;
 }
-#logina > h3 {
-    text-align: center;
-}
-#button-loggin{
+
+#buttons {
     position: relative;
-    left: 50%;
-    top: 10px;
-    transform: translate(-50%,-50%)
+    left: 25%;
+}
+
+#buttons div {
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    #login-container {
+        width: 90%;
+        padding: 15px;
+    }
+    #buttons {
+        left: 10%;
+    }
 }

@@ -1,0 +1,21 @@
+
+
+
+{% block css_content %}
+
+{% load static %}
+<link rel="stylesheet" href={% static "Home/css/login.css" %}>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% endblock %}
+
+{% block authentication %}
+{% endblock %}
+
+{% block body_content %}
+
+
+<a href="http://ec2-54-167-69-130.compute-1.amazonaws.com:8000/password/reset/{{correo}}/{{token}}">Da click para ir a establecer tu contraseña </a><br>
+Este token se te pedirá para verificar que eres tú: <h3>{{token}} </h3>
+
+{% endblock %}

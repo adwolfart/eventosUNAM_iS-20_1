@@ -23,6 +23,7 @@ class Userform(forms.Form):
 
 class UserProfileForm(forms.ModelForm):
     password = forms.CharField(widget = forms.PasswordInput)
+
     class Meta:
         model = UserProfile
         fields = ('nombre', 'entidad', 'avatar')
@@ -31,4 +32,6 @@ class UserProfileForm(forms.ModelForm):
         avatar = self.cleaned_data['avatar']
         return avatar
 
+class PasswordResetF(forms.Form):
+    password = forms.CharField(max_length=50)
   

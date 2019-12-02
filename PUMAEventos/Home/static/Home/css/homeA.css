@@ -1,31 +1,33 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans|QuickSand|Open+Sans|Indie+Flower&display=swap');
-
-html{
+html {
     margin: 0 0;
-    background-color: #21D4FD;
+    background-color: black;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     background-position: top;
-    background-image: url("/static/Home/img/1.jpg");    
 }
-#aveces{
+
+#aveces {
     position: absolute;
     z-index: -1;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%)
+    transform: translate(-50%, -50%)
 }
-#aveces h3:hover{
+
+#aveces h3:hover {
     transform: scale(1.2);
     text-decoration: none;
     color: white;
 }
-div h3 a{
+
+div h3 a {
     color: white;
     font-family: 'Indie Flower', monospace
 }
-div h3 a:hover{
+
+div h3 a:hover {
     text-decoration: none;
     color: white;
     transform: scale(1.1);

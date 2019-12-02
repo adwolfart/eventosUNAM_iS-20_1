@@ -1,7 +1,59 @@
-h1{
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    color: black;
+@import url('https://fonts.googleapis.com/css?family=Lato|Josefin+Sans|Ubuntu|QuickSand|Open+Sans&display=swap');
+html {
+    width: 100%;
+    margin: 0 0;
+}
+
+body {
+    width: 100%;
+    background-color: red;
+}
+
+#users {
+    position: relative;
+    width: 100%;
+    margin: 0 0%;
+    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(255,249,255,1) 11.1%, rgba(255,241,255,1) 90% );
+    margin: 0 0;
+    padding: 5% 20%;
+}
+
+.row{
+    width: 100%;
+}
+
+#foot{
+    margin: 0 0;
+    width: 100%;
+    padding: 15%; 
+    background-color: #21D4FD;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: top;
+    background-image: url("/static/Home/img/2.jpg");
+    color: white;
+}
+
+
+
+@media only screen and (min-width: 600px) {
+
+    #users {
+        position: relative;
+        width: 100%;
+        margin: 0 0%;
+        background-color: white;
+        margin: 0 0;
+        padding: 5% 5%;
+    }
+    
+    .row{
+        width: 70%;
+    }
+    
+    hr{
+        width: 60%;
+    background-color: black;
+    }
 }

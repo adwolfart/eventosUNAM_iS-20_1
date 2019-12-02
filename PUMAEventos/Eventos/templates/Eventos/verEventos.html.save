@@ -1,0 +1,237 @@
+{% extends "Home/base.html" %}
+
+{% block css_content %}
+
+{% load static %}
+<link rel="stylesheet" href={% static "Eventos/css/verEventos.css" %}>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+{% endblock %}
+
+
+{% block body_content %}
+
+<div id="aveces">
+        {% if user.is_authenticated %}
+        
+                
+        
+                {% if user.username == 'admin' %}
+        
+                <div class="alert alert-primary" role="alert" style="margin: 10px 10px;">
+                        Solo los organizadores o usuarios pueden acceder a esta página.
+                </div>
+        
+                {% else %}
+                {% if user.first_name == 'Organizador' %}
+        
+                        <div id="eventos">
+                                <h4 class="center"><u>Estos son los eventos que has creado!</u></h4>
+
+                        </div>
+                        {% if messages %}
+                        <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                        </ul>
+                        {% endif %}  
+
+
+                        {% for post in posts %}
+
+
+
+                            {% if post.correo == user.email %}
+
+<div class="column"></div>
+<div class="col-sm-12" style="background-color: black; padding-left: 15%; padding-right: 15%">
+        <ul class="list-group">
+                <li class="list-group-item active"><b>{{post.id}}, Evento: </b>{{post.titulo}} ({{post.entidad}}, {{post.ubicacion}})
+                        <b style="float: right"># {{post.id}} </b></li>
+                <li class="list-group-item"><b>Horario: </b>{{post.fecha_de_inicio}} {{post.hora_de_inicio}} -
+                        {{post.fecha_final}} {{post.hora_final}}</li>
+                <li style="color: black" class="list-group-item"><b>Descripción: </b>{{post.descripcion}}</li>
+                <li style="color: black" class="list-group-item"><b>Dirección: </b>{{post.direccion}}</li>
+                <li class="list-group-item"><b>Capacidad:</b> {{post.cupo_maximo}}</li>
+                <li class="list-group-item"><b>Periodicidad:</b> {{post.periodicidad}}</li>
+                <li class="list-group-item">
+                        <form action="/asignar/staff" method="post">
+                        {% csrf_token %}
+                        <b>Id evento</b>
+                        <input type="number" name="id" value="{{post.id}}"  required>
+                        <b>Correo del staff: </b><input id="correo" type="email" name="correo" value="" placeholder="Ingresa el correo del staff" required>
+                        <input style="float: right" class="btn btn-dark" type="submit" value="Asignar staff">
+                        </form></li>
+                <li class="list-group-item">
+                        <form action="/etiquetas/update" method="post">
+                        {% csrf_token %}
+                        <b>Id evento</b>
+                        <input type="number" name="id" value="{{post.id}}" required>
+                        <b>Etiquetas</b>
+                        <input type="text" name="etiquetas" value="{{post.etiquetas}}" required>
+                        <input style="float: right" class="btn btn-dark" type="submit" value="Guardar Etiqueta">
+                        </form></li>  
+
+                <li class="list-group-item">
+                        <form action="/anular/invitacion" method="post">
+                        {% csrf_token %}
+                        <b>Id evento</b>
+                        <input type="number" name="id" value="{{post.id}}" required>
+                        <b>Correo del usuario por anular:</b>
+                        <input type="text" name="correo" placeholder="Ingresa el correo" required>
+                        <input style="float: right" class="btn btn-dark" type="submit" value="Anular Invitacion">
+                        </form></li>
+                <li class="list-group-item"> 
+                        <select name="entidad" id="combo_facultades" class="form-control">
+                                <option value="0">Da click si quieres ver la lista de usuarios</option>
+                                {% for usuario in inscritos%}
+                                        {% if usuario.id_Evento == post.id %}
+                                                <option value={{usuario.email_Usuario}}>{{usuario.email_Usuario}} - {{usuario.confirmacion}}</option>
+                                        {% else %}
+
+                                        {% endif %}
+
+                                {% endfor %}
+                        </select>
+                
+                </li>
+                
+                <li class="list-group-item">
+                        <form action="/mostrar/invitados" method="post">
+                        {% csrf_token %}
+                        <b>Id evento</b>
+                        <input type="number" name="id" value="{{post.id}}" required>
+                        <b>Mostra lista de invitados?</b>
+                        <select name="mostrar" id="combo_facultades">
+                                <option value={{post.mostrar}}>{{post.mostrar}} Da click para ver las opciones</option>
+                                <option value="0">No</option>
+                                <option value="1">Si</option>
+                        </select>
+                        <input style="float: right" class="btn btn-dark" type="submit" value="Guardar">
+                        </form></li>                        
+                <li class="list-group-item list-group-item"><b>Compartir: </b>
+                        <a href="https://twitter.com/intent/tweet?text=¡Ven a este evento puma!&url=http://ec2-54-167-69-130.compute-1.amazonaws.com:8000{% url 'Eventos:twoPost' post.id %}"><i class="fab fa-twitter"></i></a> 
+                        <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+                        <script type="IN/Share" data-url="http://ec2-54-167-69-130.compute-1.amazonaws.com:8000{% url 'Eventos:twoPost' post.id %}"></script>
+                        <div class="fb-share-button" data-href="{% url 'Eventos:twoPost' post.id %}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
+                <li class="list-group-item list-group-item-danger"> 
+                        <a href="{% url 'Eventos:onePost' post.id %}"><b style = "color: black;">Actualizar evento: </b><i class="fas fa-edit"></i></a>
+                        <a style="float: right;" href="{% url 'Eventos:deleteEventos' post.id%}"><b style = "color: red;">Borrar evento: </b><i class="fas fa-trash" style="color: red"></i></a></li>
+        </ul>
+        <br>
+
+</div>
+
+
+                            {% else %}
+
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+            
+                
+                {% else %}
+                
+                <div id="eventos">
+                        <h4 class="center"><u>Estos son todos los eventos que están disponibles!</u></h4>
+
+                </div>
+
+
+                {% for post in posts %}
+
+                <div class="column"></div>
+                        <div class="col-sm-12" style="background-color: black; padding-left: 15%; padding-right: 15%" >
+                        <ul class="list-group">
+                                <li class="list-group-item active"><b>{{post.id}}, Evento: </b>{{post.titulo}} ({{post.entidad}}, {{post.ubicacion}})
+                                        <b style="float: right"> <a href="{% url 'Eventos:updateEvento' post_id=post.id user_mail=user.email %}"><i  class="fas fa-plus-square" style="float: right"><b></b></i></a> </b></li>
+                                <li style="color: black" class="list-group-item"><b>Horario: </b>{{post.fecha_de_inicio}} {{post.hora_de_inicio}} -
+                                        {{post.fecha_final}} {{post.hora_final}}</li>
+                                <li class="list-group-item"><b>Capacidad:</b> {{post.cupo_maximo}}</li>                                
+                                <li class="list-group-item"><b>Periodicidad:</b> {{post.periodicidad}}</li>
+                                <li style="color: black" class="list-group-item"><b>Descripción: </b>{{post.descripcion}}</li>
+                                <li style="color: black" class="list-group-item"><b>Dirección: </b>{{post.direccion}}</li>
+                                <li style="color: black" class="list-group-item"><b>Etiquetas: </b>{{post.etiquetas}}</li>                                
+                                <li style="color: black" class="list-group-item"><b>Organizador: </b>{{post.correo}}</li>
+                                <li class="list-group-item list-group-item-dark"><b>Compartir: </b>
+                                                <a href="https://twitter.com/intent/tweet?text=¡Ven a este evento puma!&url=http://ec2-54-167-69-130.compute-1.amazonaws.com:8000{% url 'Eventos:twoPost' post.id %}"><i class="fab fa-twitter"></i></a> 
+                                                
+                                                <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+                                                <script type="IN/Share" data-url="http://ec2-54-167-69-130.compute-1.amazonaws.com:8000{% url 'Eventos:twoPost' post.id %}"></script>
+                                                <div class="fb-share-button" data-href="http://ec2-54-167-69-130.compute-1.amazonaws.com:8000{% url 'Eventos:twoPost' post.id %}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
+
+				{% for s in staff%}
+
+				{% if post.id == s.id_Evento and user.username == s.email_staff%}
+                                <li class="list-group-item"> 
+                                        <select name="entidad" id="combo_facultades" class="form-control">
+                                                <option value="0">Da click si quieres ver la lista de usuarios</option>
+                                                {% if post.mostrar == "0"%}
+
+                                                {% else%}
+                                                        {% for usuario in inscritos%}
+                                                                {% if usuario.id_Evento == post.id %}
+                                                                        <option value={{usuario.email_Usuario}}>{{usuario.email_Usuario}} {{usuario.confirmacion}}</option>
+                                                                {% else %}
+
+                                                                {% endif %}
+
+                                                        {% endfor %}
+                                                {% endif%}
+                                         </select>
+                                
+                                </li>
+
+				{% else %}
+
+				{% endif %}
+
+				{% endfor %}
+                                <li class="list-group-item"> 
+                                        <select name="entidad" id="combo_facultades" class="form-control">
+                                                <option value="0">Da click si quieres ver la lista de usuarios</option>
+                                                {% if post.mostrar == "0"%}
+
+                                                {% else%}
+                                                        {% for usuario in inscritos%}
+                                                                {% if usuario.id_Evento == post.id %}
+                                                                        <option value={{usuario.email_Usuario}}>{{usuario.email_Usuario}}</option>
+                                                                {% else %}
+
+                                                                {% endif %}
+
+                                                        {% endfor %}
+                                                {% endif%}
+                                         </select>
+                                
+                                </li>
+                                                        
+                        </ul>
+                        <br>
+
+                        </div>
+
+
+
+                </div>
+                {% endfor %}
+
+                
+                {% endif %}                
+
+
+                
+                {% endif %}
+
+
+        {% else %}
+                <div class="alert alert-primary" role="alert" style="margin: 10px 10px;">
+                        Necesitas logeart y ser administrador
+                </div>        
+        {% endif %}
+</div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v5.0"></script>
+{% endblock %}
